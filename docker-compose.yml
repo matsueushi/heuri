@@ -1,0 +1,12 @@
+version: "3.9"
+volumes:
+  db-store:
+services:
+  heurisko:
+    container_name: "heuri"
+    build: ./
+    volumes:
+      - ./:/heuri:delegated
+    ports:
+      - 3000:3000
+    tty: true
