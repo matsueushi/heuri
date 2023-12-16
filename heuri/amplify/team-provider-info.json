@@ -10,6 +10,11 @@
       "StackName": "amplify-heuri-dev-131855",
       "StackId": "arn:aws:cloudformation:us-east-1:013706170414:stack/amplify-heuri-dev-131855/ac4edd80-9c15-11ee-93b3-0abdb7bf02eb",
       "AmplifyAppId": "dejvoisl26e8k"
+    },
+    "categories": {
+      "auth": {
+        "heuri8d4a17a68d4a17a6": {}
+      }
     }
   }
 }
