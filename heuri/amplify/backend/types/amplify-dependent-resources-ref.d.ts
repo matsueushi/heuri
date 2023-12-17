@@ -1,6 +1,12 @@
 export type AmplifyDependentResourcesAttributes = {
+  "api": {
+    "heuri": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string"
+    }
+  },
   "auth": {
-    "heuri8d4a17a68d4a17a6": {
+    "heurid61a014ed61a014e": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -8,6 +14,9 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "heuriGroupRole": "string"
     }
   }
 }

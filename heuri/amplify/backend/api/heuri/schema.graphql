@@ -1,0 +1,13 @@
+type Contest @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  description: String!
+  submissions: [Submission] @hasMany(indexName: "byContest", fields: ["id"])
+}
+
+type Submission @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  contestID: ID! @index(name: "byContest")
+  func: String!
+  description: String!
+}

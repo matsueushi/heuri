@@ -13,7 +13,11 @@
     },
     "categories": {
       "auth": {
-        "heuri8d4a17a68d4a17a6": {}
+        "heurid61a014ed61a014e": {},
+        "userPoolGroups": {}
+      },
+      "api": {
+        "heuri": {}
       }
     }
   }
