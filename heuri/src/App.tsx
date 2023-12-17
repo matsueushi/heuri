@@ -1,3 +1,8 @@
+import { type AuthUser } from "aws-amplify/auth";
+import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+
 import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
@@ -8,7 +13,12 @@ import { Layout } from "./components/layout";
 
 import "./App.css";
 
-const App = () => {
+type AppProps = {
+  signOut?: UseAuthenticator["signOut"]; //() => void;
+  user?: AuthUser;
+};
+
+const App = ({ signOut, user }: AppProps) => {
   return (
     <BrowserRouter>
       <Refine
@@ -32,6 +42,10 @@ const App = () => {
           <Route
             element={
               <Layout>
+                Hello, user {user?.username}
+                <button onClick={signOut} >
+                  SignOut
+                </button>
                 <Outlet />
               </Layout>
             }
@@ -50,4 +64,12 @@ const App = () => {
     </BrowserRouter>
   );
 };
-export default App;
+
+// サインアップしない
+const withAuthenticatorOptions = {
+  hideSignUp: true,
+};
+
+const AppWithAuth = withAuthenticator(App, withAuthenticatorOptions);
+
+export default AppWithAuth;
