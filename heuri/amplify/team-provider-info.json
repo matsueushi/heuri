@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-heuri-dev-131855-authRole",
+      "UnauthRoleArn": "arn:aws:iam::013706170414:role/amplify-heuri-dev-131855-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::013706170414:role/amplify-heuri-dev-131855-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-heuri-dev-131855-deployment",
+      "UnauthRoleName": "amplify-heuri-dev-131855-unauthRole",
+      "StackName": "amplify-heuri-dev-131855",
+      "StackId": "arn:aws:cloudformation:us-east-1:013706170414:stack/amplify-heuri-dev-131855/ac4edd80-9c15-11ee-93b3-0abdb7bf02eb",
+      "AmplifyAppId": "dejvoisl26e8k"
+    },
+    "categories": {
+      "auth": {
+        "heuri8d4a17a68d4a17a6": {}
+      }
+    }
+  }
+}
