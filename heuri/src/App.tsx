@@ -1,4 +1,5 @@
 import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/api";
 import { type AuthUser } from "aws-amplify/auth";
 import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
@@ -12,10 +13,14 @@ import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 import { HeadlessInferencer } from "@refinedev/inferencer/headless";
 
 import { Layout } from "./components/layout";
+import { listContests } from "./graphql/queries";
 
 import "./App.css";
+import { createContest } from "./graphql/mutations";
 
 Amplify.configure(amplifyconfig);
+
+const client = generateClient();
 
 type AppProps = {
   signOut?: UseAuthenticator["signOut"]; //() => void;
@@ -51,6 +56,33 @@ const App = ({ signOut, user }: AppProps) => {
                 <button onClick={signOut} >
                   SignOut
                 </button>
+                <br />
+                <button onClick={async () => {
+                  try {
+                    await client.graphql({
+                      query: createContest, variables: {
+                        input: {
+                          name: "aaa",
+                          description: "xxx",
+                        }
+                      }
+                    });
+                  } catch (errors) {
+                    console.error(errors);
+                  }
+                }}>
+                  create
+                </button>
+                <button onClick={async () => {
+                  try {
+                    const response = await client.graphql({ query: listContests });
+                    response.data.listContests.items.map((cont, i) => console.log(cont.name, i));
+                  } catch (errors) {
+                    console.error(errors);
+                  }
+                }}>
+                  list contests
+                </button>
                 <Outlet />
               </Layout>
             }
@@ -65,8 +97,8 @@ const App = ({ signOut, user }: AppProps) => {
           </Route>
         </Routes>
         <UnsavedChangesNotifier />
-      </Refine>
-    </BrowserRouter>
+      </Refine >
+    </BrowserRouter >
   );
 };
 
