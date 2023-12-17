@@ -15,6 +15,9 @@
       "auth": {
         "heurid61a014ed61a014e": {},
         "userPoolGroups": {}
+      },
+      "api": {
+        "heuri": {}
       }
     }
   }

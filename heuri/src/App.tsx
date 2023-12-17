@@ -47,6 +47,7 @@ const App = ({ signOut, user }: AppProps) => {
             element={
               <Layout>
                 Hello, user {user?.username}
+                <br />
                 <button onClick={signOut} >
                   SignOut
                 </button>
