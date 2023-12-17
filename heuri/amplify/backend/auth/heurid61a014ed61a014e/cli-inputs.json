@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "heuri8d4a17a6_identitypool_8d4a17a6",
+    "identityPoolName": "heurid61a014e_identitypool_d61a014e",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "heuri8d4a17a6",
-    "userPoolName": "heuri8d4a17a6_userpool_8d4a17a6",
+    "resourceNameTruncated": "heurid61a014e",
+    "userPoolName": "heurid61a014e_userpool_d61a014e",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -31,21 +31,23 @@
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "heuri88d4a17a6_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "heuridd61a014e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "8d4a17a6",
-    "resourceName": "heuri8d4a17a68d4a17a6",
+    "sharedId": "d61a014e",
+    "resourceName": "heurid61a014ed61a014e",
     "authSelections": "identityPoolAndUserPool",
     "useDefault": "manual",
     "thirdPartyAuth": false,
     "usernameAttributes": [
       "email"
     ],
-    "userPoolGroups": false,
+    "userPoolGroups": true,
     "adminQueries": false,
     "triggers": {},
     "hostedUI": false,
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "heuri"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true

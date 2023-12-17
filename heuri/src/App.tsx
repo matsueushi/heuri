@@ -1,7 +1,9 @@
+import { Amplify } from "aws-amplify";
 import { type AuthUser } from "aws-amplify/auth";
 import { type UseAuthenticator } from "@aws-amplify/ui-react-core";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import amplifyconfig from "./amplifyconfiguration.json";
 
 import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
@@ -12,6 +14,8 @@ import { HeadlessInferencer } from "@refinedev/inferencer/headless";
 import { Layout } from "./components/layout";
 
 import "./App.css";
+
+Amplify.configure(amplifyconfig);
 
 type AppProps = {
   signOut?: UseAuthenticator["signOut"]; //() => void;
