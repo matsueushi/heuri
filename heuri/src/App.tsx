@@ -10,13 +10,13 @@ import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
-import { HeadlessInferencer } from "@refinedev/inferencer/headless";
 
 import { Layout } from "./components/layout";
 import { listContests } from "./graphql/queries";
 
 import "./App.css";
 import { createContest } from "./graphql/mutations";
+import { CreatePost, EditPost, PostList, ShowPost } from "./pages/blog-posts";
 
 Amplify.configure(amplifyconfig);
 
@@ -89,10 +89,10 @@ const App = ({ signOut, user }: AppProps) => {
           >
             <Route index element={<NavigateToResource resource="blog_posts" />} />
             <Route path="blog-posts">
-              <Route index element={<HeadlessInferencer />} />
-              <Route path="show/:id" element={<HeadlessInferencer />} />
-              <Route path="edit/:id" element={<HeadlessInferencer />} />
-              <Route path="create" element={<HeadlessInferencer />} />
+              <Route index element={<PostList />} />
+              <Route path="show/:id" element={<ShowPost />} />
+              <Route path="edit/:id" element={<EditPost />} />
+              <Route path="create" element={<CreatePost />} />
             </Route>
           </Route>
         </Routes>
