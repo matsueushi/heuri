@@ -1,6 +1,5 @@
-import React from "react";
+import { useMemo } from "react";
 import {
-    IResourceComponentsProps,
     useNavigation,
     GetManyResponse,
     useMany,
@@ -8,8 +7,8 @@ import {
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef, flexRender } from "@tanstack/react-table";
 
-export const BlogPostList: React.FC<IResourceComponentsProps> = () => {
-    const columns = React.useMemo<ColumnDef<any>[]>(
+export const PostList = (): JSX.Element => {
+    const columns = useMemo<ColumnDef<any>[]>(
         () => [
             {
                 id: "id",

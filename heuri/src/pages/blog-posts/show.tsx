@@ -1,13 +1,11 @@
-import React from "react";
 import {
     useShow,
     useResource,
     useNavigation,
-    IResourceComponentsProps,
     useOne,
 } from "@refinedev/core";
 
-export const BlogPostShow: React.FC<IResourceComponentsProps> = () => {
+export const ShowPost = (): JSX.Element => {
     const { edit, list } = useNavigation();
     const { id } = useResource();
     const { queryResult } = useShow();

@@ -1,12 +1,11 @@
 import React from "react";
 import {
     useNavigation,
-    IResourceComponentsProps,
     useSelect,
 } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const BlogPostEdit: React.FC<IResourceComponentsProps> = () => {
+export const EditPost = (): JSX.Element => {
     const { list } = useNavigation();
 
     const {
@@ -93,11 +92,13 @@ export const BlogPostEdit: React.FC<IResourceComponentsProps> = () => {
                     <label>
                         <span style={{ marginRight: "8px" }}>Category</span>
                         <select
-                            placeholder="Select category"
                             {...register("category.id", {
                                 required: "This field is required",
                             })}
                         >
+                            <option value="" disabled selected>
+                                Select category
+                            </option>
                             {categoryOptions?.map((option) => (
                                 <option value={option.value} key={option.value}>
                                     {option.label}
