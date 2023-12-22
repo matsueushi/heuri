@@ -7,7 +7,7 @@ import {
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef, flexRender } from "@tanstack/react-table";
 
-export const PostList = (): JSX.Element => {
+export const ContestList = (): JSX.Element => {
     const columns = useMemo<ColumnDef<any>[]>(
         () => [
             {
@@ -143,7 +143,7 @@ export const PostList = (): JSX.Element => {
                     justifyContent: "space-between",
                 }}
             >
-                <h1>Blog Posts</h1>
+                <h1>Contests</h1>
                 <button onClick={() => create("blog_posts")}>Create</button>
             </div>
             <div style={{ maxWidth: "100%", overflowY: "scroll" }}>

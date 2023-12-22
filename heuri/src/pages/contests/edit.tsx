@@ -5,7 +5,7 @@ import {
 } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const EditPost = (): JSX.Element => {
+export const EditContest = (): JSX.Element => {
     const { list } = useNavigation();
 
     const {
@@ -30,14 +30,14 @@ export const EditPost = (): JSX.Element => {
     return (
         <div style={{ padding: "16px" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <h1>Blog Post Edit</h1>
+                <h1>Contest Edit</h1>
                 <div>
                     <button
                         onClick={() => {
                             list("blog_posts");
                         }}
                     >
-                        Blog Posts
+                        Contests
                     </button>
                 </div>
             </div>

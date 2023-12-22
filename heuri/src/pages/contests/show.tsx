@@ -5,7 +5,7 @@ import {
     useOne,
 } from "@refinedev/core";
 
-export const ShowPost = (): JSX.Element => {
+export const ShowContest = (): JSX.Element => {
     const { edit, list } = useNavigation();
     const { id } = useResource();
     const { queryResult } = useShow();
@@ -30,10 +30,10 @@ export const ShowPost = (): JSX.Element => {
                     justifyContent: "space-between",
                 }}
             >
-                <h1>Blog Post Show</h1>
+                <h1>Contest Show</h1>
                 <div style={{ display: "flex", gap: "8px" }}>
                     <button onClick={() => list("blog_posts")}>
-                        Blog Posts
+                        Contests
                     </button>
                     <button onClick={() => edit("blog_posts", id ?? "")}>
                         Edit

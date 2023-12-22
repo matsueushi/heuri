@@ -16,7 +16,7 @@ import { listContests } from "./graphql/queries";
 
 import "./App.css";
 import { createContest } from "./graphql/mutations";
-import { CreatePost, EditPost, PostList, ShowPost } from "./pages/contests";
+import { CreateContest, EditContest, ContestList, ShowContest } from "./pages/contests";
 
 Amplify.configure(amplifyconfig);
 
@@ -89,10 +89,10 @@ const App = ({ signOut, user }: AppProps) => {
           >
             <Route index element={<NavigateToResource resource="blog_posts" />} />
             <Route path="contests">
-              <Route index element={<PostList />} />
-              <Route path="show/:id" element={<ShowPost />} />
-              <Route path="edit/:id" element={<EditPost />} />
-              <Route path="create" element={<CreatePost />} />
+              <Route index element={<ContestList />} />
+              <Route path="show/:id" element={<ShowContest />} />
+              <Route path="edit/:id" element={<EditContest />} />
+              <Route path="create" element={<CreateContest />} />
             </Route>
           </Route>
         </Routes>
