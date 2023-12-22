@@ -70,11 +70,12 @@ export const CreateContest = (): JSX.Element => {
                     <label>
                         <span style={{ marginRight: "8px" }}>Category</span>
                         <select
+                            defaultValue=""
                             {...register("category.id", {
                                 required: "This field is required",
                             })}
                         >
-                            <option value="" disabled selected>
+                            <option value="" disabled >
                                 Select category
                             </option>
                             {categoryOptions?.map((option) => (
