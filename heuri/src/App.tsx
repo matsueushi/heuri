@@ -62,8 +62,8 @@ const App = ({ signOut, user }: AppProps) => {
                     await client.graphql({
                       query: createContest, variables: {
                         input: {
-                          name: "aaa",
-                          description: "xxx",
+                          name: "afseawaweeeawawasgg",
+                          description: "xxrsewaaeax",
                         }
                       }
                     });
@@ -75,7 +75,13 @@ const App = ({ signOut, user }: AppProps) => {
                 </button>
                 <button onClick={async () => {
                   try {
-                    const response = await client.graphql({ query: listContests });
+                    const response = await client.graphql({
+                      query: listContests,
+                      variables: {
+                        limit: 5,
+                      }
+                    });
+                    console.log(response);
                     response.data.listContests.items.map((cont, i) => console.log(cont.name, i));
                   } catch (errors) {
                     console.error(errors);
