@@ -3,6 +3,8 @@ import camelCase from "camelcase";
 
 import { DataProvider, GetListParams, GetOneParams } from "@refinedev/core";
 
+import * as queries from "../graphql/queries";
+
 import { V6Client } from "@aws-amplify/api-graphql";
 
 export const posts = [
@@ -31,44 +33,46 @@ export const categories = [
 
 
 export const amplifyDataProvider = (client: V6Client): DataProvider => {
-    // リソース名は使わず、全てメタ情報で解決する
-    return {
-        getList: async ({ resource, meta }: GetListParams) => {
+    const getList = async ({ resource, meta }: GetListParams) => {
+        console.log("getList", resource, meta);
 
-            console.log("getList", resource, meta);
-            console.log(meta?.listQuery || "");
-            const response = await client.graphql({ query: meta?.listQuery });
-            console.log(response);
+        const opName = camelCase(`list-${resource}`);
+        const query = (queries as any)[opName];
+        const response = await client.graphql({ query });
+        console.log(response);
 
-            const opName = camelCase(`list-${resource}`);
-            const data = response.data[opName].items;
-            if (data) {
-                return {
-                    data,
-                    total: data.length,
-                };
-            }
-
+        const data = response.data[opName].items;
+        if (data) {
             return {
-                data: [],
-                total: 0,
+                data,
+                total: data.length,
             };
-        },
+        }
 
-        getOne: async <TData>({ resource, id, meta }: GetOneParams) => {
-            console.log("getOne", resource, id, meta);
-            const singularResource = pluralize.singular(resource);
-            const op = camelCase(`get-${singularResource}`);
-            console.log(op);
-            const post = posts.find((p) => p.id === id);
-            if (post) {
-                return {
-                    data: post as TData,
-                };
-            } else {
-                throw new Error(`Post with id ${id} not found`);
-            }
-        },
+        return {
+            data: [],
+            total: 0,
+        };
+    };
+
+    const getOne = async <TData>({ resource, id, meta }: GetOneParams) => {
+        console.log("getOne", resource, id, meta);
+        const singularResource = pluralize.singular(resource);
+        const op = camelCase(`get-${singularResource}`);
+        console.log(op);
+        const post = posts.find((p) => p.id === id);
+        if (post) {
+            return {
+                data: post as TData,
+            };
+        } else {
+            throw new Error(`Post with id ${id} not found`);
+        }
+    };
+
+    return {
+        getList,
+        getOne,
 
         create: async <TData>({ resource, variables }) => {
             console.log("create", resource, variables);

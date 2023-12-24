@@ -44,9 +44,6 @@ const App = ({ signOut, user }: AppProps): JSX.Element => {
             show: "/contests/show/:id",
             create: "/contests/create",
             edit: "/contests/edit/:id",
-            meta: {
-              listQuery: listContests,
-            }
           },
         ]}
         options={{
