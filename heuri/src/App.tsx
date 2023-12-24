@@ -9,7 +9,7 @@ import amplifyconfig from "./amplifyconfiguration.json";
 import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
 import dataProvider from "@refinedev/simple-rest";
-import { mockDataProvider } from "./dataProviders";
+import { amplifyDataProvider } from "./dataProviders";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 
 import { Layout } from "./components/layout";
@@ -29,16 +29,16 @@ type AppProps = {
 };
 
 
-const App = ({ signOut, user }: AppProps) => {
+const App = ({ signOut, user }: AppProps): JSX.Element => {
   return (
     <BrowserRouter>
       <Refine
         routerProvider={routerBindings}
         // dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-        dataProvider={mockDataProvider}
+        dataProvider={amplifyDataProvider(client)}
         resources={[
           {
-            name: "blog_posts",
+            name: "contests",
             list: "/contests",
             show: "/contests/show/:id",
             create: "/contests/create",
@@ -96,7 +96,7 @@ const App = ({ signOut, user }: AppProps) => {
               </Layout>
             }
           >
-            <Route index element={<NavigateToResource resource="blog_posts" />} />
+            <Route index element={<NavigateToResource resource="contests" />} />
             <Route path="contests">
               <Route index element={<ContestList />} />
               <Route path="show/:id" element={<ShowContest />} />

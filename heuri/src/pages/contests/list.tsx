@@ -25,26 +25,26 @@ export const ContestList = (): JSX.Element => {
                 accessorKey: "content",
                 header: "Content",
             },
-            {
-                id: "category",
-                header: "Category",
-                accessorKey: "category.id",
-                cell: function render({ getValue, table }) {
-                    const meta = table.options.meta as {
-                        categoryData: GetManyResponse;
-                    };
+            // {
+            //     id: "category",
+            //     header: "Category",
+            //     accessorKey: "category.id",
+            //     cell: function render({ getValue, table }) {
+            //         const meta = table.options.meta as {
+            //             categoryData: GetManyResponse;
+            //         };
 
-                    try {
-                        const category = meta.categoryData?.data?.find(
-                            (item) => item.id == getValue<any>(),
-                        );
+            //         try {
+            //             const category = meta.categoryData?.data?.find(
+            //                 (item) => item.id == getValue<any>(),
+            //             );
 
-                        return category?.title ?? "Loading...";
-                    } catch (error) {
-                        return null;
-                    }
-                },
-            },
+            //             return category?.title ?? "Loading...";
+            //         } catch (error) {
+            //             return null;
+            //         }
+            //     },
+            // },
             {
                 id: "status",
                 accessorKey: "status",
