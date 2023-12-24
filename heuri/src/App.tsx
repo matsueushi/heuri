@@ -13,6 +13,7 @@ import { amplifyDataProvider } from "./dataProviders";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 
 import { Layout } from "./components/layout";
+
 import { listContests } from "./graphql/queries";
 
 import "./App.css";
@@ -43,6 +44,9 @@ const App = ({ signOut, user }: AppProps): JSX.Element => {
             show: "/contests/show/:id",
             create: "/contests/create",
             edit: "/contests/edit/:id",
+            meta: {
+              listQuery: listContests,
+            }
           },
         ]}
         options={{
@@ -99,9 +103,9 @@ const App = ({ signOut, user }: AppProps): JSX.Element => {
             <Route index element={<NavigateToResource resource="contests" />} />
             <Route path="contests">
               <Route index element={<ContestList />} />
-              <Route path="show/:id" element={<ShowContest />} />
+              {/* <Route path="show/:id" element={<ShowContest />} />
               <Route path="edit/:id" element={<EditContest />} />
-              <Route path="create" element={<CreateContest />} />
+              <Route path="create" element={<CreateContest />} /> */}
             </Route>
           </Route>
         </Routes>

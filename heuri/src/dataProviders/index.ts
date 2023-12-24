@@ -33,28 +33,30 @@ export const categories = [
 export const amplifyDataProvider = (client: V6Client): DataProvider => {
     // リソース名は使わず、全てメタ情報で解決する
     return {
-        getList: async <TData>({ resource, meta }: GetListParams) => {
-            console.log(meta);
-            // const response = await client.graphql({ ...met});
+        getList: async ({ resource, meta }: GetListParams) => {
 
-            // console.log(response);
-            // console.log(response.data);
+            console.log("getList", resource, meta);
+            console.log(meta?.listQuery || "");
+            const response = await client.graphql({ query: meta?.listQuery });
+            console.log(response);
 
-            if (resource === "contests") {
+            const opName = camelCase(`list-${resource}`);
+            const data = response.data[opName].items;
+            if (data) {
                 return {
-                    data: posts as TData[],
-                    total: posts.length,
-                };
-            } else {
-                return {
-                    data: categories as TData[],
-                    total: categories.length,
+                    data,
+                    total: data.length,
                 };
             }
 
+            return {
+                data: [],
+                total: 0,
+            };
         },
 
         getOne: async <TData>({ resource, id, meta }: GetOneParams) => {
+            console.log("getOne", resource, id, meta);
             const singularResource = pluralize.singular(resource);
             const op = camelCase(`get-${singularResource}`);
             console.log(op);
@@ -69,6 +71,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         },
 
         create: async <TData>({ resource, variables }) => {
+            console.log("create", resource, variables);
             const singularResource = pluralize.singular(resource);
             const op = camelCase(`create-${singularResource}`);
             console.log(op);
@@ -83,6 +86,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         },
 
         update: async <TData>({ resource, id, variables }) => {
+            console.log("update", resource, id, variables);
             const singularResource = pluralize.singular(resource);
             const op = camelCase(`update-${singularResource}`);
             const postIndex = posts.findIndex((p) => p.id === id);
@@ -100,6 +104,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         },
 
         deleteOne: async <TData>({ resource, id }) => {
+            console.log("deleteOne", resource, id);
             const singularResource = pluralize.singular(resource);
             const op = camelCase(`delete-${singularResource}`);
             const postIndex = posts.findIndex((p) => p.id === id);
