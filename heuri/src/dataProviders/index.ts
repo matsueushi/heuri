@@ -5,16 +5,12 @@ import { DataProvider, GetListParams, GetOneParams } from "@refinedev/core";
 
 import { V6Client } from "@aws-amplify/api-graphql";
 
-import * as queries from "../graphql/queries";
-import * as mutations from "../graphql/mutations";
-
-
 export const posts = [
     {
-        id: "1",
+        id: 1,
         title: "dalgja;",
         category: {
-            "id": 10,
+            "id": 1,
         },
         content: "abc",
         status: "published",
@@ -22,28 +18,43 @@ export const posts = [
     },
 ];
 
+export const categories = [
+    {
+        id: 1,
+        title: "category1",
+    },
+    {
+        id: 2,
+        title: "category2",
+    }
+];
+
+
 export const amplifyDataProvider = (client: V6Client): DataProvider => {
+    // リソース名は使わず、全てメタ情報で解決する
     return {
         getList: async <TData>({ resource, meta }: GetListParams) => {
-            const operationName = camelCase(`list-${resource}`);
+            console.log(meta);
+            // const response = await client.graphql({ ...met});
 
+            // console.log(response);
+            // console.log(response.data);
 
-            const query = (queries as any)[operationName];
-
-            if (query) {
-                const response = await client.graphql({ query });
-
-                console.log(response);
-                // console.log(response.data);
+            if (resource === "contests") {
+                return {
+                    data: posts as TData[],
+                    total: posts.length,
+                };
+            } else {
+                return {
+                    data: categories as TData[],
+                    total: categories.length,
+                };
             }
 
-            return {
-                data: posts as TData[],
-                total: posts.length,
-            };
         },
 
-        getOne: async <TData>({ resource, id }: GetOneParams) => {
+        getOne: async <TData>({ resource, id, meta }: GetOneParams) => {
             const singularResource = pluralize.singular(resource);
             const op = camelCase(`get-${singularResource}`);
             console.log(op);
