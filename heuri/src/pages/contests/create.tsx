@@ -26,7 +26,7 @@ export const CreateContest = (): JSX.Element => {
                 <div>
                     <button
                         onClick={() => {
-                            list("blog_posts");
+                            list("contests");
                         }}
                     >
                         Contests

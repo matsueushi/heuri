@@ -34,7 +34,7 @@ export const EditContest = (): JSX.Element => {
                 <div>
                     <button
                         onClick={() => {
-                            list("blog_posts");
+                            list("contests");
                         }}
                     >
                         Contests

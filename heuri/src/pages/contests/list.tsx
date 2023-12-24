@@ -76,14 +76,14 @@ export const ContestList = (): JSX.Element => {
                         >
                             <button
                                 onClick={() => {
-                                    show("blog_posts", getValue() as string);
+                                    show("contests", getValue() as string);
                                 }}
                             >
                                 Show
                             </button>
                             <button
                                 onClick={() => {
-                                    edit("blog_posts", getValue() as string);
+                                    edit("contests", getValue() as string);
                                 }}
                             >
                                 Edit
@@ -144,7 +144,7 @@ export const ContestList = (): JSX.Element => {
                 }}
             >
                 <h1>Contests</h1>
-                <button onClick={() => create("blog_posts")}>Create</button>
+                <button onClick={() => create("contests")}>Create</button>
             </div>
             <div style={{ maxWidth: "100%", overflowY: "scroll" }}>
                 <table>

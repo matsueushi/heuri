@@ -32,10 +32,10 @@ export const ShowContest = (): JSX.Element => {
             >
                 <h1>Contest Show</h1>
                 <div style={{ display: "flex", gap: "8px" }}>
-                    <button onClick={() => list("blog_posts")}>
+                    <button onClick={() => list("contests")}>
                         Contests
                     </button>
-                    <button onClick={() => edit("blog_posts", id ?? "")}>
+                    <button onClick={() => edit("contests", id ?? "")}>
                         Edit
                     </button>
                 </div>
