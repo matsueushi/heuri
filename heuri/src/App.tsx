@@ -100,9 +100,9 @@ const App = ({ signOut, user }: AppProps): JSX.Element => {
             <Route index element={<NavigateToResource resource="contests" />} />
             <Route path="contests">
               <Route index element={<ContestList />} />
-              {/* <Route path="show/:id" element={<ShowContest />} />
+              <Route path="show/:id" element={<ShowContest />} />
               <Route path="edit/:id" element={<EditContest />} />
-              <Route path="create" element={<CreateContest />} /> */}
+              <Route path="create" element={<CreateContest />} />
             </Route>
           </Route>
         </Routes>
