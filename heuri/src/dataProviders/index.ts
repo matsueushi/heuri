@@ -16,13 +16,23 @@ import * as mutations from "../graphql/mutations";
 import { V6Client } from "@aws-amplify/api-graphql";
 
 export const amplifyDataProvider = (client: V6Client): DataProvider => {
-    const getList = async ({ resource, meta }: GetListParams) => {
-        console.log("getList", resource, meta);
+    const getList = async ({ resource, pagination, meta }: GetListParams) => {
+        console.log("getList", resource, pagination, meta);
+
+        const {
+            current = 1,
+            pageSize = 10,
+        } = pagination ?? {};
 
         const opName = camelCase(`list-${resource}`);
         const query = (queries as any)[opName];
         if (query) {
-            const response = await client.graphql({ query });
+            const response = await client.graphql({
+                query,
+                variables: {
+                    limit: pageSize,
+                }
+            });
             console.log(response);
 
             const data = response.data[opName].items;
