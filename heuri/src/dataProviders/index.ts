@@ -1,7 +1,14 @@
 import pluralize from "pluralize";
 import camelCase from "camelcase";
 
-import { DataProvider, GetListParams, GetOneParams } from "@refinedev/core";
+import {
+    CreateParams,
+    DataProvider,
+    DeleteOneParams,
+    GetListParams,
+    GetOneParams,
+    UpdateParams,
+} from "@refinedev/core";
 
 import * as queries from "../graphql/queries";
 import * as mutations from "../graphql/mutations";
@@ -57,7 +64,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         }
     };
 
-    const create = async ({ resource, variables }) => {
+    const create = async <TVariables>({ resource, variables }: CreateParams<TVariables>) => {
         console.log("create", resource, variables);
 
         const singularResource = pluralize.singular(resource);
@@ -81,7 +88,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         }
     };
 
-    const update = async ({ resource, id, variables }) => {
+    const update = async <TVariables>({ resource, id, variables }: UpdateParams<TVariables>) => {
         console.log("update", resource, id, variables);
 
         const singularResource = pluralize.singular(resource);
@@ -108,7 +115,7 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
         }
     };
 
-    const deleteOne = async ({ resource, id }) => {
+    const deleteOne = async <TVariables>({ resource, id }: DeleteOneParams<TVariables>) => {
         console.log("deleteOne", resource, id);
 
         const singularResource = pluralize.singular(resource);
@@ -118,7 +125,9 @@ export const amplifyDataProvider = (client: V6Client): DataProvider => {
             const response = await client.graphql({
                 query,
                 variables: {
-                    id: id,
+                    input: {
+                        id: id,
+                    }
                 },
             });
             console.log(response);

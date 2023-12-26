@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import {
+    useDelete,
     useNavigation,
 } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
@@ -72,6 +73,16 @@ export const ContestList = (): JSX.Element => {
                             >
                                 Edit
                             </button>
+                            <button
+                                onClick={() => {
+                                    mutate({
+                                        resource: "contests",
+                                        id: getValue() as string
+                                    });
+                                }}
+                            >
+                                Delete
+                            </button>
                         </div>
                     );
                 },
@@ -81,6 +92,7 @@ export const ContestList = (): JSX.Element => {
     );
 
     const { edit, show, create } = useNavigation();
+    const { mutate } = useDelete();
 
     const {
         getHeaderGroups,
