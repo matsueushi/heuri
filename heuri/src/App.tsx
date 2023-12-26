@@ -8,37 +8,36 @@ import amplifyconfig from "./amplifyconfiguration.json";
 
 import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
-import dataProvider from "@refinedev/simple-rest";
-import { mockDataProvider } from "./dataProviders";
+// import dataProvider from "@refinedev/simple-rest";
+import { amplifyDataProvider } from "./dataProviders";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 
 import { Layout } from "./components/layout";
-import { listContests } from "./graphql/queries";
+
 
 import "./App.css";
-import { createContest } from "./graphql/mutations";
 import { CreateContest, EditContest, ContestList, ShowContest } from "./pages/contests";
 
 Amplify.configure(amplifyconfig);
-
-const client = generateClient();
 
 type AppProps = {
   signOut?: UseAuthenticator["signOut"]; //() => void;
   user?: AuthUser;
 };
 
+const client = generateClient();
+const dataProvider = amplifyDataProvider(client);
 
-const App = ({ signOut, user }: AppProps) => {
+const App = ({ signOut, user }: AppProps): JSX.Element => {
   return (
     <BrowserRouter>
       <Refine
         routerProvider={routerBindings}
         // dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-        dataProvider={mockDataProvider}
+        dataProvider={dataProvider}
         resources={[
           {
-            name: "blog_posts",
+            name: "contests",
             list: "/contests",
             show: "/contests/show/:id",
             create: "/contests/create",
@@ -59,44 +58,11 @@ const App = ({ signOut, user }: AppProps) => {
                 <button onClick={signOut} >
                   SignOut
                 </button>
-                <br />
-                <button onClick={async () => {
-                  try {
-                    await client.graphql({
-                      query: createContest, variables: {
-                        input: {
-                          name: "afseawaweeeawawasgg",
-                          description: "xxrsewaaeax",
-                        }
-                      }
-                    });
-                  } catch (errors) {
-                    console.error(errors);
-                  }
-                }}>
-                  create
-                </button>
-                <button onClick={async () => {
-                  try {
-                    const response = await client.graphql({
-                      query: listContests,
-                      variables: {
-                        limit: 5,
-                      }
-                    });
-                    console.log(response);
-                    response.data.listContests.items.map((cont, i) => console.log(cont.name, i));
-                  } catch (errors) {
-                    console.error(errors);
-                  }
-                }}>
-                  list contests
-                </button>
                 <Outlet />
               </Layout>
             }
           >
-            <Route index element={<NavigateToResource resource="blog_posts" />} />
+            <Route index element={<NavigateToResource resource="contests" />} />
             <Route path="contests">
               <Route index element={<ContestList />} />
               <Route path="show/:id" element={<ShowContest />} />

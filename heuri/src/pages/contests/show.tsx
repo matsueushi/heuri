@@ -2,7 +2,6 @@ import {
     useShow,
     useResource,
     useNavigation,
-    useOne,
 } from "@refinedev/core";
 
 export const ShowContest = (): JSX.Element => {
@@ -12,14 +11,6 @@ export const ShowContest = (): JSX.Element => {
     const { data, isLoading } = queryResult;
 
     const record = data?.data;
-
-    const { data: categoryData, isLoading: categoryIsLoading } = useOne({
-        resource: "categories",
-        id: record?.category?.id || "",
-        queryOptions: {
-            enabled: !!record,
-        },
-    });
 
     return (
         <div style={{ padding: "16px" }}>
@@ -32,10 +23,10 @@ export const ShowContest = (): JSX.Element => {
             >
                 <h1>Contest Show</h1>
                 <div style={{ display: "flex", gap: "8px" }}>
-                    <button onClick={() => list("blog_posts")}>
+                    <button onClick={() => list("contests")}>
                         Contests
                     </button>
-                    <button onClick={() => edit("blog_posts", id ?? "")}>
+                    <button onClick={() => edit("contests", id ?? "")}>
                         Edit
                     </button>
                 </div>
@@ -46,31 +37,25 @@ export const ShowContest = (): JSX.Element => {
                     <div>{record?.id ?? ""}</div>
                 </div>
                 <div style={{ marginTop: "6px" }}>
-                    <h5>Title</h5>
-                    <div>{record?.title}</div>
+                    <h5>Name</h5>
+                    <div>{record?.name}</div>
                 </div>
                 <div style={{ marginTop: "6px" }}>
-                    <h5>Content</h5>
-                    <p>{record?.content}</p>
-                </div>
-                <div style={{ marginTop: "6px" }}>
-                    <h5>Category</h5>
-                    <div>
-                        {categoryIsLoading ? (
-                            <>Loading...</>
-                        ) : (
-                            <>{categoryData?.data?.title}</>
-                        )}
-                    </div>
-                </div>
-                <div style={{ marginTop: "6px" }}>
-                    <h5>Status</h5>
-                    <div>{record?.status}</div>
+                    <h5>Description</h5>
+                    <p>{record?.description}</p>
                 </div>
                 <div style={{ marginTop: "6px" }}>
                     <h5>Created At</h5>
                     <div>
                         {new Date(record?.createdAt).toLocaleString(undefined, {
+                            timeZone: "UTC",
+                        })}
+                    </div>
+                </div>
+                <div style={{ marginTop: "6px" }}>
+                    <h5>Updated At</h5>
+                    <div>
+                        {new Date(record?.updatedAt).toLocaleString(undefined, {
                             timeZone: "UTC",
                         })}
                     </div>

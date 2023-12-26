@@ -1,4 +1,3 @@
-import React from "react";
 import {
     useNavigation,
     useSelect,
@@ -16,17 +15,6 @@ export const EditContest = (): JSX.Element => {
         formState: { errors },
     } = useForm();
 
-    const blogPostsData = queryResult?.data?.data;
-
-    const { options: categoryOptions } = useSelect({
-        resource: "categories",
-        defaultValue: blogPostsData?.category?.id,
-    });
-
-    React.useEffect(() => {
-        setValue("category.id", blogPostsData?.category?.id);
-    }, [categoryOptions]);
-
     return (
         <div style={{ padding: "16px" }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -34,7 +22,7 @@ export const EditContest = (): JSX.Element => {
                 <div>
                     <button
                         onClick={() => {
-                            list("blog_posts");
+                            list("contests");
                         }}
                     >
                         Contests
@@ -53,10 +41,9 @@ export const EditContest = (): JSX.Element => {
                         <span style={{ marginRight: "8px" }}>Id</span>
                         <input
                             disabled
-                            type="number"
+                            type="text"
                             {...register("id", {
                                 required: "This field is required",
-                                valueAsNumber: true,
                             })}
                         />
                         <span style={{ color: "red" }}>
@@ -64,73 +51,29 @@ export const EditContest = (): JSX.Element => {
                         </span>
                     </label>
                     <label>
-                        <span style={{ marginRight: "8px" }}>Title</span>
+                        <span style={{ marginRight: "8px" }}>Name</span>
                         <input
                             type="text"
-                            {...register("title", {
+                            {...register("name", {
                                 required: "This field is required",
                             })}
                         />
                         <span style={{ color: "red" }}>
-                            {(errors as any)?.title?.message as string}
+                            {(errors as any)?.name?.message as string}
                         </span>
                     </label>
                     <label>
-                        <span style={{ marginRight: "8px" }}>Content</span>
+                        <span style={{ marginRight: "8px" }}>Description</span>
                         <textarea
                             rows={5}
                             cols={33}
                             style={{ verticalAlign: "top" }}
-                            {...register("content", {
+                            {...register("description", {
                                 required: "This field is required",
                             })}
                         />
                         <span style={{ color: "red" }}>
-                            {(errors as any)?.content?.message as string}
-                        </span>
-                    </label>
-                    <label>
-                        <span style={{ marginRight: "8px" }}>Category</span>
-                        <select
-                            defaultValue=""
-                            {...register("category.id", {
-                                required: "This field is required",
-                            })}
-                        >
-                            <option value="" disabled>
-                                Select category
-                            </option>
-                            {categoryOptions?.map((option) => (
-                                <option value={option.value} key={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                        <span style={{ color: "red" }}>
-                            {(errors as any)?.category?.id?.message as string}
-                        </span>
-                    </label>
-                    <label>
-                        <span style={{ marginRight: "8px" }}>Status</span>
-                        <input
-                            type="text"
-                            {...register("status", {
-                                required: "This field is required",
-                            })}
-                        />
-                        <span style={{ color: "red" }}>
-                            {(errors as any)?.status?.message as string}
-                        </span>
-                    </label>
-                    <label>
-                        <span style={{ marginRight: "8px" }}>Created At</span>
-                        <input
-                            {...register("createdAt", {
-                                required: "This field is required",
-                            })}
-                        />
-                        <span style={{ color: "red" }}>
-                            {(errors as any)?.createdAt?.message as string}
+                            {(errors as any)?.description?.message as string}
                         </span>
                     </label>
                     <div>

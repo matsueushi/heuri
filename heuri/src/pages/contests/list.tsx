@@ -1,14 +1,14 @@
 import { useMemo } from "react";
 import {
+    useDelete,
     useNavigation,
-    GetManyResponse,
-    useMany,
 } from "@refinedev/core";
 import { useTable } from "@refinedev/react-table";
 import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { Contest } from "../../API";
 
 export const ContestList = (): JSX.Element => {
-    const columns = useMemo<ColumnDef<any>[]>(
+    const columns = useMemo<ColumnDef<Contest>[]>(
         () => [
             {
                 id: "id",
@@ -16,46 +16,31 @@ export const ContestList = (): JSX.Element => {
                 header: "Id",
             },
             {
-                id: "title",
-                accessorKey: "title",
-                header: "Title",
+                id: "name",
+                accessorKey: "name",
+                header: "Name",
             },
             {
-                id: "content",
-                accessorKey: "content",
-                header: "Content",
-            },
-            {
-                id: "category",
-                header: "Category",
-                accessorKey: "category.id",
-                cell: function render({ getValue, table }) {
-                    const meta = table.options.meta as {
-                        categoryData: GetManyResponse;
-                    };
-
-                    try {
-                        const category = meta.categoryData?.data?.find(
-                            (item) => item.id == getValue<any>(),
-                        );
-
-                        return category?.title ?? "Loading...";
-                    } catch (error) {
-                        return null;
-                    }
-                },
-            },
-            {
-                id: "status",
-                accessorKey: "status",
-                header: "Status",
+                id: "description",
+                accessorKey: "description",
+                header: "Description",
             },
             {
                 id: "createdAt",
                 accessorKey: "createdAt",
                 header: "Created At",
                 cell: function render({ getValue }) {
-                    return new Date(getValue<any>()).toLocaleString(undefined, {
+                    return new Date(getValue<string>()).toLocaleString(undefined, {
+                        timeZone: "UTC",
+                    });
+                },
+            },
+            {
+                id: "updatedAt",
+                accessorKey: "updatedAt",
+                header: "Updated At",
+                cell: function render({ getValue }) {
+                    return new Date(getValue<string>()).toLocaleString(undefined, {
                         timeZone: "UTC",
                     });
                 },
@@ -76,17 +61,27 @@ export const ContestList = (): JSX.Element => {
                         >
                             <button
                                 onClick={() => {
-                                    show("blog_posts", getValue() as string);
+                                    show("contests", getValue() as string);
                                 }}
                             >
                                 Show
                             </button>
                             <button
                                 onClick={() => {
-                                    edit("blog_posts", getValue() as string);
+                                    edit("contests", getValue() as string);
                                 }}
                             >
                                 Edit
+                            </button>
+                            <button
+                                onClick={() => {
+                                    mutate({
+                                        resource: "contests",
+                                        id: getValue() as string
+                                    });
+                                }}
+                            >
+                                Delete
                             </button>
                         </div>
                     );
@@ -97,14 +92,11 @@ export const ContestList = (): JSX.Element => {
     );
 
     const { edit, show, create } = useNavigation();
+    const { mutate } = useDelete();
 
     const {
         getHeaderGroups,
         getRowModel,
-        setOptions,
-        refineCore: {
-            tableQueryResult: { data: tableData },
-        },
         getState,
         setPageIndex,
         getCanPreviousPage,
@@ -113,26 +105,9 @@ export const ContestList = (): JSX.Element => {
         nextPage,
         previousPage,
         setPageSize,
-        getColumn,
     } = useTable({
         columns,
     });
-
-    const { data: categoryData } = useMany({
-        resource: "categories",
-        ids: tableData?.data?.map((item) => item?.category?.id) ?? [],
-        queryOptions: {
-            enabled: !!tableData?.data,
-        },
-    });
-
-    setOptions((prev) => ({
-        ...prev,
-        meta: {
-            ...prev.meta,
-            categoryData,
-        },
-    }));
 
     return (
         <div style={{ padding: "16px" }}>
@@ -144,7 +119,7 @@ export const ContestList = (): JSX.Element => {
                 }}
             >
                 <h1>Contests</h1>
-                <button onClick={() => create("blog_posts")}>Create</button>
+                <button onClick={() => create("contests")}>Create</button>
             </div>
             <div style={{ maxWidth: "100%", overflowY: "scroll" }}>
                 <table>
