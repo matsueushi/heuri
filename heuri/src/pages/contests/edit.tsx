@@ -53,6 +53,7 @@ export const EditContest = (): JSX.Element => {
                     <label>
                         <span style={{ marginRight: "8px" }}>Name</span>
                         <input
+                            disabled
                             type="text"
                             {...register("name", {
                                 required: "This field is required",

@@ -54,12 +54,14 @@ export const mockDataProvider = (): DataProvider => {
         }
     };
 
-    const create = async ({ resource, variables }: CreateParams<Omit<Contest, "id">>) => {
+    const create = async ({ resource, variables }: CreateParams<Contest>) => {
         console.log("create", resource, variables);
 
         const newContest: Contest = {
-            id: String(contests.length + 1),
             ...variables,
+            id: String(contests.length + 1),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
         };
         contests.push(newContest);
         return {

@@ -8,8 +8,8 @@ import amplifyconfig from "./amplifyconfiguration.json";
 
 import { Refine } from "@refinedev/core";
 import routerBindings, { NavigateToResource, UnsavedChangesNotifier } from "@refinedev/react-router-v6";
-// import dataProvider from "@refinedev/simple-rest";
-import { amplifyDataProvider } from "./dataProviders";
+// import { amplifyDataProvider } from "./dataProviders";
+import { mockDataProvider } from "./dataProviders";
 import { BrowserRouter, Route, Routes, Outlet } from "react-router-dom";
 
 import { Layout } from "./components/layout";
@@ -26,7 +26,8 @@ type AppProps = {
 };
 
 const client = generateClient();
-const dataProvider = amplifyDataProvider(client);
+// const dataProvider = amplifyDataProvider(client);
+const dataProvider = mockDataProvider();
 
 const App = ({ signOut, user }: AppProps): JSX.Element => {
   return (
