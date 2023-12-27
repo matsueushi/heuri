@@ -53,8 +53,6 @@ const App = ({ signOut, user }: AppProps): JSX.Element => {
           <Route
             element={
               <Layout>
-                Hello, user {user?.username}
-                <br />
                 <button onClick={signOut} >
                   SignOut
                 </button>
