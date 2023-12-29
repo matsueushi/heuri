@@ -1,47 +1,50 @@
-# tutorial
+# my-admin
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+## Installation
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+Install the application dependencies by running:
 
-## Getting Started
-
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
-
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
-
-## Available Scripts
-
-### Running the development server.
-
-```bash
-    npm run dev
+```sh
+npm install
+# or
+yarn install
 ```
 
-### Building for production.
+## Development
 
-```bash
-    npm run build
+Start the application in development mode by running:
+
+```sh
+npm run dev
+# or
+yarn dev
 ```
 
-### Running the production server.
+## Production
 
-```bash
-    npm run start
+Build the application in production mode by running:
+
+```sh
+npm run build
+# or
+yarn build
 ```
 
-## Learn More
+## DataProvider
 
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
+The included data provider use [FakeREST](https://github.com/marmelab/fakerest) to simulate a backend.
+You'll find a `data.json` file in the `src` directory that includes some fake data for testing purposes.
 
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-- **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
+It includes two resources, posts and comments.
+Posts have the following properties: `id`, `title` and `content`.
+Comments have the following properties: `id`, `post_id` and `content`.
 
-## License
+## Authentication
 
-MIT
+The included auth provider should only be used for development and test purposes.
+You'll find a `users.json` file in the `src` directory that includes the users you can use.
+
+You can sign in to the application with the following usernames and password:
+- janedoe / password
+- johndoe / password
+

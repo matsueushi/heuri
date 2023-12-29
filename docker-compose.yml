@@ -3,7 +3,7 @@ volumes:
   db-store:
 services:
   heuri:
-    container_name: "heuri"
+    container_name: "dashboard"
     build: ./
     volumes:
       - ./:/heuri:delegated
