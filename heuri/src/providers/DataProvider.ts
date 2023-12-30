@@ -360,7 +360,7 @@ export class DataProvider {
         query: string,
         variables: Record<string, unknown>
     ): Promise<any> {
-        console.log(query, variables);
+        // console.log(query, variables);
         const queryResult = <GraphQLResult>await this.client.graphql({
             query,
             variables,
@@ -371,6 +371,7 @@ export class DataProvider {
             throw new Error("Data provider error");
         }
 
+        // console.log(queryResult);
         return queryResult.data;
     }
 }

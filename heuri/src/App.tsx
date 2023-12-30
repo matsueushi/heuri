@@ -3,7 +3,7 @@ import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from "react-ad
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
-// import { dataProvider as fakeDataProvider } from "./providers/fakeDataProvider";
+import { dataProvider as fakeDataProvider } from "./providers/fakeDataProvider";
 import { buildDataProvider } from "./providers";
 
 import amplifyconfig from "./amplifyconfiguration.json";
@@ -24,13 +24,13 @@ export const App = () => {
     console.log(amplifyconfig);
     return (
         <Admin
-            // dataProvider={fakeDataProvider}
-            dataProvider={dataProvider}
+            dataProvider={fakeDataProvider}
+            // dataProvider={dataProvider}
             authProvider={authProvider}
             loginPage={Login}
         >
             <Resource name="contests" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-            {/* <Resource name="comments" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
+            {/* <Resource name="submissions" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
         </Admin>
     );
 };
