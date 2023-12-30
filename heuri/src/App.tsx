@@ -1,14 +1,19 @@
 import { Amplify } from "aws-amplify";
-import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from "react-admin";
+import {
+    Admin, Resource,
+    // ListGuesser, EditGuesser, ShowGuesser
+} from "react-admin";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
-import { dataProvider as fakeDataProvider } from "./providers/fakeDataProvider";
+import { dataProvider as fakeDataProvider } from "./providers/FakeDataProvider";
 import { buildDataProvider } from "./providers";
 
 import amplifyconfig from "./amplifyconfiguration.json";
 import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
+
+import contests from "./components/contests";
 
 Amplify.configure(amplifyconfig);
 
@@ -21,7 +26,6 @@ const authProvider = CognitoAuthProvider(userPool);
 const dataProvider = buildDataProvider({ queries, mutations });
 
 export const App = () => {
-    console.log(amplifyconfig);
     return (
         <Admin
             dataProvider={fakeDataProvider}
@@ -29,7 +33,7 @@ export const App = () => {
             authProvider={authProvider}
             loginPage={Login}
         >
-            <Resource name="contests" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+            <Resource name="contests" {...contests} />
             {/* <Resource name="submissions" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
         </Admin>
     );

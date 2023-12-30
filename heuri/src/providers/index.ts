@@ -1,4 +1,4 @@
-export * from "./fakeDataProvider";
+export * from "./FakeDataProvider";
 
 import {
     DataProvider as DataProviderInterface,
