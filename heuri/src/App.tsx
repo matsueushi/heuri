@@ -1,7 +1,7 @@
 import { Admin, Resource, ListGuesser, EditGuesser, ShowGuesser } from "react-admin";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
-import { dataProvider } from "./dataProvider";
+import { dataProvider } from "./providers/fakeDataProvider";
 
 import amplifyconfig from "./amplifyconfiguration.json";
 const userPool = new CognitoUserPool({
@@ -19,7 +19,7 @@ export const App = () => {
             loginPage={Login}
         >
             <Resource name="posts" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
-            <Resource name="comments" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} />
+            {/* <Resource name="comments" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
         </Admin>
     );
 };
