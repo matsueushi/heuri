@@ -1,4 +1,9 @@
-import { API, GraphQLResult, GRAPHQL_AUTH_MODE } from "@aws-amplify/api";
+import {
+    generateClient,
+    GraphQLResult,
+    // GRAPHQL_AUTH_MODE,
+} from "@aws-amplify/api";
+import { V6Client } from "@aws-amplify/api-graphql";
 import {
     CreateParams,
     CreateResult,
@@ -29,29 +34,33 @@ export interface Operations {
 }
 
 export interface DataProviderOptions {
-    authMode?: GRAPHQL_AUTH_MODE;
+    // authMode?: GRAPHQL_AUTH_MODE;
     storageBucket?: string;
     storageRegion?: string;
 }
 
-const defaultOptions = {
-    authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
-};
+// const defaultOptions = {
+//     authMode: GRAPHQL_AUTH_MODE.AMAZON_COGNITO_USER_POOLS,
+// };
 
 export class DataProvider {
+    public client: V6Client;
+
     public queries: Record<string, string>;
     public mutations: Record<string, string>;
 
-    public authMode: GRAPHQL_AUTH_MODE;
+    // public authMode: GRAPHQL_AUTH_MODE;
 
     static storageBucket?: string;
     static storageRegion?: string;
 
     public constructor(operations: Operations, options?: DataProviderOptions) {
+        this.client = generateClient();
+
         this.queries = operations.queries;
         this.mutations = operations.mutations;
 
-        this.authMode = options?.authMode || defaultOptions.authMode;
+        // this.authMode = options?.authMode || defaultOptions.authMode;
 
         DataProvider.storageBucket = options?.storageBucket;
         DataProvider.storageRegion = options?.storageRegion;
@@ -351,10 +360,11 @@ export class DataProvider {
         query: string,
         variables: Record<string, unknown>
     ): Promise<any> {
-        const queryResult = <GraphQLResult>await API.graphql({
+        console.log(query, variables);
+        const queryResult = <GraphQLResult>await this.client.graphql({
             query,
             variables,
-            authMode: this.authMode,
+            // authMode: this.authMode,
         });
 
         if (queryResult.errors || !queryResult.data) {
