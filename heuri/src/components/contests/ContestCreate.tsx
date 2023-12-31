@@ -1,5 +1,6 @@
+import { v4 as uuidv4 } from "uuid";
+
 import {
-    DateTimeInput,
     Create,
     SimpleForm,
     TextInput,
@@ -7,14 +8,19 @@ import {
 } from "react-admin";
 
 export const ContestCreate = () => {
+    // const transform = (data: any) => data;
+    const transform = (data: any) => ({
+        ...data,
+        id: uuidv4(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+
     return (
-        <Create redirect="list">
+        <Create redirect="list" transform={transform}>
             <SimpleForm>
-                <TextInput source="id" />
                 <TextInput source="name" />
                 <TextInput source="description" />
-                <DateTimeInput source="createdAt" />
-                <DateTimeInput source="updatedAt" />
             </SimpleForm>
         </Create>
     );
