@@ -1,13 +1,21 @@
-import { DateTimeInput, Create, SimpleForm, TextInput } from "react-admin";
+import {
+    DateTimeInput,
+    Create,
+    SimpleForm,
+    TextInput,
 
-export const ContestCreate = () => (
-    <Create>
-        <SimpleForm>
-            <TextInput source="id" />
-            <TextInput source="name" />
-            <TextInput source="description" />
-            <DateTimeInput source="createdAt" />
-            <DateTimeInput source="updatedAt" />
-        </SimpleForm>
-    </Create>
-);
+} from "react-admin";
+
+export const ContestCreate = () => {
+    return (
+        <Create redirect="list">
+            <SimpleForm>
+                <TextInput source="id" />
+                <TextInput source="name" />
+                <TextInput source="description" />
+                <DateTimeInput source="createdAt" />
+                <DateTimeInput source="updatedAt" />
+            </SimpleForm>
+        </Create>
+    );
+};
