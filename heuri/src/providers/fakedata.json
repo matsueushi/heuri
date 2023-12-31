@@ -90,5 +90,23 @@
             "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
             "__typename": "Contest"
         }
+    ],
+    "submissions": [
+        {
+            "contestId": "dc4a7d61-ab41-4884-afa8-e585246370a4",
+            "func": "asdf",
+            "description": "11111",
+            "id": "df49d407-8314-43f9-8cba-9ba24ab2df81",
+            "createdAt": "2023-12-31T06:46:55.138Z",
+            "updatedAt": "2023-12-31T06:46:55.138Z"
+        },
+        {
+            "contestId": "dc4a7d61-ab41-4884-afa8-e585246370a4",
+            "func": "eeedf",
+            "description": "ee111",
+            "id": "af49d407-8314-43f9-8cba-9ba24ab2df81",
+            "createdAt": "2023-12-31T02:46:55.138Z",
+            "updatedAt": "2023-12-31T02:46:55.138Z"
+        }
     ]
 }

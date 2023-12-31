@@ -14,6 +14,7 @@ import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
 
 import contests from "./components/contests";
+import submissions from "./components/submissions";
 
 Amplify.configure(amplifyconfig);
 
@@ -34,7 +35,7 @@ export const App = () => {
             loginPage={Login}
         >
             <Resource {...contests} />
-            {/* <Resource name="submissions" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
+            <Resource {...submissions} />
         </Admin>
     );
 };
