@@ -33,7 +33,7 @@ export const App = () => {
             authProvider={authProvider}
             loginPage={Login}
         >
-            <Resource name="contests" {...contests} />
+            <Resource {...contests} />
             {/* <Resource name="submissions" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
         </Admin>
     );
