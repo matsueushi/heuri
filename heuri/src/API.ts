@@ -61,24 +61,6 @@ export type Contest = {
   id: string,
   name: string,
   description: string,
-  submissions?: ModelSubmissionConnection | null,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type ModelSubmissionConnection = {
-  __typename: "ModelSubmissionConnection",
-  items:  Array<Submission | null >,
-  nextToken?: string | null,
-};
-
-export type Submission = {
-  __typename: "Submission",
-  id: string,
-  contestID: string,
-  func: string,
-  description: string,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
@@ -96,13 +78,13 @@ export type DeleteContestInput = {
 
 export type CreateSubmissionInput = {
   id?: string | null,
-  contestID: string,
+  contestId: string,
   func: string,
   description: string,
 };
 
 export type ModelSubmissionConditionInput = {
-  contestID?: ModelIDInput | null,
+  contestId?: ModelIDInput | null,
   func?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelSubmissionConditionInput | null > | null,
@@ -126,9 +108,20 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type Submission = {
+  __typename: "Submission",
+  id: string,
+  contestId: string,
+  func: string,
+  description: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
 export type UpdateSubmissionInput = {
   id: string,
-  contestID?: string | null,
+  contestId?: string | null,
   func?: string | null,
   description?: string | null,
 };
@@ -154,7 +147,7 @@ export type ModelContestConnection = {
 
 export type ModelSubmissionFilterInput = {
   id?: ModelIDInput | null,
-  contestID?: ModelIDInput | null,
+  contestId?: ModelIDInput | null,
   func?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelSubmissionFilterInput | null > | null,
@@ -162,11 +155,11 @@ export type ModelSubmissionFilterInput = {
   not?: ModelSubmissionFilterInput | null,
 };
 
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
+export type ModelSubmissionConnection = {
+  __typename: "ModelSubmissionConnection",
+  items:  Array<Submission | null >,
+  nextToken?: string | null,
+};
 
 export type ModelSubscriptionContestFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -208,7 +201,7 @@ export type ModelSubscriptionStringInput = {
 
 export type ModelSubscriptionSubmissionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  contestID?: ModelSubscriptionIDInput | null,
+  contestId?: ModelSubscriptionIDInput | null,
   func?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionSubmissionFilterInput | null > | null,
@@ -226,10 +219,6 @@ export type CreateContestMutation = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -247,10 +236,6 @@ export type UpdateContestMutation = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -268,10 +253,6 @@ export type DeleteContestMutation = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -287,7 +268,7 @@ export type CreateSubmissionMutation = {
   createSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -305,7 +286,7 @@ export type UpdateSubmissionMutation = {
   updateSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -323,7 +304,7 @@ export type DeleteSubmissionMutation = {
   deleteSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -342,10 +323,6 @@ export type GetContestQuery = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -382,7 +359,7 @@ export type GetSubmissionQuery = {
   getSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -403,32 +380,7 @@ export type ListSubmissionsQuery = {
     items:  Array< {
       __typename: "Submission",
       id: string,
-      contestID: string,
-      func: string,
-      description: string,
-      createdAt: string,
-      updatedAt: string,
-      owner?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type SubmissionsByContestIDQueryVariables = {
-  contestID: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelSubmissionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type SubmissionsByContestIDQuery = {
-  submissionsByContestID?:  {
-    __typename: "ModelSubmissionConnection",
-    items:  Array< {
-      __typename: "Submission",
-      id: string,
-      contestID: string,
+      contestId: string,
       func: string,
       description: string,
       createdAt: string,
@@ -450,10 +402,6 @@ export type OnCreateContestSubscription = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -471,10 +419,6 @@ export type OnUpdateContestSubscription = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -492,10 +436,6 @@ export type OnDeleteContestSubscription = {
     id: string,
     name: string,
     description: string,
-    submissions?:  {
-      __typename: "ModelSubmissionConnection",
-      nextToken?: string | null,
-    } | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -511,7 +451,7 @@ export type OnCreateSubmissionSubscription = {
   onCreateSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -529,7 +469,7 @@ export type OnUpdateSubmissionSubscription = {
   onUpdateSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,
@@ -547,7 +487,7 @@ export type OnDeleteSubmissionSubscription = {
   onDeleteSubmission?:  {
     __typename: "Submission",
     id: string,
-    contestID: string,
+    contestId: string,
     func: string,
     description: string,
     createdAt: string,

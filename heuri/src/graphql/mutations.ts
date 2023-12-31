@@ -16,10 +16,6 @@ export const createContest = /* GraphQL */ `mutation CreateContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -38,10 +34,6 @@ export const updateContest = /* GraphQL */ `mutation UpdateContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -60,10 +52,6 @@ export const deleteContest = /* GraphQL */ `mutation DeleteContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -80,7 +68,7 @@ export const createSubmission = /* GraphQL */ `mutation CreateSubmission(
 ) {
   createSubmission(input: $input, condition: $condition) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
@@ -99,7 +87,7 @@ export const updateSubmission = /* GraphQL */ `mutation UpdateSubmission(
 ) {
   updateSubmission(input: $input, condition: $condition) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
@@ -118,7 +106,7 @@ export const deleteSubmission = /* GraphQL */ `mutation DeleteSubmission(
 ) {
   deleteSubmission(input: $input, condition: $condition) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
