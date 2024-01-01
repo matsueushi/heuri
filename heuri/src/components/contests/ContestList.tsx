@@ -4,7 +4,7 @@ export const ContestList = () => (
     <List
         sort={{ field: "updatedAt", order: "DESC" }}
     >
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="name" />
             <TextField source="description" />
             <DateField source="createdAt" showTime />

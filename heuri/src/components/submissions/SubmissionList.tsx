@@ -10,7 +10,7 @@ export const SubmissionList = () => {
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={id ? { contestId: id } : {}}
         >
-            <Datagrid rowClick="edit">
+            <Datagrid rowClick="show">
                 <TextField source="id" />
                 <TextField source="contestId" />
                 <TextField source="func" />
