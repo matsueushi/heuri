@@ -1,4 +1,4 @@
-import { Datagrid, DateField, EditButton, List, ShowButton, TextField } from "react-admin";
+import { Datagrid, DateField, EditButton, List, ReferenceField, ShowButton, TextField } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const SubmissionList = () => {
@@ -13,6 +13,9 @@ export const SubmissionList = () => {
             <Datagrid rowClick="show">
                 <TextField source="id" />
                 <TextField source="contestId" />
+                <ReferenceField source="contestId" reference="contests">
+                    <TextField source="name" />
+                </ReferenceField>
                 <TextField source="func" />
                 <TextField source="description" />
                 <DateField source="createdAt" showTime />
