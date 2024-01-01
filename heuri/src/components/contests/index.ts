@@ -5,6 +5,7 @@ import { ContestShow } from "./ContestShow";
 
 export default {
     name: "contests",
+    recordRepresentation: (record: any) => (`${record.name}, #${record.id}`),
     list: ContestList,
     create: ContestCreate,
     edit: ContestEdit,

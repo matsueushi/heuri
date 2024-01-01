@@ -1,10 +1,11 @@
 import { DateField, Show, SimpleShowLayout, TextField } from "react-admin";
 
-export const ContestShow = () => (
+export const SubmissionShow = () => (
     <Show>
         <SimpleShowLayout>
             <TextField source="id" />
-            <TextField source="name" />
+            <TextField source="contestId" />
+            <TextField source="func" />
             <TextField source="description" />
             <DateField source="createdAt" showTime />
             <DateField source="updatedAt" showTime />

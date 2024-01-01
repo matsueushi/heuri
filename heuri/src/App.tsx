@@ -3,6 +3,7 @@ import {
     Admin, Resource,
     // ListGuesser, EditGuesser, ShowGuesser
 } from "react-admin";
+import { Route } from "react-router-dom";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
@@ -14,6 +15,8 @@ import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
 
 import contests from "./components/contests";
+import submissions from "./components/submissions";
+import { SubmissionList } from "./components/submissions/SubmissionList";
 
 Amplify.configure(amplifyconfig);
 
@@ -33,8 +36,10 @@ export const App = () => {
             authProvider={authProvider}
             loginPage={Login}
         >
-            <Resource {...contests} />
-            {/* <Resource name="submissions" list={ListGuesser} edit={EditGuesser} show={ShowGuesser} /> */}
+            <Resource {...contests}>
+                <Route path=":id/submissions" element={<SubmissionList />} />
+            </Resource>
+            <Resource {...submissions} />
         </Admin>
     );
 };

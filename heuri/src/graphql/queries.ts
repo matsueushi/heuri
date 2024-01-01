@@ -13,10 +13,6 @@ export const getContest = /* GraphQL */ `query GetContest($id: ID!) {
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -53,7 +49,7 @@ export const listContests = /* GraphQL */ `query ListContests(
 export const getSubmission = /* GraphQL */ `query GetSubmission($id: ID!) {
   getSubmission(id: $id) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
@@ -74,7 +70,7 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
   listSubmissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      contestID
+      contestId
       func
       description
       createdAt
@@ -89,36 +85,4 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
 ` as GeneratedQuery<
   APITypes.ListSubmissionsQueryVariables,
   APITypes.ListSubmissionsQuery
->;
-export const submissionsByContestID = /* GraphQL */ `query SubmissionsByContestID(
-  $contestID: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelSubmissionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  submissionsByContestID(
-    contestID: $contestID
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      contestID
-      func
-      description
-      createdAt
-      updatedAt
-      owner
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SubmissionsByContestIDQueryVariables,
-  APITypes.SubmissionsByContestIDQuery
 >;

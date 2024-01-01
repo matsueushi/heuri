@@ -16,10 +16,6 @@ export const onCreateContest = /* GraphQL */ `subscription OnCreateContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -38,10 +34,6 @@ export const onUpdateContest = /* GraphQL */ `subscription OnUpdateContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -60,10 +52,6 @@ export const onDeleteContest = /* GraphQL */ `subscription OnDeleteContest(
     id
     name
     description
-    submissions {
-      nextToken
-      __typename
-    }
     createdAt
     updatedAt
     owner
@@ -80,7 +68,7 @@ export const onCreateSubmission = /* GraphQL */ `subscription OnCreateSubmission
 ) {
   onCreateSubmission(filter: $filter, owner: $owner) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
@@ -99,7 +87,7 @@ export const onUpdateSubmission = /* GraphQL */ `subscription OnUpdateSubmission
 ) {
   onUpdateSubmission(filter: $filter, owner: $owner) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
@@ -118,7 +106,7 @@ export const onDeleteSubmission = /* GraphQL */ `subscription OnDeleteSubmission
 ) {
   onDeleteSubmission(filter: $filter, owner: $owner) {
     id
-    contestID
+    contestId
     func
     description
     createdAt
