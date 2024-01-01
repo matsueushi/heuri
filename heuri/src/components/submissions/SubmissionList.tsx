@@ -11,8 +11,8 @@ export const SubmissionList = () => {
             filter={id ? { contestId: id } : {}}
         >
             <Datagrid rowClick="show">
-                <TextField source="id" />
-                <TextField source="contestId" />
+                {/* <TextField source="id" /> */}
+                {/* <TextField source="contestId" /> */}
                 <ReferenceField source="contestId" reference="contests">
                     <TextField source="name" />
                 </ReferenceField>
