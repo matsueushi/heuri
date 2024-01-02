@@ -17,6 +17,8 @@ import * as queries from "./graphql/queries";
 import contests from "./components/contests";
 import submissions from "./components/submissions";
 import { SubmissionList } from "./components/submissions/SubmissionList";
+import testcases from "./components/testcases";
+import { TestCaseList } from "./components/testcases/TestCaseList";
 
 Amplify.configure(amplifyconfig);
 
@@ -39,7 +41,10 @@ export const App = () => {
             <Resource {...contests}>
                 <Route path=":id/submissions" element={<SubmissionList />} />
             </Resource>
-            <Resource {...submissions} />
+            <Resource {...submissions}>
+                <Route path=":id/testcases" element={<TestCaseList />} />
+            </Resource>
+            <Resource {...testcases} />
         </Admin>
     );
 };

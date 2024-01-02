@@ -79,13 +79,13 @@
             "id": "testCaseId2",
             "submissionId": "submissionId1",
             "seed": 0,
-            "score": 12345
+            "score": 412345
         },
         {
             "id": "testCaseId3",
             "submissionId": "submissionId1",
             "seed": 1,
-            "score": 23456
+            "score": 243456
         }
     ]
 }

@@ -10,8 +10,10 @@ export const SubmissionList = () => {
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={id ? { contestId: id } : {}}
         >
-            <Datagrid rowClick="show">
-                {/* <TextField source="id" /> */}
+            <Datagrid rowClick={(id, resource) => {
+                return `/${resource}/${id}/testcases`;
+            }}>
+                <TextField source="id" />
                 {/* <TextField source="contestId" /> */}
                 <ReferenceField source="contestId" reference="contests">
                     <TextField source="name" />
