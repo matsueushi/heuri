@@ -20,7 +20,7 @@ export const SubmissionCreate = () => {
         <Create redirect="list" transform={transform}>
             <SimpleForm>
                 <TextInput source="contestId" />
-                <TextInput source="func" />
+                <TextInput source="functionName" />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>

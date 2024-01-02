@@ -32,7 +32,7 @@
         {
             "id": "submissionId0",
             "contestId": "contestId0",
-            "func": "asdf",
+            "functionName": "asdf",
             "description": "jhrree",
             "createdAt": "2023-12-31T06:46:55.138Z",
             "updatedAt": "2023-12-31T06:46:55.138Z"
@@ -40,7 +40,7 @@
         {
             "id": "submissionId1",
             "contestId": "contestId0",
-            "func": "agsg",
+            "functionName": "agsg",
             "description": "gyrewg",
             "createdAt": "2023-12-31T06:43:55.138Z",
             "updatedAt": "2023-12-31T06:43:55.138Z"
@@ -48,7 +48,7 @@
         {
             "id": "submissionId2",
             "contestId": "contestId0",
-            "func": "asdf",
+            "functionName": "asdf",
             "description": "jhrree",
             "createdAt": "2023-12-31T06:26:55.138Z",
             "updatedAt": "2023-12-31T06:26:55.138Z"
@@ -56,7 +56,7 @@
         {
             "id": "submissionId3",
             "contestId": "contestId1",
-            "func": "agsg",
+            "functionName": "agsg",
             "description": "gyrewg",
             "createdAt": "2023-12-31T06:16:55.138Z",
             "updatedAt": "2023-12-31T06:16:55.138Z"

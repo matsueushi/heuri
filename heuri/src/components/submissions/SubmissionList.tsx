@@ -18,7 +18,7 @@ export const SubmissionList = () => {
                 <ReferenceField source="contestId" reference="contests">
                     <TextField source="name" />
                 </ReferenceField>
-                <TextField source="func" />
+                <TextField source="functionName" />
                 <TextField source="description" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />

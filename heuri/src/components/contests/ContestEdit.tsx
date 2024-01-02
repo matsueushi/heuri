@@ -5,7 +5,7 @@ export const ContestEdit = () => (
         <SimpleForm>
             <TextInput source="id" InputProps={{ disabled: true }} />
             <TextInput source="name" />
-            <TextInput source="description" />
+            <TextInput source="description" fullWidth />
             <DateTimeInput source="createdAt" InputProps={{ disabled: true }} />
             <DateTimeInput source="updatedAt" InputProps={{ disabled: true }} />
         </SimpleForm>
