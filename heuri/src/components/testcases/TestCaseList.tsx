@@ -1,4 +1,4 @@
-import { Datagrid, List, ReferenceField, ShowButton, TextField } from "react-admin";
+import { ChipField, Datagrid, List, NumberField, ReferenceField, ShowButton, TextField, UrlField } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const TestCaseList = () => {
@@ -18,8 +18,11 @@ export const TestCaseList = () => {
                 <ReferenceField source="submissionId" reference="submissions">
                     <TextField source="id" />
                 </ReferenceField>
+                <ChipField source="status" />
+                <UrlField source="input" />
+                <UrlField source="output" />
                 <TextField source="seed" />
-                <TextField source="score" />
+                <NumberField source="score" />
                 {/* <DateField source="createdAt" showTime /> */}
                 {/* <DateField source="updatedAt" showTime /> */}
                 <>

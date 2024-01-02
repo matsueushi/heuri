@@ -1,4 +1,4 @@
-import { ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { NumberField, ReferenceField, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
 
 export const TestCaseShow = () => (
     <Show>
@@ -7,8 +7,11 @@ export const TestCaseShow = () => (
             <ReferenceField source="submissionId" reference="submissions">
                 <TextField source="id" />
             </ReferenceField>
+            <TextField source="status" />
+            <UrlField source="input" />
+            <UrlField source="output" />
             <TextField source="seed" />
-            <TextField source="score" />
+            <NumberField source="score" />
             {/* <DateField source="createdAt" showTime />
             <DateField source="updatedAt" showTime /> */}
         </SimpleShowLayout>

@@ -67,25 +67,32 @@
             "id": "testCaseId0",
             "submissionId": "submissionId0",
             "seed": 0,
-            "score": 12345
+            "score": 12345,
+            "status": "completed",
+            "input": "https://example.com",
+            "output": "https://example.com"
         },
         {
             "id": "testCaseId1",
             "submissionId": "submissionId0",
             "seed": 1,
-            "score": 23456
+            "status": "running",
+            "input": "https://example.com"
         },
         {
             "id": "testCaseId2",
             "submissionId": "submissionId1",
             "seed": 0,
-            "score": 412345
+            "score": 15,
+            "status": "completed",
+            "input": "https://example.com"
         },
         {
             "id": "testCaseId3",
             "submissionId": "submissionId1",
             "seed": 1,
-            "score": 243456
+            "status": "running",
+            "input": "https://example.com"
         }
     ]
 }
