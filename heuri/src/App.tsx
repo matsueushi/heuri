@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
-import { dataProvider as fakeDataProvider } from "./providers/FakeDataProvider";
+import { dataProvider, dataProvider as fakeDataProvider } from "./providers/FakeDataProvider";
 import { buildDataProvider } from "./providers";
 
 import amplifyconfig from "./amplifyconfiguration.json";
@@ -19,6 +19,8 @@ import submissions from "./components/submissions";
 import { SubmissionList } from "./components/submissions/SubmissionList";
 import testcases from "./components/testcases";
 import { TestCaseList } from "./components/testcases/TestCaseList";
+import { useState } from "react";
+import { TestContext } from "./contexts/testContexts";
 
 Amplify.configure(amplifyconfig);
 
@@ -28,24 +30,29 @@ const userPool = new CognitoUserPool({
 });
 const authProvider = CognitoAuthProvider(userPool);
 
-const dataProvider = buildDataProvider({ queries, mutations });
+// const dataProvider = buildDataProvider({ queries, mutations });
 
 export const App = () => {
+    const [isTest] = useState(true);
+
+    const dataProvider = isTest ? fakeDataProvider : buildDataProvider({ queries, mutations });
+
     return (
-        <Admin
-            dataProvider={fakeDataProvider}
-            // dataProvider={dataProvider}
-            authProvider={authProvider}
-            loginPage={Login}
-        >
-            <Resource {...contests}>
-                <Route path=":id/submissions" element={<SubmissionList />} />
-            </Resource>
-            <Resource {...submissions}>
-                <Route path=":id/testcases" element={<TestCaseList />} />
-            </Resource>
-            <Resource {...testcases} />
-        </Admin>
+        <TestContext.Provider value={isTest}>
+            <Admin
+                dataProvider={dataProvider}
+                authProvider={authProvider}
+                loginPage={Login}
+            >
+                <Resource {...contests}>
+                    <Route path=":id/submissions" element={<SubmissionList />} />
+                </Resource>
+                <Resource {...submissions}>
+                    <Route path=":id/testcases" element={<TestCaseList />} />
+                </Resource>
+                <Resource {...testcases} />
+            </Admin>
+        </TestContext.Provider >
     );
 };
 

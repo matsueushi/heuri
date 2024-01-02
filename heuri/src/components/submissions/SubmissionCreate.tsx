@@ -6,15 +6,23 @@ import {
     TextInput,
 
 } from "react-admin";
+import { useContext } from "react";
+import { TestContext } from "../../contexts/testContexts";
 
 export const SubmissionCreate = () => {
-    // const transform = (data: any) => data;
-    const transform = (data: any) => ({
-        ...data,
-        id: uuidv4(),
-        createdAt: new Date(),
-        updatedAt: new Date(),
-    });
+    const isTest = useContext(TestContext);
+    const transform = (data: any) => {
+        if (isTest) {
+            return {};
+        } else {
+            return {
+                ...data,
+                id: uuidv4(),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+        }
+    };
 
     return (
         <Create redirect="list" transform={transform}>
