@@ -1,8 +1,8 @@
 {
     "contests": [
         {
-            "id": "5006034e-96f4-4ddf-b3b8-f220531537fd",
-            "name": "ahc012",
+            "id": "contestId0",
+            "name": "ahc000",
             "description": "poity",
             "createdAt": "2023-12-23T10:05:21.182Z",
             "updatedAt": "2023-12-24T14:27:46.223Z",
@@ -10,8 +10,8 @@
             "__typename": "Contest"
         },
         {
-            "id": "f68ea95b-855d-49ac-95ca-6b382268e078",
-            "name": "afseawaweeeawawasgg",
+            "id": "contestId1",
+            "name": "ahc001",
             "description": "xxrsewaaeax",
             "createdAt": "2023-12-23T10:05:45.274Z",
             "updatedAt": "2023-12-23T10:05:45.274Z",
@@ -19,94 +19,80 @@
             "__typename": "Contest"
         },
         {
-            "id": "228030eb-955b-471a-be02-ac3d85781d46",
-            "name": "aaa",
-            "description": "xxx",
+            "id": "contestId2",
+            "name": "ahc002",
+            "description": "ewwtgreghe",
             "createdAt": "2023-12-23T10:04:09.847Z",
             "updatedAt": "2023-12-23T10:04:09.847Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "dc4a7d61-ab41-4884-afa8-e585246370a4",
-            "name": "ahc000",
-            "description": "t",
-            "createdAt": "2023-12-24T14:34:09.621Z",
-            "updatedAt": "2023-12-24T14:34:09.621Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "4938ae96-da92-4b84-9735-7fa46104e6b8",
-            "name": "afsweeeawawasgg",
-            "description": "xxrseaeax",
-            "createdAt": "2023-12-23T10:05:20.814Z",
-            "updatedAt": "2023-12-23T10:05:20.814Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "1af16b11-81e2-456d-a43a-d03dc131b979",
-            "name": "afsw",
-            "description": "xxrsx",
-            "createdAt": "2023-12-23T10:04:23.239Z",
-            "updatedAt": "2023-12-23T10:04:23.239Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "1aade884-45b9-4f3e-b387-3c07e2692882",
-            "name": "afsweeeawawasgg",
-            "description": "xxrseaeax",
-            "createdAt": "2023-12-23T10:05:19.148Z",
-            "updatedAt": "2023-12-23T10:05:19.148Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "5771756d-44d9-4ec0-a5fd-75f75f7c847a",
-            "name": "afsweeeawawasgg",
-            "description": "xxrseaeax",
-            "createdAt": "2023-12-23T10:05:20.398Z",
-            "updatedAt": "2023-12-23T10:05:20.398Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "846521c9-4760-41ea-b41e-a92b9e497a13",
-            "name": "ahcxxx",
-            "description": "12356",
-            "createdAt": "2023-12-24T14:33:11.001Z",
-            "updatedAt": "2023-12-24T14:33:11.001Z",
-            "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
-            "__typename": "Contest"
-        },
-        {
-            "id": "b326f06d-23cb-4e34-a65e-0c0f59594565",
-            "name": "afsweawasgg",
-            "description": "xxrseaeax",
-            "createdAt": "2023-12-23T10:04:48.509Z",
-            "updatedAt": "2023-12-23T10:04:48.509Z",
             "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
             "__typename": "Contest"
         }
     ],
     "submissions": [
         {
-            "contestId": "dc4a7d61-ab41-4884-afa8-e585246370a4",
-            "func": "asdf",
-            "description": "11111",
-            "id": "df49d407-8314-43f9-8cba-9ba24ab2df81",
+            "id": "submissionId0",
+            "contestId": "contestId0",
+            "functionName": "asdf",
+            "description": "jhrree",
             "createdAt": "2023-12-31T06:46:55.138Z",
             "updatedAt": "2023-12-31T06:46:55.138Z"
         },
         {
-            "contestId": "pc4a7d61-ab41-4884-afa8-e585246370a4",
-            "func": "eeedf",
-            "description": "ee111",
-            "id": "846521c9-4760-41ea-b41e-a92b9e497a13",
-            "createdAt": "2023-12-31T02:46:55.138Z",
-            "updatedAt": "2023-12-31T02:46:55.138Z"
+            "id": "submissionId1",
+            "contestId": "contestId0",
+            "functionName": "agsg",
+            "description": "gyrewg",
+            "createdAt": "2023-12-31T06:43:55.138Z",
+            "updatedAt": "2023-12-31T06:43:55.138Z"
+        },
+        {
+            "id": "submissionId2",
+            "contestId": "contestId0",
+            "functionName": "asdf",
+            "description": "jhrree",
+            "createdAt": "2023-12-31T06:26:55.138Z",
+            "updatedAt": "2023-12-31T06:26:55.138Z"
+        },
+        {
+            "id": "submissionId3",
+            "contestId": "contestId1",
+            "functionName": "agsg",
+            "description": "gyrewg",
+            "createdAt": "2023-12-31T06:16:55.138Z",
+            "updatedAt": "2023-12-31T06:16:55.138Z"
+        }
+    ],
+    "testcases": [
+        {
+            "id": "testCaseId0",
+            "submissionId": "submissionId0",
+            "seed": 0,
+            "score": 12345,
+            "status": "completed",
+            "input": "https://example.com",
+            "output": "https://example.com"
+        },
+        {
+            "id": "testCaseId1",
+            "submissionId": "submissionId0",
+            "seed": 1,
+            "status": "running",
+            "input": "https://example.com"
+        },
+        {
+            "id": "testCaseId2",
+            "submissionId": "submissionId1",
+            "seed": 0,
+            "score": 15,
+            "status": "completed",
+            "input": "https://example.com"
+        },
+        {
+            "id": "testCaseId3",
+            "submissionId": "submissionId1",
+            "seed": 1,
+            "status": "running",
+            "input": "https://example.com"
         }
     ]
 }
