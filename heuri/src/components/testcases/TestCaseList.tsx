@@ -1,4 +1,4 @@
-import { Datagrid, List, ReferenceField, TextField } from "react-admin";
+import { Datagrid, List, ReferenceField, ShowButton, TextField } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const TestCaseList = () => {
@@ -10,7 +10,10 @@ export const TestCaseList = () => {
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={id ? { submissionId: id } : {}}
         >
-            <Datagrid rowClick="show">
+            <Datagrid
+                rowClick="show"
+                bulkActionButtons={false}
+            >
                 <TextField source="id" />
                 <ReferenceField source="submissionId" reference="submissions">
                     <TextField source="id" />
@@ -19,6 +22,9 @@ export const TestCaseList = () => {
                 <TextField source="score" />
                 {/* <DateField source="createdAt" showTime /> */}
                 {/* <DateField source="updatedAt" showTime /> */}
+                <>
+                    <ShowButton />
+                </>
             </Datagrid>
         </List>
     );
