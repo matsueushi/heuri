@@ -9,6 +9,7 @@ export const ContestEdit = () => (
             <Labeled>
                 <TextField source="name" />
             </Labeled>
+            <TextInput source="input" />
             <TextInput source="description" />
             <Labeled>
                 <DateField source="createdAt" showTime />

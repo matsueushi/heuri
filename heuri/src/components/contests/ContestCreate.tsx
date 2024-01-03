@@ -29,6 +29,7 @@ export const ContestCreate = () => {
         <Create redirect="list" transform={transform}>
             <SimpleForm>
                 <TextInput source="name" validate={required()} />
+                <TextInput source="input" validate={required()} />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>
