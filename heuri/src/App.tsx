@@ -3,7 +3,6 @@ import {
     Admin, Resource,
     // ListGuesser, EditGuesser, ShowGuesser
 } from "react-admin";
-import { Route } from "react-router-dom";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
@@ -16,9 +15,7 @@ import * as queries from "./graphql/queries";
 
 import contests from "./components/contests";
 import submissions from "./components/submissions";
-import { SubmissionList } from "./components/submissions/SubmissionList";
 import testcases from "./components/testcases";
-import { TestCaseList } from "./components/testcases/TestCaseList";
 import { useState } from "react";
 import { TestContext } from "./contexts/testContexts";
 
