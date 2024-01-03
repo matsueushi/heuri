@@ -36,6 +36,7 @@ export const SubmissionCreate = () => {
             <SimpleForm>
                 <TextInput source="contestId" defaultValue={id} disabled />
                 <TextInput source="functionName" />
+                <TextInput source="seeds" multiline />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>

@@ -42,12 +42,8 @@ export const App = () => {
                 authProvider={authProvider}
                 loginPage={Login}
             >
-                <Resource {...contests}>
-                    <Route path=":id/submissions" element={<SubmissionList />} />
-                </Resource>
-                <Resource {...submissions}>
-                    <Route path=":id/testcases" element={<TestCaseList />} />
-                </Resource>
+                <Resource {...contests} />
+                <Resource {...submissions} />
                 <Resource {...testcases} />
             </Admin>
         </TestContext.Provider >
