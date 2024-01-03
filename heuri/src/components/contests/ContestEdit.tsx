@@ -1,4 +1,4 @@
-import { DateField, DateTimeInput, Edit, Labeled, SimpleForm, TextField, TextInput } from "react-admin";
+import { DateField, Edit, Labeled, SimpleForm, TextField, TextInput } from "react-admin";
 
 export const ContestEdit = () => (
     <Edit>
@@ -6,7 +6,9 @@ export const ContestEdit = () => (
             <Labeled>
                 <TextField source="id" />
             </Labeled>
-            <TextInput source="name" />
+            <Labeled>
+                <TextField source="name" />
+            </Labeled>
             <TextInput source="description" />
             <Labeled>
                 <DateField source="createdAt" showTime />

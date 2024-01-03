@@ -11,7 +11,9 @@ export const SubmissionEdit = () => (
                     <TextField source="name" />
                 </ReferenceField>
             </Labeled>
-            <TextInput source="functionName" />
+            <Labeled>
+                <TextField source="functionName" />
+            </Labeled>
             <TextInput source="description" />
             <Labeled>
                 <TextField source="status" />

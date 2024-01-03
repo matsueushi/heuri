@@ -6,7 +6,7 @@ import {
     Create,
     SimpleForm,
     TextInput,
-
+    required,
 } from "react-admin";
 import { useContext } from "react";
 import { TestContext } from "../../contexts/testContexts";
@@ -34,9 +34,9 @@ export const SubmissionCreate = () => {
     return (
         <Create redirect="list" transform={transform}>
             <SimpleForm>
-                <TextInput source="contestId" defaultValue={id} disabled />
-                <TextInput source="functionName" />
-                <TextInput source="seeds" multiline />
+                <TextInput source="contestId" validate={required()} />
+                <TextInput source="functionName" validate={required()} />
+                <TextInput source="seeds" multiline validate={required()} />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>
