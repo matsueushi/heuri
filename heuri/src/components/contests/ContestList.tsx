@@ -4,9 +4,7 @@ export const ContestList = () => (
     <List
         sort={{ field: "updatedAt", order: "DESC" }}
     >
-        <Datagrid rowClick={(id, resource) => {
-            return `/${resource}/${id}/submissions`;
-        }}>
+        <Datagrid rowClick="show">
             {/* <TextField source="id" /> */}
             <TextField source="name" />
             <TextField source="description" />

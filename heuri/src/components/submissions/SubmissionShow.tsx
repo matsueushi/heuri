@@ -1,4 +1,5 @@
 import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { TestCaseList } from "../testcases/TestCaseList";
 
 export const SubmissionShow = () => (
     <Show>
@@ -15,5 +16,6 @@ export const SubmissionShow = () => (
             <DateField source="createdAt" showTime />
             <DateField source="updatedAt" showTime />
         </SimpleShowLayout>
+        <TestCaseList />
     </Show>
 );
