@@ -1,3 +1,5 @@
+import { useParams } from "react-router-dom";
+
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -10,6 +12,8 @@ import { useContext } from "react";
 import { TestContext } from "../../contexts/testContexts";
 
 export const SubmissionCreate = () => {
+    const { id } = useParams();
+
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
         if (isTest) {
@@ -30,7 +34,7 @@ export const SubmissionCreate = () => {
     return (
         <Create redirect="list" transform={transform}>
             <SimpleForm>
-                <TextInput source="contestId" />
+                <TextInput source="contestId" defaultValue={id} disabled />
                 <TextInput source="functionName" />
                 <TextInput source="description" />
             </SimpleForm>

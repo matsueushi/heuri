@@ -7,7 +7,7 @@ import { Route } from "react-router-dom";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
-import { dataProvider, dataProvider as fakeDataProvider } from "./providers/FakeDataProvider";
+import { dataProvider as fakeDataProvider } from "./providers/FakeDataProvider";
 import { buildDataProvider } from "./providers";
 
 import amplifyconfig from "./amplifyconfiguration.json";
@@ -29,8 +29,6 @@ const userPool = new CognitoUserPool({
     ClientId: amplifyconfig.aws_user_pools_web_client_id,
 });
 const authProvider = CognitoAuthProvider(userPool);
-
-// const dataProvider = buildDataProvider({ queries, mutations });
 
 export const App = () => {
     const [isTest] = useState(true);

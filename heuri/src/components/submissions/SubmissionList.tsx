@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 export const SubmissionList = () => {
     const { id } = useParams();
-    console.log(id);
     return (
         <List
             resource="submissions"
@@ -13,9 +12,11 @@ export const SubmissionList = () => {
         >
             <Datagrid rowClick="show">
                 <TextField source="id" />
-                <ReferenceField source="contestId" reference="contests">
-                    <TextField source="name" />
-                </ReferenceField>
+                {
+                    id || <ReferenceField source="contestId" reference="contests">
+                        <TextField source="name" />
+                    </ReferenceField>
+                }
                 <TextField source="functionName" />
                 <TextField source="description" />
                 <ChipField source="status" />
