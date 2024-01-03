@@ -4,6 +4,7 @@
             "id": "contestId0",
             "name": "ahc000",
             "description": "poity",
+            "input": "https://example.com",
             "createdAt": "2023-12-23T10:05:21.182Z",
             "updatedAt": "2023-12-24T14:27:46.223Z",
             "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
@@ -13,6 +14,7 @@
             "id": "contestId1",
             "name": "ahc001",
             "description": "xxrsewaaeax",
+            "input": "https://example.com",
             "createdAt": "2023-12-23T10:05:45.274Z",
             "updatedAt": "2023-12-23T10:05:45.274Z",
             "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
@@ -22,6 +24,7 @@
             "id": "contestId2",
             "name": "ahc002",
             "description": "ewwtgreghe",
+            "input": "https://example.com",
             "createdAt": "2023-12-23T10:04:09.847Z",
             "updatedAt": "2023-12-23T10:04:09.847Z",
             "owner": "782ffa1d-b2a4-48fb-8ef1-306efa304f20",
@@ -34,6 +37,10 @@
             "contestId": "contestId0",
             "functionName": "asdf",
             "description": "jhrree",
+            "status": "running",
+            "testcases": 2,
+            "completed": 1,
+            "score": 5,
             "createdAt": "2023-12-31T06:46:55.138Z",
             "updatedAt": "2023-12-31T06:46:55.138Z"
         },
@@ -42,6 +49,10 @@
             "contestId": "contestId0",
             "functionName": "agsg",
             "description": "gyrewg",
+            "status": "completed",
+            "testcases": 2,
+            "completed": 1,
+            "score": 10,
             "createdAt": "2023-12-31T06:43:55.138Z",
             "updatedAt": "2023-12-31T06:43:55.138Z"
         },
@@ -50,6 +61,10 @@
             "contestId": "contestId0",
             "functionName": "asdf",
             "description": "jhrree",
+            "status": "failed",
+            "testcases": 0,
+            "completed": 0,
+            "score": 0,
             "createdAt": "2023-12-31T06:26:55.138Z",
             "updatedAt": "2023-12-31T06:26:55.138Z"
         },
@@ -58,6 +73,10 @@
             "contestId": "contestId1",
             "functionName": "agsg",
             "description": "gyrewg",
+            "status": "runnning",
+            "testcases": 0,
+            "completed": 0,
+            "score": 0,
             "createdAt": "2023-12-31T06:16:55.138Z",
             "updatedAt": "2023-12-31T06:16:55.138Z"
         }
@@ -70,14 +89,17 @@
             "score": 12345,
             "status": "completed",
             "input": "https://example.com",
-            "output": "https://example.com"
+            "output": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z",
+            "endedAt": "2023-12-31T06:16:55.138Z"
         },
         {
             "id": "testCaseId1",
             "submissionId": "submissionId0",
             "seed": 1,
             "status": "running",
-            "input": "https://example.com"
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
         },
         {
             "id": "testCaseId2",
@@ -85,14 +107,18 @@
             "seed": 0,
             "score": 15,
             "status": "completed",
-            "input": "https://example.com"
+            "input": "https://example.com",
+            "output": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z",
+            "endedAt": "2023-12-31T06:16:55.138Z"
         },
         {
             "id": "testCaseId3",
             "submissionId": "submissionId1",
             "seed": 1,
             "status": "running",
-            "input": "https://example.com"
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
         }
     ]
 }

@@ -31,7 +31,8 @@ yarn build
 ```
 
 ## DataProvider
-Base on [react-admin-amplify](https://github.com/MrHertal/react-admin-amplify) Copyright (c) 2020 Grégoire Hertault
+Based on [react-admin-amplify](https://github.com/MrHertal/react-admin-amplify).
+Copyright (c) 2020 Grégoire Hertault
 
 ## Authentication
 

@@ -1,13 +1,16 @@
-import { DateTimeInput, Edit, SimpleForm, TextInput } from "react-admin";
+import { Edit, Labeled, SimpleForm, TextField, TextInput } from "react-admin";
 
 export const ContestEdit = () => (
     <Edit>
         <SimpleForm>
-            <TextInput source="id" InputProps={{ disabled: true }} />
-            <TextInput source="name" />
-            <TextInput source="description" fullWidth />
-            <DateTimeInput source="createdAt" InputProps={{ disabled: true }} />
-            <DateTimeInput source="updatedAt" InputProps={{ disabled: true }} />
+            <Labeled>
+                <TextField source="id" />
+            </Labeled>
+            <Labeled>
+                <TextField source="name" />
+            </Labeled>
+            <TextInput source="input" />
+            <TextInput source="description" />
         </SimpleForm>
     </Edit>
 );

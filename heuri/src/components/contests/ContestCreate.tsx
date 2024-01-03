@@ -4,6 +4,7 @@ import {
     Create,
     SimpleForm,
     TextInput,
+    required,
 
 } from "react-admin";
 import { useContext } from "react";
@@ -13,21 +14,22 @@ export const ContestCreate = () => {
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
         if (isTest) {
-            return {};
-        } else {
             return {
                 ...data,
                 id: uuidv4(),
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };
+        } else {
+            return data;
         }
     };
 
     return (
         <Create redirect="list" transform={transform}>
             <SimpleForm>
-                <TextInput source="name" />
+                <TextInput source="name" validate={required()} />
+                <TextInput source="input" validate={required()} />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>
