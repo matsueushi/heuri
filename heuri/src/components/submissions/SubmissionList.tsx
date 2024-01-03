@@ -1,4 +1,4 @@
-import { Datagrid, DateField, EditButton, List, ReferenceField, ShowButton, TextField } from "react-admin";
+import { ChipField, Datagrid, DateField, EditButton, List, NumberField, ReferenceField, ShowButton, TextField } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const SubmissionList = () => {
@@ -20,6 +20,9 @@ export const SubmissionList = () => {
                 </ReferenceField>
                 <TextField source="functionName" />
                 <TextField source="description" />
+                <ChipField source="status" />
+                <NumberField source="testcases" />
+                <NumberField source="completed" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />
                 <>

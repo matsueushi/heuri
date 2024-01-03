@@ -13,14 +13,14 @@ export const ContestCreate = () => {
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
         if (isTest) {
-            return {};
-        } else {
             return {
                 ...data,
                 id: uuidv4(),
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };
+        } else {
+            return data;
         }
     };
 

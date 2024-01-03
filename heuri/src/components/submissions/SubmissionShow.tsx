@@ -1,4 +1,4 @@
-import { DateField, ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
 
 export const SubmissionShow = () => (
     <Show>
@@ -9,6 +9,9 @@ export const SubmissionShow = () => (
             </ReferenceField>
             <TextField source="functionName" />
             <TextField source="description" />
+            <TextField source="status" />
+            <NumberField source="testcases" />
+            <NumberField source="completed" />
             <DateField source="createdAt" showTime />
             <DateField source="updatedAt" showTime />
         </SimpleShowLayout>
