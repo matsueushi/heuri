@@ -1,5 +1,3 @@
-import { useParams } from "react-router-dom";
-
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -10,9 +8,12 @@ import {
 } from "react-admin";
 import { useContext } from "react";
 import { TestContext } from "../../contexts/testContexts";
+import { useLocation } from "react-router-dom";
 
 export const SubmissionCreate = () => {
-    const { id } = useParams();
+    const search = useLocation().search;
+    const query = new URLSearchParams(search);
+    const contestId = query.get("contestId");
 
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
@@ -34,7 +35,7 @@ export const SubmissionCreate = () => {
     return (
         <Create redirect="list" transform={transform}>
             <SimpleForm>
-                <TextInput source="contestId" validate={required()} />
+                <TextInput source="contestId" defaultValue={contestId} validate={required()} />
                 <TextInput source="functionName" validate={required()} />
                 <TextInput source="seeds" multiline validate={required()} />
                 <TextInput source="description" />

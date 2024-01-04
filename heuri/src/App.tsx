@@ -1,9 +1,11 @@
-import { Amplify } from "aws-amplify";
+import { useState } from "react";
+import { Route } from "react-router-dom";
 import {
     Admin, Resource,
     // ListGuesser, EditGuesser, ShowGuesser
 } from "react-admin";
-import { Route } from "react-router-dom";
+
+import { Amplify } from "aws-amplify";
 import { CognitoAuthProvider, Login } from "ra-auth-cognito";
 import { CognitoUserPool } from "amazon-cognito-identity-js";
 
@@ -14,13 +16,15 @@ import amplifyconfig from "./amplifyconfiguration.json";
 import * as mutations from "./graphql/mutations";
 import * as queries from "./graphql/queries";
 
+import { TestContext } from "./contexts/testContexts";
+
 import contests from "./components/contests";
 import submissions from "./components/submissions";
-import { SubmissionList } from "./components/submissions/SubmissionList";
-import testcases from "./components/testcases";
-import { TestCaseList } from "./components/testcases/TestCaseList";
-import { useState } from "react";
-import { TestContext } from "./contexts/testContexts";
+import testCases from "./components/testCases";
+import { SubmissionCompare } from "./components/submissions/SubmissionCompare";
+import { SubmissionCompareWith } from "./components/submissions/SubmissionCompareWith";
+import { TestCaseCompareWith } from "./components/testCases/TestCaseCompareWith";
+
 
 Amplify.configure(amplifyconfig);
 
@@ -43,8 +47,13 @@ export const App = () => {
                 loginPage={Login}
             >
                 <Resource {...contests} />
-                <Resource {...submissions} />
-                <Resource {...testcases} />
+                <Resource {...submissions}>
+                    <Route path=":submissionId/compare/" element={<SubmissionCompare />} />
+                    <Route path=":submissionId/compare/:baseSubmissionId" element={<SubmissionCompareWith />} />
+                </Resource>
+                <Resource {...testCases} >
+                    <Route path=":testCaseId/compare/:baseTestCaseId" element={<TestCaseCompareWith />} />
+                </Resource>
             </Admin>
         </TestContext.Provider >
     );

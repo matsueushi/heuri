@@ -1,14 +1,23 @@
-import { ChipField, Datagrid, DateField, EditButton, List, NumberField, ReferenceField, ShowButton, TextField } from "react-admin";
+import { ChipField, CreateButton, Datagrid, DateField, EditButton, ExportButton, List, NumberField, ReferenceField, ShowButton, TextField, TopToolbar } from "react-admin";
 import { useParams } from "react-router-dom";
 
 export const SubmissionList = () => {
     const { id } = useParams();
+    // console.log(id);
+
+    const ListActions = () => (
+        <TopToolbar>
+            {id && <CreateButton to={`/submissions/create?contestId=${id}`} />}
+            <ExportButton />
+        </TopToolbar>
+    );
+
     return (
         <List
+            actions={<ListActions />}
             resource="submissions"
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={id ? { contestId: id } : {}}
-            hasCreate={id !== undefined}
         >
             <Datagrid rowClick="show">
                 <TextField source="id" />
