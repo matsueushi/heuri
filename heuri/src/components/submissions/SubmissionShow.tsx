@@ -1,8 +1,18 @@
-import { DateField, Labeled, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { Button, DateField, EditButton, Labeled, NumberField, ReferenceField, Show, SimpleShowLayout, TextField, TopToolbar } from "react-admin";
 import { TestCaseList } from "../testCases/TestCaseList";
+import CompareIcon from "@mui/icons-material/Compare";
+
+const SubmissionShowActions = () => (
+    <TopToolbar>
+        <Button label="compare">
+            <CompareIcon />
+        </Button>
+        <EditButton />
+    </TopToolbar>
+);
 
 export const SubmissionShow = () => (
-    <Show>
+    <Show actions={<SubmissionShowActions />}>
         <SimpleShowLayout>
             <TextField source="id" />
             <ReferenceField source="contestId" reference="contests">
@@ -19,6 +29,5 @@ export const SubmissionShow = () => (
                 <TestCaseList />
             </Labeled>
         </SimpleShowLayout>
-
     </Show>
 );
