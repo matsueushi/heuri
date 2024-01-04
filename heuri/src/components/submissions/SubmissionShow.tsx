@@ -1,5 +1,5 @@
 import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from "react-admin";
-import { TestCaseList } from "../testcases/TestCaseList";
+import { TestCaseList } from "../testCases/TestCaseList";
 
 export const SubmissionShow = () => (
     <Show>

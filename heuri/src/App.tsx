@@ -15,7 +15,7 @@ import * as queries from "./graphql/queries";
 
 import contests from "./components/contests";
 import submissions from "./components/submissions";
-import testcases from "./components/testcases";
+import testCases from "./components/testCases";
 import { useState } from "react";
 import { TestContext } from "./contexts/testContexts";
 
@@ -40,8 +40,10 @@ export const App = () => {
                 loginPage={Login}
             >
                 <Resource {...contests} />
-                <Resource {...submissions} />
-                <Resource {...testcases} />
+                <Resource {...submissions}>
+                </Resource>
+                <Resource {...testCases} >
+                </Resource>
             </Admin>
         </TestContext.Provider >
     );
