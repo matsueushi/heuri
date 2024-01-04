@@ -1,4 +1,4 @@
-import { DateField, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
+import { DateField, Labeled, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
 import { SubmissionList } from "../submissions/SubmissionList";
 
 export const ContestShow = () => (
@@ -10,7 +10,9 @@ export const ContestShow = () => (
             <TextField source="description" />
             <DateField source="createdAt" showTime />
             <DateField source="updatedAt" showTime />
+            <Labeled source="submissions">
+                <SubmissionList />
+            </Labeled>
         </SimpleShowLayout>
-        <SubmissionList />
     </Show>
 );
