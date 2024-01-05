@@ -1,12 +1,19 @@
-import { Button, DateField, EditButton, Labeled, NumberField, ReferenceField, Show, SimpleShowLayout, TextField, TopToolbar } from "react-admin";
+import { Button, DateField, EditButton, Labeled, NumberField, ReferenceField, Show, SimpleShowLayout, TextField, TopToolbar, useRecordContext, useResourceContext } from "react-admin";
 import { TestCaseList } from "../testCases/TestCaseList";
 import CompareIcon from "@mui/icons-material/Compare";
 
+const CompareButton = () => {
+    const resource = useResourceContext();
+    const record = useRecordContext();
+
+    return <Button label="compare" href={`/#/${resource}/${record.id}/compare`} >
+        <CompareIcon />
+    </Button >;
+};
+
 const SubmissionShowActions = () => (
     <TopToolbar>
-        <Button label="compare">
-            <CompareIcon />
-        </Button>
+        <CompareButton />
         <EditButton />
     </TopToolbar>
 );
