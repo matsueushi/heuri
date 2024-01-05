@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 export const SubmissionList = () => {
     const { id } = useParams();
-    // console.log(id);
 
     const ListActions = () => (
         <TopToolbar>
