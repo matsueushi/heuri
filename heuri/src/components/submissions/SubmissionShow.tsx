@@ -1,7 +1,7 @@
-import { Button, DateField, EditButton, Labeled, NumberField, ReferenceField, Show, SimpleShowLayout, TextField, TopToolbar, useRecordContext, useResourceContext } from "react-admin";
-import { TestCaseList } from "../testCases/TestCaseList";
+import { Button, EditButton, Labeled, Show, SimpleShowLayout, TopToolbar, useRecordContext, useResourceContext } from "react-admin";
 import CompareIcon from "@mui/icons-material/Compare";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
+import { TestCaseFilteredList } from "../testCases/TestCaseFilteredList";
 
 const CompareButton = () => {
     const resource = useResourceContext();
@@ -24,10 +24,10 @@ export const SubmissionShow = () => (
         <Show actions={<SubmissionShowActions />}>
             <SubmissionShowLayout />
         </Show>
-        <Show actions={<></>}>
+        <Show actions={<></>} title=" ">
             <SimpleShowLayout>
                 <Labeled source="TestCases">
-                    <TestCaseList />
+                    <TestCaseFilteredList />
                 </Labeled>
             </SimpleShowLayout>
         </Show >
