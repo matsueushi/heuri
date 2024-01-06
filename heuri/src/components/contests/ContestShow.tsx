@@ -1,8 +1,8 @@
 import { DateField, Labeled, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
 import { SubmissionList } from "../submissions/SubmissionList";
 
-export const ContestShow = () => (
-    <Show>
+export const ContestShow = () => {
+    return <Show>
         <SimpleShowLayout>
             <TextField source="id" />
             <TextField source="name" />
@@ -14,5 +14,5 @@ export const ContestShow = () => (
                 <SubmissionList />
             </Labeled>
         </SimpleShowLayout>
-    </Show>
-);
+    </Show >;
+};
