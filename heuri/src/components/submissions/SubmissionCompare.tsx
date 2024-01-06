@@ -10,10 +10,10 @@ const SubmissionCompareActions = () => (
 );
 
 export const SubmissionCompare = () => {
-    const { submissionId } = useParams();
+    const { id } = useParams();
 
     return <>
-        <Show resource="submissions" id={submissionId} actions={<SubmissionCompareActions />} >
+        <Show resource="submissions" id={id} actions={<SubmissionCompareActions />} >
             <SubmissionShowLayout />
         </Show >
         something...
