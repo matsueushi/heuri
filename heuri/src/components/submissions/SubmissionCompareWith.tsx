@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { Button, EditButton, Identifier, Loading, Show, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Button, Identifier, Loading, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
+import { useMemo } from "react";
 
 interface SetAsBestButtonProps {
     id?: Identifier,
@@ -22,7 +23,7 @@ interface CompareActionsProps {
 const CompareActions = ({ id }: CompareActionsProps) => (
     <TopToolbar>
         <SetAsBestButton id={id} />
-        <EditButton />
+        <ShowButton />
     </TopToolbar>
 );
 
@@ -46,6 +47,28 @@ export const SubmissionCompareWith = () => {
             sort: { field: "seed", order: "ASC" }
         }
     );
+
+    const merged = useMemo(() => {
+        if (data && dataTarget) {
+            const beforeSeeds = new Set<number>(data.map((x) => x.seed));
+            const afterSeeds = new Set<number>(dataTarget.map((x) => x.seed));
+            const commonSeeds = [...beforeSeeds].filter((x) => afterSeeds.has(x));
+            const result = [...commonSeeds].map((seed) => {
+                const x = data.find((x) => x.seed === seed);
+                const y = dataTarget.find((y) => y.seed === seed);
+                return {
+                    seed: seed,
+                    beforeTestCaseId: x?.id ?? "",
+                    afterTestCaseId: y?.id ?? "",
+                    beforeScore: x?.score ?? 0,
+                    afterScore: y?.score ?? 0,
+                };
+            });
+            return result;
+        } else {
+            return [];
+        }
+    }, [data, dataTarget]);
 
     if (isLoading || isLoadingTarget) { return <Loading />; }
     if (error) { return <p>Error: {JSON.stringify(error)}</p>; }
@@ -82,6 +105,8 @@ export const SubmissionCompareWith = () => {
             {dataTarget?.map(x => <li>
                 {JSON.stringify(x)}
             </li>)}
+
+            {JSON.stringify(merged)}
         </Grid >
     </>;
 };
