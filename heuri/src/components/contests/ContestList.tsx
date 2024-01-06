@@ -3,7 +3,6 @@ import { Datagrid, DateField, EditButton, List, ShowButton, TextField } from "re
 export const ContestList = () => (
     <List
         sort={{ field: "updatedAt", order: "DESC" }}
-        title="List of contests"
     >
         <Datagrid rowClick="show">
             <TextField source="id" />

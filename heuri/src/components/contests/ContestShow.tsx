@@ -14,7 +14,10 @@ const ShowWrapper = ({ children }: ShowWrapperProps) => {
 
         <Paper sx={{ padding: 2 }}>
             <Labeled source="submissions">
-                <SubmissionFilteredList contestId={record.id} />
+                <SubmissionFilteredList
+                    rowClick="show"
+                    contestId={record.id}
+                />
             </Labeled>
         </Paper>
     </Paper>;

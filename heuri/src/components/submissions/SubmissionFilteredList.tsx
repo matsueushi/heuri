@@ -1,10 +1,11 @@
-import { ChipField, CreateButton, Datagrid, DateField, EditButton, ExportButton, Identifier, List, NumberField, ShowButton, TextField, TopToolbar } from "react-admin";
+import { ChipField, CreateButton, Datagrid, DateField, EditButton, ExportButton, Identifier, List, NumberField, RowClickFunction, ShowButton, TextField, TopToolbar } from "react-admin";
 
 interface SubmissionFilteredListProps {
-    contestId?: Identifier
+    rowClick: string | RowClickFunction
+    contestId?: Identifier,
 }
 
-export const SubmissionFilteredList = ({ contestId }: SubmissionFilteredListProps) => {
+export const SubmissionFilteredList = ({ rowClick, contestId }: SubmissionFilteredListProps) => {
     const ListActions = () => (
         <TopToolbar>
             <CreateButton to={`/submissions/create?contestId=${contestId}`} />
@@ -20,7 +21,7 @@ export const SubmissionFilteredList = ({ contestId }: SubmissionFilteredListProp
             filter={{ contestId: contestId }}
             title=" "
         >
-            <Datagrid rowClick="show">
+            <Datagrid rowClick={rowClick}>
                 <TextField source="id" />
                 <TextField source="functionName" />
                 <TextField source="description" />
