@@ -7,7 +7,7 @@ export const TestCaseShowLayout = () => (
             <TextField source="id" />
         </ReferenceField>
         <TextField source="status" />
-        <UrlField source="input" />
+        <UrlField source="workingDir" />
         <UrlField source="output" />
         <TextField source="seed" />
         <NumberField source="score" />

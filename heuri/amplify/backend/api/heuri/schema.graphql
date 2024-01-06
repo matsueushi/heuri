@@ -1,6 +1,7 @@
 type Contest @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
+  workingDir: String!
   description: String!
 }
 
@@ -10,14 +11,18 @@ type Submission @model @auth(rules: [{ allow: owner }]) {
   functionName: String!
   description: String!
   status: String!
+  testcases: Int!
+  score: Int
 }
 
 type TestCase @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   submissionId: ID!
-  status: String!
   seed: Int!
+  status: String!
   score: Int
+  input: String
+  output: String
   startedAt: AWSDateTime
   endedAt: AWSDateTime
 }

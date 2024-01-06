@@ -5,11 +5,13 @@
 export type CreateContestInput = {
   id?: string | null,
   name: string,
+  workingDir: string,
   description: string,
 };
 
 export type ModelContestConditionInput = {
   name?: ModelStringInput | null,
+  workingDir?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelContestConditionInput | null > | null,
   or?: Array< ModelContestConditionInput | null > | null,
@@ -60,6 +62,7 @@ export type Contest = {
   __typename: "Contest",
   id: string,
   name: string,
+  workingDir: string,
   description: string,
   createdAt: string,
   updatedAt: string,
@@ -69,6 +72,7 @@ export type Contest = {
 export type UpdateContestInput = {
   id: string,
   name?: string | null,
+  workingDir?: string | null,
   description?: string | null,
 };
 
@@ -82,6 +86,8 @@ export type CreateSubmissionInput = {
   functionName: string,
   description: string,
   status: string,
+  testcases: number,
+  score?: number | null,
 };
 
 export type ModelSubmissionConditionInput = {
@@ -89,6 +95,8 @@ export type ModelSubmissionConditionInput = {
   functionName?: ModelStringInput | null,
   description?: ModelStringInput | null,
   status?: ModelStringInput | null,
+  testcases?: ModelIntInput | null,
+  score?: ModelIntInput | null,
   and?: Array< ModelSubmissionConditionInput | null > | null,
   or?: Array< ModelSubmissionConditionInput | null > | null,
   not?: ModelSubmissionConditionInput | null,
@@ -110,52 +118,6 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type Submission = {
-  __typename: "Submission",
-  id: string,
-  contestId: string,
-  functionName: string,
-  description: string,
-  status: string,
-  createdAt: string,
-  updatedAt: string,
-  owner?: string | null,
-};
-
-export type UpdateSubmissionInput = {
-  id: string,
-  contestId?: string | null,
-  functionName?: string | null,
-  description?: string | null,
-  status?: string | null,
-};
-
-export type DeleteSubmissionInput = {
-  id: string,
-};
-
-export type CreateTestCaseInput = {
-  id?: string | null,
-  submissionId: string,
-  status: string,
-  seed: number,
-  score?: number | null,
-  startedAt?: string | null,
-  endedAt?: string | null,
-};
-
-export type ModelTestCaseConditionInput = {
-  submissionId?: ModelIDInput | null,
-  status?: ModelStringInput | null,
-  seed?: ModelIntInput | null,
-  score?: ModelIntInput | null,
-  startedAt?: ModelStringInput | null,
-  endedAt?: ModelStringInput | null,
-  and?: Array< ModelTestCaseConditionInput | null > | null,
-  or?: Array< ModelTestCaseConditionInput | null > | null,
-  not?: ModelTestCaseConditionInput | null,
-};
-
 export type ModelIntInput = {
   ne?: number | null,
   eq?: number | null,
@@ -168,13 +130,69 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
+export type Submission = {
+  __typename: "Submission",
+  id: string,
+  contestId: string,
+  functionName: string,
+  description: string,
+  status: string,
+  testcases: number,
+  score?: number | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateSubmissionInput = {
+  id: string,
+  contestId?: string | null,
+  functionName?: string | null,
+  description?: string | null,
+  status?: string | null,
+  testcases?: number | null,
+  score?: number | null,
+};
+
+export type DeleteSubmissionInput = {
+  id: string,
+};
+
+export type CreateTestCaseInput = {
+  id?: string | null,
+  submissionId: string,
+  seed: number,
+  status: string,
+  score?: number | null,
+  input?: string | null,
+  output?: string | null,
+  startedAt?: string | null,
+  endedAt?: string | null,
+};
+
+export type ModelTestCaseConditionInput = {
+  submissionId?: ModelIDInput | null,
+  seed?: ModelIntInput | null,
+  status?: ModelStringInput | null,
+  score?: ModelIntInput | null,
+  input?: ModelStringInput | null,
+  output?: ModelStringInput | null,
+  startedAt?: ModelStringInput | null,
+  endedAt?: ModelStringInput | null,
+  and?: Array< ModelTestCaseConditionInput | null > | null,
+  or?: Array< ModelTestCaseConditionInput | null > | null,
+  not?: ModelTestCaseConditionInput | null,
+};
+
 export type TestCase = {
   __typename: "TestCase",
   id: string,
   submissionId: string,
-  status: string,
   seed: number,
+  status: string,
   score?: number | null,
+  input?: string | null,
+  output?: string | null,
   startedAt?: string | null,
   endedAt?: string | null,
   createdAt: string,
@@ -185,9 +203,11 @@ export type TestCase = {
 export type UpdateTestCaseInput = {
   id: string,
   submissionId?: string | null,
-  status?: string | null,
   seed?: number | null,
+  status?: string | null,
   score?: number | null,
+  input?: string | null,
+  output?: string | null,
   startedAt?: string | null,
   endedAt?: string | null,
 };
@@ -199,6 +219,7 @@ export type DeleteTestCaseInput = {
 export type ModelContestFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  workingDir?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelContestFilterInput | null > | null,
   or?: Array< ModelContestFilterInput | null > | null,
@@ -217,6 +238,8 @@ export type ModelSubmissionFilterInput = {
   functionName?: ModelStringInput | null,
   description?: ModelStringInput | null,
   status?: ModelStringInput | null,
+  testcases?: ModelIntInput | null,
+  score?: ModelIntInput | null,
   and?: Array< ModelSubmissionFilterInput | null > | null,
   or?: Array< ModelSubmissionFilterInput | null > | null,
   not?: ModelSubmissionFilterInput | null,
@@ -231,9 +254,11 @@ export type ModelSubmissionConnection = {
 export type ModelTestCaseFilterInput = {
   id?: ModelIDInput | null,
   submissionId?: ModelIDInput | null,
-  status?: ModelStringInput | null,
   seed?: ModelIntInput | null,
+  status?: ModelStringInput | null,
   score?: ModelIntInput | null,
+  input?: ModelStringInput | null,
+  output?: ModelStringInput | null,
   startedAt?: ModelStringInput | null,
   endedAt?: ModelStringInput | null,
   and?: Array< ModelTestCaseFilterInput | null > | null,
@@ -250,6 +275,7 @@ export type ModelTestCaseConnection = {
 export type ModelSubscriptionContestFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
+  workingDir?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionContestFilterInput | null > | null,
   or?: Array< ModelSubscriptionContestFilterInput | null > | null,
@@ -291,20 +317,10 @@ export type ModelSubscriptionSubmissionFilterInput = {
   functionName?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
   status?: ModelSubscriptionStringInput | null,
+  testcases?: ModelSubscriptionIntInput | null,
+  score?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionSubmissionFilterInput | null > | null,
   or?: Array< ModelSubscriptionSubmissionFilterInput | null > | null,
-};
-
-export type ModelSubscriptionTestCaseFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  submissionId?: ModelSubscriptionIDInput | null,
-  status?: ModelSubscriptionStringInput | null,
-  seed?: ModelSubscriptionIntInput | null,
-  score?: ModelSubscriptionIntInput | null,
-  startedAt?: ModelSubscriptionStringInput | null,
-  endedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIntInput = {
@@ -319,6 +335,20 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionTestCaseFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  submissionId?: ModelSubscriptionIDInput | null,
+  seed?: ModelSubscriptionIntInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  score?: ModelSubscriptionIntInput | null,
+  input?: ModelSubscriptionStringInput | null,
+  output?: ModelSubscriptionStringInput | null,
+  startedAt?: ModelSubscriptionStringInput | null,
+  endedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
+};
+
 export type CreateContestMutationVariables = {
   input: CreateContestInput,
   condition?: ModelContestConditionInput | null,
@@ -329,6 +359,7 @@ export type CreateContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -346,6 +377,7 @@ export type UpdateContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -363,6 +395,7 @@ export type DeleteContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -383,6 +416,8 @@ export type CreateSubmissionMutation = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -402,6 +437,8 @@ export type UpdateSubmissionMutation = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -421,6 +458,8 @@ export type DeleteSubmissionMutation = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -437,9 +476,11 @@ export type CreateTestCaseMutation = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -458,9 +499,11 @@ export type UpdateTestCaseMutation = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -479,9 +522,11 @@ export type DeleteTestCaseMutation = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -499,6 +544,7 @@ export type GetContestQuery = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -519,6 +565,7 @@ export type ListContestsQuery = {
       __typename: "Contest",
       id: string,
       name: string,
+      workingDir: string,
       description: string,
       createdAt: string,
       updatedAt: string,
@@ -540,6 +587,8 @@ export type GetSubmissionQuery = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -562,6 +611,8 @@ export type ListSubmissionsQuery = {
       functionName: string,
       description: string,
       status: string,
+      testcases: number,
+      score?: number | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -579,9 +630,11 @@ export type GetTestCaseQuery = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -603,9 +656,11 @@ export type ListTestCasesQuery = {
       __typename: "TestCase",
       id: string,
       submissionId: string,
-      status: string,
       seed: number,
+      status: string,
       score?: number | null,
+      input?: string | null,
+      output?: string | null,
       startedAt?: string | null,
       endedAt?: string | null,
       createdAt: string,
@@ -626,6 +681,7 @@ export type OnCreateContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -643,6 +699,7 @@ export type OnUpdateContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -660,6 +717,7 @@ export type OnDeleteContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -680,6 +738,8 @@ export type OnCreateSubmissionSubscription = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -699,6 +759,8 @@ export type OnUpdateSubmissionSubscription = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -718,6 +780,8 @@ export type OnDeleteSubmissionSubscription = {
     functionName: string,
     description: string,
     status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -734,9 +798,11 @@ export type OnCreateTestCaseSubscription = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -755,9 +821,11 @@ export type OnUpdateTestCaseSubscription = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,
@@ -776,9 +844,11 @@ export type OnDeleteTestCaseSubscription = {
     __typename: "TestCase",
     id: string,
     submissionId: string,
-    status: string,
     seed: number,
+    status: string,
     score?: number | null,
+    input?: string | null,
+    output?: string | null,
     startedAt?: string | null,
     endedAt?: string | null,
     createdAt: string,

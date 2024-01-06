@@ -24,7 +24,7 @@ export const SubmissionCreate = () => {
                 id: uuidv4(),
                 status: "runnnig",
                 testcases: 0,
-                completed: 0,
+                score: 0,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };

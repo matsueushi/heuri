@@ -22,7 +22,7 @@ export const SubmissionList = () => {
                 <TextField source="description" />
                 <ChipField source="status" />
                 <NumberField source="testcases" />
-                <NumberField source="completed" />
+                <NumberField source="score" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />
             </Datagrid>

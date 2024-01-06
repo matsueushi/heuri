@@ -15,6 +15,7 @@ export const onCreateContest = /* GraphQL */ `subscription OnCreateContest(
   onCreateContest(filter: $filter, owner: $owner) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -33,6 +34,7 @@ export const onUpdateContest = /* GraphQL */ `subscription OnUpdateContest(
   onUpdateContest(filter: $filter, owner: $owner) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -51,6 +53,7 @@ export const onDeleteContest = /* GraphQL */ `subscription OnDeleteContest(
   onDeleteContest(filter: $filter, owner: $owner) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -72,6 +75,8 @@ export const onCreateSubmission = /* GraphQL */ `subscription OnCreateSubmission
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -92,6 +97,8 @@ export const onUpdateSubmission = /* GraphQL */ `subscription OnUpdateSubmission
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -112,6 +119,8 @@ export const onDeleteSubmission = /* GraphQL */ `subscription OnDeleteSubmission
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -129,9 +138,11 @@ export const onCreateTestCase = /* GraphQL */ `subscription OnCreateTestCase(
   onCreateTestCase(filter: $filter, owner: $owner) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt
@@ -151,9 +162,11 @@ export const onUpdateTestCase = /* GraphQL */ `subscription OnUpdateTestCase(
   onUpdateTestCase(filter: $filter, owner: $owner) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt
@@ -173,9 +186,11 @@ export const onDeleteTestCase = /* GraphQL */ `subscription OnDeleteTestCase(
   onDeleteTestCase(filter: $filter, owner: $owner) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt

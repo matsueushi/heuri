@@ -15,6 +15,7 @@ export const createContest = /* GraphQL */ `mutation CreateContest(
   createContest(input: $input, condition: $condition) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -33,6 +34,7 @@ export const updateContest = /* GraphQL */ `mutation UpdateContest(
   updateContest(input: $input, condition: $condition) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -51,6 +53,7 @@ export const deleteContest = /* GraphQL */ `mutation DeleteContest(
   deleteContest(input: $input, condition: $condition) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -72,6 +75,8 @@ export const createSubmission = /* GraphQL */ `mutation CreateSubmission(
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -92,6 +97,8 @@ export const updateSubmission = /* GraphQL */ `mutation UpdateSubmission(
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -112,6 +119,8 @@ export const deleteSubmission = /* GraphQL */ `mutation DeleteSubmission(
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -129,9 +138,11 @@ export const createTestCase = /* GraphQL */ `mutation CreateTestCase(
   createTestCase(input: $input, condition: $condition) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt
@@ -151,9 +162,11 @@ export const updateTestCase = /* GraphQL */ `mutation UpdateTestCase(
   updateTestCase(input: $input, condition: $condition) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt
@@ -173,9 +186,11 @@ export const deleteTestCase = /* GraphQL */ `mutation DeleteTestCase(
   deleteTestCase(input: $input, condition: $condition) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt

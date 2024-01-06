@@ -12,6 +12,7 @@ export const getContest = /* GraphQL */ `query GetContest($id: ID!) {
   getContest(id: $id) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -32,6 +33,7 @@ export const listContests = /* GraphQL */ `query ListContests(
     items {
       id
       name
+      workingDir
       description
       createdAt
       updatedAt
@@ -53,6 +55,8 @@ export const getSubmission = /* GraphQL */ `query GetSubmission($id: ID!) {
     functionName
     description
     status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -75,6 +79,8 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
       functionName
       description
       status
+      testcases
+      score
       createdAt
       updatedAt
       owner
@@ -92,9 +98,11 @@ export const getTestCase = /* GraphQL */ `query GetTestCase($id: ID!) {
   getTestCase(id: $id) {
     id
     submissionId
-    status
     seed
+    status
     score
+    input
+    output
     startedAt
     endedAt
     createdAt
@@ -116,9 +124,11 @@ export const listTestCases = /* GraphQL */ `query ListTestCases(
     items {
       id
       submissionId
-      status
       seed
+      status
       score
+      input
+      output
       startedAt
       endedAt
       createdAt
