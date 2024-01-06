@@ -1,4 +1,4 @@
-import { ChipField, Datagrid, DateField, List, NumberField, ReferenceField, ShowButton, TextField } from "react-admin";
+import { ChipField, Datagrid, DateField, List, NumberField, ReferenceField, TextField } from "react-admin";
 
 export const TestCaseList = () => {
     return (
@@ -19,9 +19,6 @@ export const TestCaseList = () => {
                 <NumberField source="score" />
                 <DateField source="startedAt" showTime />
                 <DateField source="endedAt" showTime />
-                <>
-                    <ShowButton />
-                </>
             </Datagrid>
         </List>
     );
