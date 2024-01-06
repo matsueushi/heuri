@@ -48,11 +48,11 @@ export const App = () => {
             >
                 <Resource {...contests} />
                 <Resource {...submissions}>
-                    <Route path=":submissionId/compare/" element={<SubmissionCompare />} />
-                    <Route path=":submissionId/compare/:baseSubmissionId" element={<SubmissionCompareWith />} />
+                    <Route path=":id/compare/" element={<SubmissionCompare />} />
+                    <Route path=":id/compare/:targetId" element={<SubmissionCompareWith />} />
                 </Resource>
                 <Resource {...testCases} >
-                    <Route path=":testCaseId/compare/:baseTestCaseId" element={<TestCaseCompareWith />} />
+                    <Route path=":id/compare/:targetId" element={<TestCaseCompareWith />} />
                 </Resource>
             </Admin>
         </TestContext.Provider >

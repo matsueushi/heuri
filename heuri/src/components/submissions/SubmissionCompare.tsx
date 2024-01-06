@@ -1,6 +1,9 @@
-import { EditButton, Show, ShowButton, TopToolbar } from "react-admin";
+import { EditButton, Labeled, Show, ShowButton, TopToolbar, useRecordContext } from "react-admin";
 import { useParams } from "react-router-dom";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
+import { Paper } from "@mui/material";
+import { ReactNode } from "react";
+import { SubmissionFilteredList } from "./SubmissionFilteredList";
 
 const SubmissionCompareActions = () => (
     <TopToolbar>
@@ -9,13 +12,38 @@ const SubmissionCompareActions = () => (
     </TopToolbar>
 );
 
+interface ShowWrapperProps {
+    children?: ReactNode
+}
+
+const ShowWrapper = ({ children }: ShowWrapperProps) => {
+    const record = useRecordContext();
+    return <Paper sx={{ width: 1 }}>
+        {children}
+        <Paper sx={{ padding: 2 }}>
+            <Labeled source="submissions">
+                <SubmissionFilteredList
+                    rowClick={(id) => {
+                        return `./${id}`;
+                    }}
+                    contestId={record.contestId}
+                />
+            </Labeled>
+        </Paper>
+    </Paper>;
+};
+
 export const SubmissionCompare = () => {
-    const { submissionId } = useParams();
+    const { id } = useParams();
 
     return <>
-        <Show resource="submissions" id={submissionId} actions={<SubmissionCompareActions />} >
+        <Show
+            resource="submissions"
+            id={id}
+            actions={<SubmissionCompareActions />}
+            component={ShowWrapper}
+        >
             <SubmissionShowLayout />
         </Show >
-        something...
     </>;
 };
