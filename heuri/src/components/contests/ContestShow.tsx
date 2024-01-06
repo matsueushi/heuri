@@ -1,18 +1,24 @@
 import { DateField, Labeled, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
-import { SubmissionList } from "../submissions/SubmissionList";
+import { SubmissionFilteredList } from "../submissions/SubmissionFilteredList";
 
-export const ContestShow = () => (
-    <Show>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <TextField source="name" />
-            <UrlField source="input" />
-            <TextField source="description" />
-            <DateField source="createdAt" showTime />
-            <DateField source="updatedAt" showTime />
-            <Labeled source="submissions">
-                <SubmissionList />
-            </Labeled>
-        </SimpleShowLayout>
-    </Show>
-);
+export const ContestShow = () => {
+    return <>
+        <Show >
+            <SimpleShowLayout>
+                <TextField source="id" />
+                <TextField source="name" />
+                <UrlField source="input" />
+                <TextField source="description" />
+                <DateField source="createdAt" showTime />
+                <DateField source="updatedAt" showTime />
+            </SimpleShowLayout>
+        </Show >
+        <Show actions={<></>} title=" ">
+            <SimpleShowLayout>
+                <Labeled source="submissions">
+                    <SubmissionFilteredList />
+                </Labeled>
+            </SimpleShowLayout>
+        </Show >
+    </>;
+};
