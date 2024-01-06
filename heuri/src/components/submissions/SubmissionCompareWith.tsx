@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, EditButton, Identifier, Show, TopToolbar, useResourceContext, } from "react-admin";
+import { Button, EditButton, Identifier, Loading, Show, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
@@ -29,6 +29,28 @@ const CompareActions = ({ id }: CompareActionsProps) => (
 export const SubmissionCompareWith = () => {
     const { id, targetId } = useParams();
 
+    const { data, isLoading, error } = useGetManyReference(
+        "testcases",
+        {
+            target: "submissionId",
+            id: id,
+            sort: { field: "seed", order: "ASC" }
+        }
+    );
+
+    const { data: dataTarget, isLoading: isLoadingTarget, error: errorTarget } = useGetManyReference(
+        "testcases",
+        {
+            target: "submissionId",
+            id: targetId,
+            sort: { field: "seed", order: "ASC" }
+        }
+    );
+
+    if (isLoading || isLoadingTarget) { return <Loading />; }
+    if (error) { return <p>Error: {JSON.stringify(error)}</p>; }
+    if (errorTarget) { return <p>Error: {JSON.stringify(errorTarget)}</p>; }
+
     return <>
         <Grid container spacing={2}>
             <Grid item xs={6}>
@@ -51,6 +73,15 @@ export const SubmissionCompareWith = () => {
                     <SubmissionShowLayout />
                 </Show>
             </Grid>
+            <p>id</p>
+            {data?.map(x => <li>
+                {JSON.stringify(x)}
+            </li>)}
+
+            <p>targetId</p>
+            {dataTarget?.map(x => <li>
+                {JSON.stringify(x)}
+            </li>)}
         </Grid >
     </>;
 };
