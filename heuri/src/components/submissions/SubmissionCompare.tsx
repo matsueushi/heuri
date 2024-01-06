@@ -17,7 +17,6 @@ interface ShowWrapperProps {
 
 const ShowWrapper = ({ children }: ShowWrapperProps) => {
     const record = useRecordContext();
-
     return <Paper sx={{ width: 1 }}>
         {children}
 
@@ -31,7 +30,12 @@ export const SubmissionCompare = () => {
     const { id } = useParams();
 
     return <>
-        <Show resource="submissions" id={id} actions={<SubmissionCompareActions />} component={ShowWrapper} >
+        <Show
+            resource="submissions"
+            id={id}
+            actions={<SubmissionCompareActions />}
+            component={ShowWrapper}
+        >
             <SubmissionShowLayout />
         </Show >
     </>;

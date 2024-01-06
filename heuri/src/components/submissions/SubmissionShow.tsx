@@ -3,7 +3,7 @@ import CompareIcon from "@mui/icons-material/Compare";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import { TestCaseFilteredList } from "../testCases/TestCaseFilteredList";
 import { Paper } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { ReactNode } from "react";
 
 const CompareButton = () => {
     const resource = useResourceContext();
@@ -21,17 +21,29 @@ const SubmissionShowActions = () => (
     </TopToolbar>
 );
 
-export const SubmissionShow = () => {
-    const { id } = useParams();
+interface ShowWrapperProps {
+    children?: ReactNode
+}
 
+const ShowWrapper = ({ children }: ShowWrapperProps) => {
+    const record = useRecordContext();
     return <>
-        <Show actions={<SubmissionShowActions />}>
-            <SubmissionShowLayout />
-        </Show>
-        <Paper sx={{ padding: 2 }}>
+        <Paper sx={{ width: 1 }}>
+            {children}
+        </Paper>
+        <Paper sx={{ width: 1, padding: 2 }}>
             <Labeled source="TestCases">
-                <TestCaseFilteredList submissionId={id} />
+                <TestCaseFilteredList submissionId={record.id} />
             </Labeled>
         </Paper>
     </>;
+};
+
+export const SubmissionShow = () => {
+    return <Show
+        actions={<SubmissionShowActions />}
+        component={ShowWrapper}
+    >
+        <SubmissionShowLayout />
+    </Show>;
 };
