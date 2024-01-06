@@ -50,8 +50,9 @@ export const getSubmission = /* GraphQL */ `query GetSubmission($id: ID!) {
   getSubmission(id: $id) {
     id
     contestId
-    func
+    functionName
     description
+    status
     createdAt
     updatedAt
     owner
@@ -71,8 +72,9 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
     items {
       id
       contestId
-      func
+      functionName
       description
+      status
       createdAt
       updatedAt
       owner
@@ -85,4 +87,50 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
 ` as GeneratedQuery<
   APITypes.ListSubmissionsQueryVariables,
   APITypes.ListSubmissionsQuery
+>;
+export const getTestCase = /* GraphQL */ `query GetTestCase($id: ID!) {
+  getTestCase(id: $id) {
+    id
+    submissionId
+    status
+    seed
+    score
+    startedAt
+    endedAt
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetTestCaseQueryVariables,
+  APITypes.GetTestCaseQuery
+>;
+export const listTestCases = /* GraphQL */ `query ListTestCases(
+  $filter: ModelTestCaseFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTestCases(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      submissionId
+      status
+      seed
+      score
+      startedAt
+      endedAt
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListTestCasesQueryVariables,
+  APITypes.ListTestCasesQuery
 >;

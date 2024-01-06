@@ -69,8 +69,9 @@ export const createSubmission = /* GraphQL */ `mutation CreateSubmission(
   createSubmission(input: $input, condition: $condition) {
     id
     contestId
-    func
+    functionName
     description
+    status
     createdAt
     updatedAt
     owner
@@ -88,8 +89,9 @@ export const updateSubmission = /* GraphQL */ `mutation UpdateSubmission(
   updateSubmission(input: $input, condition: $condition) {
     id
     contestId
-    func
+    functionName
     description
+    status
     createdAt
     updatedAt
     owner
@@ -107,8 +109,9 @@ export const deleteSubmission = /* GraphQL */ `mutation DeleteSubmission(
   deleteSubmission(input: $input, condition: $condition) {
     id
     contestId
-    func
+    functionName
     description
+    status
     createdAt
     updatedAt
     owner
@@ -118,4 +121,70 @@ export const deleteSubmission = /* GraphQL */ `mutation DeleteSubmission(
 ` as GeneratedMutation<
   APITypes.DeleteSubmissionMutationVariables,
   APITypes.DeleteSubmissionMutation
+>;
+export const createTestCase = /* GraphQL */ `mutation CreateTestCase(
+  $input: CreateTestCaseInput!
+  $condition: ModelTestCaseConditionInput
+) {
+  createTestCase(input: $input, condition: $condition) {
+    id
+    submissionId
+    status
+    seed
+    score
+    startedAt
+    endedAt
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateTestCaseMutationVariables,
+  APITypes.CreateTestCaseMutation
+>;
+export const updateTestCase = /* GraphQL */ `mutation UpdateTestCase(
+  $input: UpdateTestCaseInput!
+  $condition: ModelTestCaseConditionInput
+) {
+  updateTestCase(input: $input, condition: $condition) {
+    id
+    submissionId
+    status
+    seed
+    score
+    startedAt
+    endedAt
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateTestCaseMutationVariables,
+  APITypes.UpdateTestCaseMutation
+>;
+export const deleteTestCase = /* GraphQL */ `mutation DeleteTestCase(
+  $input: DeleteTestCaseInput!
+  $condition: ModelTestCaseConditionInput
+) {
+  deleteTestCase(input: $input, condition: $condition) {
+    id
+    submissionId
+    status
+    seed
+    score
+    startedAt
+    endedAt
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteTestCaseMutationVariables,
+  APITypes.DeleteTestCaseMutation
 >;
