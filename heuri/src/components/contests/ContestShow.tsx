@@ -1,7 +1,11 @@
 import { DateField, Labeled, Show, SimpleShowLayout, TextField, UrlField } from "react-admin";
 import { SubmissionFilteredList } from "../submissions/SubmissionFilteredList";
+import { Paper } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 export const ContestShow = () => {
+    const { id } = useParams();
+
     return <>
         <Show >
             <SimpleShowLayout>
@@ -13,12 +17,10 @@ export const ContestShow = () => {
                 <DateField source="updatedAt" showTime />
             </SimpleShowLayout>
         </Show >
-        <Show actions={<></>} title=" ">
-            <SimpleShowLayout>
-                <Labeled source="submissions">
-                    <SubmissionFilteredList />
-                </Labeled>
-            </SimpleShowLayout>
-        </Show >
+        <Paper sx={{ padding: 2 }}>
+            <Labeled source="submissions">
+                <SubmissionFilteredList contestId={id} />
+            </Labeled>
+        </Paper>
     </>;
 };

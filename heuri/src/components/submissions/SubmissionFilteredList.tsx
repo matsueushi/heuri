@@ -1,12 +1,13 @@
-import { ChipField, CreateButton, Datagrid, DateField, EditButton, ExportButton, List, NumberField, ReferenceField, ShowButton, TextField, TopToolbar } from "react-admin";
-import { useParams } from "react-router-dom";
+import { ChipField, CreateButton, Datagrid, DateField, EditButton, ExportButton, Identifier, List, NumberField, ShowButton, TextField, TopToolbar } from "react-admin";
 
-export const SubmissionFilteredList = () => {
-    const { id } = useParams();
+interface SubmissionFilteredListProps {
+    contestId?: Identifier
+}
 
+export const SubmissionFilteredList = ({ contestId }: SubmissionFilteredListProps) => {
     const ListActions = () => (
         <TopToolbar>
-            <CreateButton to={`/submissions/create?contestId=${id}`} />
+            <CreateButton to={`/submissions/create?contestId=${contestId}`} />
             <ExportButton />
         </TopToolbar>
     );
@@ -16,7 +17,7 @@ export const SubmissionFilteredList = () => {
             actions={<ListActions />}
             resource="submissions"
             sort={{ field: "updatedAt", order: "DESC" }}
-            filter={{ contestId: id }}
+            filter={{ contestId: contestId }}
             title=" "
         >
             <Datagrid rowClick="show">

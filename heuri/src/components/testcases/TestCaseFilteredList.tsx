@@ -1,13 +1,15 @@
-import { ChipField, Datagrid, DateField, List, NumberField, ShowButton, TextField } from "react-admin";
-import { useParams } from "react-router-dom";
+import { ChipField, Datagrid, DateField, Identifier, List, NumberField, ShowButton, TextField } from "react-admin";
 
-export const TestCaseFilteredList = () => {
-    const { id } = useParams();
+interface TestCaseFilteredListProps {
+    submissionId?: Identifier,
+}
+
+export const TestCaseFilteredList = ({ submissionId }: TestCaseFilteredListProps) => {
     return (
         <List
             resource="testcases"
             sort={{ field: "updatedAt", order: "DESC" }}
-            filter={{ submissionId: id }}
+            filter={{ submissionId: submissionId }}
             title=" "
         >
             <Datagrid
