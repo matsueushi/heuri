@@ -95,10 +95,28 @@
             "seed": 1,
             "status": "running",
             "input": "https://example.com",
-            "startedAt": "2023-12-31T06:16:55.138Z"
+            "output": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z",
+            "endedAt": "2023-12-31T06:16:55.138Z"
         },
         {
             "id": "testcaseid2",
+            "submissionId": "submissionid0",
+            "seed": 2,
+            "status": "running",
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
+        },
+        {
+            "id": "testcaseid3",
+            "submissionId": "submissionid0",
+            "seed": 3,
+            "status": "running",
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
+        },
+        {
+            "id": "testcaseid4",
             "submissionId": "submissionid1",
             "seed": 0,
             "score": 15,
@@ -109,9 +127,25 @@
             "endedAt": "2023-12-31T06:16:55.138Z"
         },
         {
-            "id": "testcaseid3",
+            "id": "testcaseid5",
             "submissionId": "submissionid1",
             "seed": 1,
+            "status": "running",
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
+        },
+        {
+            "id": "testcaseid6",
+            "submissionId": "submissionid1",
+            "seed": 2,
+            "status": "running",
+            "input": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z"
+        },
+        {
+            "id": "testcaseid7",
+            "submissionId": "submissionid1",
+            "seed": 4,
             "status": "running",
             "input": "https://example.com",
             "startedAt": "2023-12-31T06:16:55.138Z"
