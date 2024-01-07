@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
 import { Paper } from "@mui/material";
+import { Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
 
 interface SetAsBestButtonProps {
     id?: Identifier,
@@ -100,6 +101,20 @@ export const SubmissionCompareWith = () => {
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
+                    <ScatterChart
+                        width={730}
+                        height={250}
+                    >
+                        <XAxis dataKey="beforeScore" name="before" type="number" />
+                        <YAxis dataKey="afterScore" name="after" type="number" />
+                        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+                        <Scatter name="Score" data={merged} fill="#8884d8" />
+                    </ScatterChart>
+                </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Paper sx={{ padding: 2 }}>
                     <Datagrid
                         data={merged}
                         sort={{ field: "seed", order: "ASC" }}
@@ -112,7 +127,6 @@ export const SubmissionCompareWith = () => {
                         <NumberField source="afterScore" />
                         <FunctionField label="change" render={(record: any) => record.afterScore - record.beforeScore} />
                     </Datagrid>
-
                 </Paper>
             </Grid>
 
