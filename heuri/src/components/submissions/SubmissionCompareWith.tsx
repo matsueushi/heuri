@@ -103,9 +103,8 @@ export const SubmissionCompareWith = () => {
                     <Datagrid
                         data={merged}
                         sort={{ field: "seed", order: "ASC" }}
-                        rowClick={(record) => {
-                            console.log("rowClick", record);
-                            return "show";
+                        rowClick={(id, resource, record) => {
+                            return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
                         }}
                     >
                         <NumberField source="seed" />
