@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
-import { Button, Identifier, Loading, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Button, Datagrid, FunctionField, Identifier, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
+import { Paper } from "@mui/material";
 
 interface SetAsBestButtonProps {
     id?: Identifier,
@@ -96,17 +97,42 @@ export const SubmissionCompareWith = () => {
                     <SubmissionShowLayout />
                 </Show>
             </Grid>
-            <p>id</p>
-            {data?.map(x => <li>
-                {JSON.stringify(x)}
-            </li>)}
 
-            <p>targetId</p>
-            {dataTarget?.map(x => <li>
-                {JSON.stringify(x)}
-            </li>)}
+            <Grid item xs={12}>
+                <Paper sx={{ padding: 2 }}>
+                    <Datagrid
+                        data={merged}
+                        sort={{ field: "seed", order: "ASC" }}
+                        rowClick={(record) => {
+                            console.log("rowClick", record);
+                            return "show";
+                        }}
+                    >
+                        <NumberField source="seed" />
+                        <NumberField source="beforeScore" />
+                        <NumberField source="afterScore" />
+                        <FunctionField label="change" render={(record: any) => record.afterScore - record.beforeScore} />
+                    </Datagrid>
 
-            {JSON.stringify(merged)}
+                </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Paper sx={{ padding: 2 }}>
+                    <p>id</p>
+                    {data?.map(x => <li>
+                        {JSON.stringify(x)}
+                    </li>)}
+
+                    <p>targetId</p>
+                    {dataTarget?.map(x => <li>
+                        {JSON.stringify(x)}
+                    </li>)}
+
+                    {JSON.stringify(merged)}
+                </Paper>
+            </Grid>
+
         </Grid >
     </>;
 };
