@@ -1,4 +1,4 @@
-import { ChipField, Datagrid, DateField, EditButton, ExportButton, List, NumberField, ReferenceField, ShowButton, TextField, TopToolbar } from "react-admin";
+import { ChipField, Datagrid, DateField, ExportButton, List, NumberField, ReferenceField, TextField, TopToolbar } from "react-admin";
 
 export const SubmissionList = () => {
     const ListActions = () => (
@@ -22,13 +22,9 @@ export const SubmissionList = () => {
                 <TextField source="description" />
                 <ChipField source="status" />
                 <NumberField source="testcases" />
-                <NumberField source="completed" />
+                <NumberField source="score" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />
-                <>
-                    <EditButton />
-                    <ShowButton />
-                </>
             </Datagrid>
         </List>
     );

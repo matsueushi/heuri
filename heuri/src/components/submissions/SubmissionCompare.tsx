@@ -21,7 +21,7 @@ const ShowWrapper = ({ children }: ShowWrapperProps) => {
     return <Paper sx={{ width: 1 }}>
         {children}
         <Paper sx={{ padding: 2 }}>
-            <Labeled source="submissions">
+            <Labeled source="compare with submissions">
                 <SubmissionFilteredList
                     rowClick={(id) => {
                         return `./${id}`;

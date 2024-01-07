@@ -31,7 +31,7 @@ export const ContestShow = () => {
             <SimpleShowLayout>
                 <TextField source="id" />
                 <TextField source="name" />
-                <UrlField source="input" />
+                <UrlField source="workingDir" />
                 <TextField source="description" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />

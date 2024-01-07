@@ -22,7 +22,7 @@ export const SubmissionEdit = () => (
                 <NumberField source="testcases" />
             </Labeled>
             <Labeled>
-                <NumberField source="completed" />
+                <NumberField source="score" />
             </Labeled>
         </SimpleForm>
     </Edit>

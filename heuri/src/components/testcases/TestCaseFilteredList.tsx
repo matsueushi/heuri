@@ -1,4 +1,4 @@
-import { ChipField, Datagrid, DateField, Identifier, List, NumberField, ShowButton, TextField } from "react-admin";
+import { ChipField, Datagrid, DateField, Identifier, List, NumberField, TextField } from "react-admin";
 
 interface TestCaseFilteredListProps {
     submissionId?: Identifier,
@@ -22,9 +22,6 @@ export const TestCaseFilteredList = ({ submissionId }: TestCaseFilteredListProps
                 <NumberField source="score" />
                 <DateField source="startedAt" showTime />
                 <DateField source="endedAt" showTime />
-                <>
-                    <ShowButton />
-                </>
             </Datagrid>
         </List>
     );

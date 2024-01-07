@@ -5,11 +5,13 @@
 export type CreateContestInput = {
   id?: string | null,
   name: string,
+  workingDir: string,
   description: string,
 };
 
 export type ModelContestConditionInput = {
   name?: ModelStringInput | null,
+  workingDir?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelContestConditionInput | null > | null,
   or?: Array< ModelContestConditionInput | null > | null,
@@ -60,6 +62,7 @@ export type Contest = {
   __typename: "Contest",
   id: string,
   name: string,
+  workingDir: string,
   description: string,
   createdAt: string,
   updatedAt: string,
@@ -69,6 +72,7 @@ export type Contest = {
 export type UpdateContestInput = {
   id: string,
   name?: string | null,
+  workingDir?: string | null,
   description?: string | null,
 };
 
@@ -79,14 +83,20 @@ export type DeleteContestInput = {
 export type CreateSubmissionInput = {
   id?: string | null,
   contestId: string,
-  func: string,
+  functionName: string,
   description: string,
+  status: string,
+  testcases: number,
+  score?: number | null,
 };
 
 export type ModelSubmissionConditionInput = {
   contestId?: ModelIDInput | null,
-  func?: ModelStringInput | null,
+  functionName?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  testcases?: ModelIntInput | null,
+  score?: ModelIntInput | null,
   and?: Array< ModelSubmissionConditionInput | null > | null,
   or?: Array< ModelSubmissionConditionInput | null > | null,
   not?: ModelSubmissionConditionInput | null,
@@ -108,12 +118,27 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type Submission = {
   __typename: "Submission",
   id: string,
   contestId: string,
-  func: string,
+  functionName: string,
   description: string,
+  status: string,
+  testcases: number,
+  score?: number | null,
   createdAt: string,
   updatedAt: string,
   owner?: string | null,
@@ -122,17 +147,79 @@ export type Submission = {
 export type UpdateSubmissionInput = {
   id: string,
   contestId?: string | null,
-  func?: string | null,
+  functionName?: string | null,
   description?: string | null,
+  status?: string | null,
+  testcases?: number | null,
+  score?: number | null,
 };
 
 export type DeleteSubmissionInput = {
   id: string,
 };
 
+export type CreateTestCaseInput = {
+  id?: string | null,
+  submissionId: string,
+  seed: number,
+  status: string,
+  score?: number | null,
+  input?: string | null,
+  output?: string | null,
+  startedAt?: string | null,
+  endedAt?: string | null,
+};
+
+export type ModelTestCaseConditionInput = {
+  submissionId?: ModelIDInput | null,
+  seed?: ModelIntInput | null,
+  status?: ModelStringInput | null,
+  score?: ModelIntInput | null,
+  input?: ModelStringInput | null,
+  output?: ModelStringInput | null,
+  startedAt?: ModelStringInput | null,
+  endedAt?: ModelStringInput | null,
+  and?: Array< ModelTestCaseConditionInput | null > | null,
+  or?: Array< ModelTestCaseConditionInput | null > | null,
+  not?: ModelTestCaseConditionInput | null,
+};
+
+export type TestCase = {
+  __typename: "TestCase",
+  id: string,
+  submissionId: string,
+  seed: number,
+  status: string,
+  score?: number | null,
+  input?: string | null,
+  output?: string | null,
+  startedAt?: string | null,
+  endedAt?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdateTestCaseInput = {
+  id: string,
+  submissionId?: string | null,
+  seed?: number | null,
+  status?: string | null,
+  score?: number | null,
+  input?: string | null,
+  output?: string | null,
+  startedAt?: string | null,
+  endedAt?: string | null,
+};
+
+export type DeleteTestCaseInput = {
+  id: string,
+};
+
 export type ModelContestFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  workingDir?: ModelStringInput | null,
   description?: ModelStringInput | null,
   and?: Array< ModelContestFilterInput | null > | null,
   or?: Array< ModelContestFilterInput | null > | null,
@@ -148,8 +235,11 @@ export type ModelContestConnection = {
 export type ModelSubmissionFilterInput = {
   id?: ModelIDInput | null,
   contestId?: ModelIDInput | null,
-  func?: ModelStringInput | null,
+  functionName?: ModelStringInput | null,
   description?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  testcases?: ModelIntInput | null,
+  score?: ModelIntInput | null,
   and?: Array< ModelSubmissionFilterInput | null > | null,
   or?: Array< ModelSubmissionFilterInput | null > | null,
   not?: ModelSubmissionFilterInput | null,
@@ -161,9 +251,31 @@ export type ModelSubmissionConnection = {
   nextToken?: string | null,
 };
 
+export type ModelTestCaseFilterInput = {
+  id?: ModelIDInput | null,
+  submissionId?: ModelIDInput | null,
+  seed?: ModelIntInput | null,
+  status?: ModelStringInput | null,
+  score?: ModelIntInput | null,
+  input?: ModelStringInput | null,
+  output?: ModelStringInput | null,
+  startedAt?: ModelStringInput | null,
+  endedAt?: ModelStringInput | null,
+  and?: Array< ModelTestCaseFilterInput | null > | null,
+  or?: Array< ModelTestCaseFilterInput | null > | null,
+  not?: ModelTestCaseFilterInput | null,
+};
+
+export type ModelTestCaseConnection = {
+  __typename: "ModelTestCaseConnection",
+  items:  Array<TestCase | null >,
+  nextToken?: string | null,
+};
+
 export type ModelSubscriptionContestFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
+  workingDir?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionContestFilterInput | null > | null,
   or?: Array< ModelSubscriptionContestFilterInput | null > | null,
@@ -202,10 +314,39 @@ export type ModelSubscriptionStringInput = {
 export type ModelSubscriptionSubmissionFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   contestId?: ModelSubscriptionIDInput | null,
-  func?: ModelSubscriptionStringInput | null,
+  functionName?: ModelSubscriptionStringInput | null,
   description?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  testcases?: ModelSubscriptionIntInput | null,
+  score?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionSubmissionFilterInput | null > | null,
   or?: Array< ModelSubscriptionSubmissionFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionTestCaseFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  submissionId?: ModelSubscriptionIDInput | null,
+  seed?: ModelSubscriptionIntInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  score?: ModelSubscriptionIntInput | null,
+  input?: ModelSubscriptionStringInput | null,
+  output?: ModelSubscriptionStringInput | null,
+  startedAt?: ModelSubscriptionStringInput | null,
+  endedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTestCaseFilterInput | null > | null,
 };
 
 export type CreateContestMutationVariables = {
@@ -218,6 +359,7 @@ export type CreateContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -235,6 +377,7 @@ export type UpdateContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -252,6 +395,7 @@ export type DeleteContestMutation = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -269,8 +413,11 @@ export type CreateSubmissionMutation = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -287,8 +434,11 @@ export type UpdateSubmissionMutation = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -305,8 +455,80 @@ export type DeleteSubmissionMutation = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreateTestCaseMutationVariables = {
+  input: CreateTestCaseInput,
+  condition?: ModelTestCaseConditionInput | null,
+};
+
+export type CreateTestCaseMutation = {
+  createTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdateTestCaseMutationVariables = {
+  input: UpdateTestCaseInput,
+  condition?: ModelTestCaseConditionInput | null,
+};
+
+export type UpdateTestCaseMutation = {
+  updateTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeleteTestCaseMutationVariables = {
+  input: DeleteTestCaseInput,
+  condition?: ModelTestCaseConditionInput | null,
+};
+
+export type DeleteTestCaseMutation = {
+  deleteTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -322,6 +544,7 @@ export type GetContestQuery = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -342,6 +565,7 @@ export type ListContestsQuery = {
       __typename: "Contest",
       id: string,
       name: string,
+      workingDir: string,
       description: string,
       createdAt: string,
       updatedAt: string,
@@ -360,8 +584,11 @@ export type GetSubmissionQuery = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -381,8 +608,61 @@ export type ListSubmissionsQuery = {
       __typename: "Submission",
       id: string,
       contestId: string,
-      func: string,
+      functionName: string,
       description: string,
+      status: string,
+      testcases: number,
+      score?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetTestCaseQueryVariables = {
+  id: string,
+};
+
+export type GetTestCaseQuery = {
+  getTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListTestCasesQueryVariables = {
+  filter?: ModelTestCaseFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListTestCasesQuery = {
+  listTestCases?:  {
+    __typename: "ModelTestCaseConnection",
+    items:  Array< {
+      __typename: "TestCase",
+      id: string,
+      submissionId: string,
+      seed: number,
+      status: string,
+      score?: number | null,
+      input?: string | null,
+      output?: string | null,
+      startedAt?: string | null,
+      endedAt?: string | null,
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
@@ -401,6 +681,7 @@ export type OnCreateContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -418,6 +699,7 @@ export type OnUpdateContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -435,6 +717,7 @@ export type OnDeleteContestSubscription = {
     __typename: "Contest",
     id: string,
     name: string,
+    workingDir: string,
     description: string,
     createdAt: string,
     updatedAt: string,
@@ -452,8 +735,11 @@ export type OnCreateSubmissionSubscription = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -470,8 +756,11 @@ export type OnUpdateSubmissionSubscription = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
@@ -488,8 +777,80 @@ export type OnDeleteSubmissionSubscription = {
     __typename: "Submission",
     id: string,
     contestId: string,
-    func: string,
+    functionName: string,
     description: string,
+    status: string,
+    testcases: number,
+    score?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreateTestCaseSubscriptionVariables = {
+  filter?: ModelSubscriptionTestCaseFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreateTestCaseSubscription = {
+  onCreateTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdateTestCaseSubscriptionVariables = {
+  filter?: ModelSubscriptionTestCaseFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdateTestCaseSubscription = {
+  onUpdateTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeleteTestCaseSubscriptionVariables = {
+  filter?: ModelSubscriptionTestCaseFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeleteTestCaseSubscription = {
+  onDeleteTestCase?:  {
+    __typename: "TestCase",
+    id: string,
+    submissionId: string,
+    seed: number,
+    status: string,
+    score?: number | null,
+    input?: string | null,
+    output?: string | null,
+    startedAt?: string | null,
+    endedAt?: string | null,
     createdAt: string,
     updatedAt: string,
     owner?: string | null,

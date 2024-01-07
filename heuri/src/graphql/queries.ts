@@ -12,6 +12,7 @@ export const getContest = /* GraphQL */ `query GetContest($id: ID!) {
   getContest(id: $id) {
     id
     name
+    workingDir
     description
     createdAt
     updatedAt
@@ -32,6 +33,7 @@ export const listContests = /* GraphQL */ `query ListContests(
     items {
       id
       name
+      workingDir
       description
       createdAt
       updatedAt
@@ -50,8 +52,11 @@ export const getSubmission = /* GraphQL */ `query GetSubmission($id: ID!) {
   getSubmission(id: $id) {
     id
     contestId
-    func
+    functionName
     description
+    status
+    testcases
+    score
     createdAt
     updatedAt
     owner
@@ -71,8 +76,11 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
     items {
       id
       contestId
-      func
+      functionName
       description
+      status
+      testcases
+      score
       createdAt
       updatedAt
       owner
@@ -85,4 +93,54 @@ export const listSubmissions = /* GraphQL */ `query ListSubmissions(
 ` as GeneratedQuery<
   APITypes.ListSubmissionsQueryVariables,
   APITypes.ListSubmissionsQuery
+>;
+export const getTestCase = /* GraphQL */ `query GetTestCase($id: ID!) {
+  getTestCase(id: $id) {
+    id
+    submissionId
+    seed
+    status
+    score
+    input
+    output
+    startedAt
+    endedAt
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetTestCaseQueryVariables,
+  APITypes.GetTestCaseQuery
+>;
+export const listTestCases = /* GraphQL */ `query ListTestCases(
+  $filter: ModelTestCaseFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTestCases(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      submissionId
+      seed
+      status
+      score
+      input
+      output
+      startedAt
+      endedAt
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListTestCasesQueryVariables,
+  APITypes.ListTestCasesQuery
 >;
