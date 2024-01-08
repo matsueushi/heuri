@@ -6,6 +6,7 @@ export class Filter {
         queries: Record<string, string>,
         filter: Record<string, unknown>
     ): string | null {
+        console.log(queries, filter);
         if (!this.isObjectOfLength(filter, 1)) {
             return null;
         }

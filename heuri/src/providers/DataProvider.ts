@@ -70,9 +70,10 @@ export class DataProvider {
         resource: string,
         params: GetListParams
     ): Promise<GetListResult> => {
+        console.log(resource, params);
         const { filter } = params;
 
-        let queryName = Filter.getQueryName(this.queries, filter);
+        let queryName = Filter.getQueryName(this.queries, resource);
         let queryVariables = Filter.getQueryVariables(filter);
 
         if (!queryName || !queryVariables) {
