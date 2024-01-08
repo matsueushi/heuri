@@ -25,9 +25,7 @@ const ShowWrapper = ({ children }: ShowWrapperProps) => {
 
 export const ContestShow = () => {
     return <>
-        <Show
-            component={ShowWrapper}
-        >
+        <Show component={ShowWrapper}>
             <SimpleShowLayout>
                 <TextField source="id" />
                 <TextField source="name" />

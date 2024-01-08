@@ -1,22 +1,14 @@
 import { useParams } from "react-router-dom";
-import { Button, Datagrid, Identifier, Labeled, ListContextProvider, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useList, useResourceContext, } from "react-admin";
+import { Datagrid, Identifier, ListContextProvider, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useList, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
-import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
 import { Paper, Stack, Typography } from "@mui/material";
 import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
+import { SetAsBestButton } from "./SetAsBestButton";
+import { BeforeAfterField } from "./BeforeAfterField";
 
-interface SetAsBestButtonProps {
-    id?: Identifier,
-}
 
-const SetAsBestButton = ({ id }: SetAsBestButtonProps) => {
-    const resource = useResourceContext();
-    return <Button label="set as best" href={`/#/${resource}/${id}/compare`} >
-        <StarIcon />
-    </Button>;
-};
 
 interface CompareActionsProps {
     id?: Identifier,
@@ -66,24 +58,6 @@ const computeStats = (scores: number[]): TestCasesStats => {
     }
 };
 
-interface BeforeAfterFieldProps {
-    source: string,
-    before: number,
-    after: number,
-}
-
-const BeforeAfterField = ({ source, before, after }: BeforeAfterFieldProps) => {
-    const color = after === before ? "black" : after > before ? "green" : "red";
-
-    return <Labeled source={source}>
-        <Typography variant="body2">
-            {before.toLocaleString()} → {after.toLocaleString()} {" "}
-            <span style={{ color }}>
-                ({after > before && "+"} {(after - before).toLocaleString()})
-            </span>
-        </Typography>
-    </Labeled>;
-};
 
 export const SubmissionCompareWith = () => {
     const { id, targetId } = useParams();

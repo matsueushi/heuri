@@ -12,11 +12,11 @@ const SubmissionCompareActions = () => (
     </TopToolbar>
 );
 
-interface ShowWrapperProps {
+interface CompareWrapperProps {
     children?: ReactNode
 }
 
-const ShowWrapper = ({ children }: ShowWrapperProps) => {
+const CompareWrapper = ({ children }: CompareWrapperProps) => {
     const record = useRecordContext();
     return <Paper sx={{ width: 1 }}>
         {children}
@@ -41,7 +41,7 @@ export const SubmissionCompare = () => {
             resource="submissions"
             id={id}
             actions={<SubmissionCompareActions />}
-            component={ShowWrapper}
+            component={CompareWrapper}
         >
             <SubmissionShowLayout />
         </Show >
