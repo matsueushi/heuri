@@ -138,7 +138,7 @@ export const SubmissionCompareWith = () => {
                             }}
                             bulkActionButtons={false}
                         >
-                            <NumberField source="seed" />
+                            <TextField source="seed" />
                             <NumberField source="beforeScore" />
                             <NumberField source="afterScore" />
                             <NumberField source="change" />

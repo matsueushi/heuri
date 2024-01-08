@@ -18,7 +18,7 @@ type Submission @model @auth(rules: [{ allow: owner }]) {
 type TestCase @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   submissionId: ID!
-  seed: Int!
+  seed: String!
   status: String!
   score: Int
   input: String

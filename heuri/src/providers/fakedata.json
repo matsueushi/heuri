@@ -81,7 +81,7 @@
         {
             "id": "testcaseid0",
             "submissionId": "submissionid0",
-            "seed": 0,
+            "seed": "0000",
             "score": 125,
             "status": "completed",
             "input": "https://example.com",
@@ -92,7 +92,7 @@
         {
             "id": "testcaseid1",
             "submissionId": "submissionid0",
-            "seed": 1,
+            "seed": "0001",
             "score": 100,
             "status": "running",
             "input": "https://example.com",
@@ -103,7 +103,7 @@
         {
             "id": "testcaseid2",
             "submissionId": "submissionid0",
-            "seed": 2,
+            "seed": "0002",
             "status": "running",
             "input": "https://example.com",
             "startedAt": "2023-12-31T06:16:55.138Z"
@@ -111,7 +111,7 @@
         {
             "id": "testcaseid3",
             "submissionId": "submissionid0",
-            "seed": 3,
+            "seed": "0003",
             "status": "running",
             "input": "https://example.com",
             "startedAt": "2023-12-31T06:16:55.138Z"
@@ -119,7 +119,7 @@
         {
             "id": "testcaseid4",
             "submissionId": "submissionid1",
-            "seed": 0,
+            "seed": "0000",
             "score": 15,
             "status": "completed",
             "input": "https://example.com",
@@ -130,7 +130,7 @@
         {
             "id": "testcaseid5",
             "submissionId": "submissionid1",
-            "seed": 1,
+            "seed": "0001",
             "score": 150,
             "status": "running",
             "input": "https://example.com",
@@ -141,7 +141,7 @@
         {
             "id": "testcaseid6",
             "submissionId": "submissionid1",
-            "seed": 2,
+            "seed": "0002",
             "status": "running",
             "input": "https://example.com",
             "startedAt": "2023-12-31T06:16:55.138Z"
@@ -149,7 +149,7 @@
         {
             "id": "testcaseid7",
             "submissionId": "submissionid1",
-            "seed": 4,
+            "seed": "0004",
             "status": "running",
             "input": "https://example.com",
             "startedAt": "2023-12-31T06:16:55.138Z"
