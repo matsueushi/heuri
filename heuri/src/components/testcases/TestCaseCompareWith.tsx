@@ -19,6 +19,5 @@ export const TestCaseCompareWith = () => {
                 </Show>
             </Grid>
         </Grid>
-        something...
     </>;
 };

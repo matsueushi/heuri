@@ -82,7 +82,7 @@
             "id": "testcaseid0",
             "submissionId": "submissionid0",
             "seed": 0,
-            "score": 12345,
+            "score": 125,
             "status": "completed",
             "input": "https://example.com",
             "output": "https://example.com",
@@ -93,6 +93,7 @@
             "id": "testcaseid1",
             "submissionId": "submissionid0",
             "seed": 1,
+            "score": 100,
             "status": "running",
             "input": "https://example.com",
             "output": "https://example.com",
@@ -130,9 +131,12 @@
             "id": "testcaseid5",
             "submissionId": "submissionid1",
             "seed": 1,
+            "score": 150,
             "status": "running",
             "input": "https://example.com",
-            "startedAt": "2023-12-31T06:16:55.138Z"
+            "output": "https://example.com",
+            "startedAt": "2023-12-31T06:16:55.138Z",
+            "endedAt": "2023-12-31T06:16:55.138Z"
         },
         {
             "id": "testcaseid6",
