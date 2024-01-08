@@ -1,14 +1,11 @@
-import { ChipField, Datagrid, DateField, List, NumberField, ReferenceField, SearchInput, TextField } from "react-admin";
-
-const filters = [
-    <SearchInput source="q" alwaysOn />,
-];
+import { ChipField, Datagrid, DateField, List, NumberField, ReferenceField, TextField } from "react-admin";
+import { listFilters } from "./ListFilters";
 
 export const TestCaseList = () => {
     return (
         <List
             resource="testcases"
-            filters={filters}
+            filters={listFilters}
             sort={{ field: "updatedAt", order: "DESC" }}
         >
             <Datagrid
