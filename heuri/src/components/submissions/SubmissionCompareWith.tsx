@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, Datagrid, Identifier, Labeled, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Button, Datagrid, Identifier, Labeled, ListContextProvider, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useList, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
@@ -121,6 +121,7 @@ export const SubmissionCompareWith = () => {
                 const beforeScore = x?.score ?? 0;
                 const afterScore = y?.score ?? 0;
                 return {
+                    id: seed,
                     seed: seed,
                     beforeTestCaseId: x?.id ?? "",
                     afterTestCaseId: y?.id ?? "",
@@ -142,6 +143,8 @@ export const SubmissionCompareWith = () => {
             return { records: [], beforeStats: computeStats([]), afterStats: computeStats([]) };
         }
     }, [data, dataTarget]);
+
+    const listContext = useList({ data: combinedData.records });
 
     if (isLoading || isLoadingTarget) { return <Loading />; }
     if (error) { return <p>Error: {JSON.stringify(error)}</p>; }
@@ -226,18 +229,19 @@ export const SubmissionCompareWith = () => {
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
-                    <Datagrid
-                        data={combinedData.records}
-                        sort={{ field: "seed", order: "ASC" }}
-                        rowClick={(id, resource, record) => {
-                            return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
-                        }}
-                    >
-                        <NumberField source="seed" />
-                        <NumberField source="beforeScore" />
-                        <NumberField source="afterScore" />
-                        <NumberField source="change" />
-                    </Datagrid>
+                    <ListContextProvider value={listContext} >
+                        <Datagrid
+                            rowClick={(id, resource, record) => {
+                                return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
+                            }}
+                            bulkActionButtons={false}
+                        >
+                            <NumberField source="seed" />
+                            <NumberField source="beforeScore" />
+                            <NumberField source="afterScore" />
+                            <NumberField source="change" />
+                        </Datagrid>
+                    </ListContextProvider>
                 </Paper>
             </Grid>
 
@@ -252,8 +256,6 @@ export const SubmissionCompareWith = () => {
                     {dataTarget?.map(x => <li>
                         {JSON.stringify(x)}
                     </li>)}
-
-                    {JSON.stringify(merged)}
                 </Paper>
             </Grid> */}
 
