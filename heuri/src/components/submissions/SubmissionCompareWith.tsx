@@ -35,7 +35,7 @@ export const SubmissionCompareWith = () => {
         if (data && dataTarget) {
             const beforeMap = new Map(data.map((obj) => [obj.seed, obj]));
             const afterMap = new Map(dataTarget.map((obj) => [obj.seed, obj]));
-            console.log(beforeMap, afterMap);
+            // console.log(beforeMap, afterMap);
 
             const beforeSeeds = new Set(beforeMap.keys());
             const afterSeeds = new Set(afterMap.keys());
@@ -62,7 +62,7 @@ export const SubmissionCompareWith = () => {
             const beforeStats = computeStats(scores);
             const afterStats = computeStats(afterScores);
 
-            console.log(commonSeeds, scores, afterScores, beforeStats, afterStats);
+            // console.log(commonSeeds, scores, afterScores, beforeStats, afterStats);
             return { records, beforeStats, afterStats };
         } else {
             return { records: [], beforeStats: computeStats([]), afterStats: computeStats([]) };
