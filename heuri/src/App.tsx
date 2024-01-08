@@ -24,6 +24,7 @@ import testCases from "./components/testCases";
 import { SubmissionCompare } from "./components/submissions/SubmissionCompare";
 import { SubmissionCompareWith } from "./components/submissions/SubmissionCompareWith";
 import { TestCaseCompareWith } from "./components/testCases/TestCaseCompareWith";
+import { QueryClient } from "react-query";
 
 
 Amplify.configure(amplifyconfig);
@@ -38,12 +39,20 @@ export const App = () => {
     const [isTest] = useState(true);
 
     const dataProvider = isTest ? fakeDataProvider : buildDataProvider({ queries, mutations });
+    const queryClient = new QueryClient({
+        defaultOptions: {
+            queries: {
+                staleTime: 1 * 60 * 1000, // 1 minutes
+            },
+        },
+    });
 
     return (
         <TestContext.Provider value={isTest}>
             <Admin
                 dataProvider={dataProvider}
                 authProvider={authProvider}
+                queryClient={queryClient}
                 loginPage={Login}
             >
                 <Resource {...contests} />

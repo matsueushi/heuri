@@ -1,12 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import {
-    Create,
-    SimpleForm,
-    TextInput,
-    required,
-
-} from "react-admin";
+import { Create, SimpleForm, TextInput, required } from "react-admin";
 import { useContext } from "react";
 import { TestContext } from "../../contexts/testContexts";
 

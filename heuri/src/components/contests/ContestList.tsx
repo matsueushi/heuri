@@ -1,7 +1,12 @@
-import { Datagrid, DateField, List, TextField } from "react-admin";
+import { Datagrid, DateField, List, SearchInput, TextField } from "react-admin";
+
+const filters = [
+    <SearchInput source="q" alwaysOn />,
+];
 
 export const ContestList = () => (
     <List
+        filters={filters}
         sort={{ field: "updatedAt", order: "DESC" }}
     >
         <Datagrid rowClick="show">

@@ -1,8 +1,12 @@
-import { ChipField, Datagrid, DateField, Identifier, List, NumberField, TextField } from "react-admin";
+import { ChipField, Datagrid, DateField, Identifier, List, NumberField, NumberInput, SearchInput, TextField, TextInput } from "react-admin";
 
 interface TestCaseFilteredListProps {
     submissionId?: Identifier,
 }
+
+const listFilters = [
+    <NumberInput source="seed" alwaysOn />
+];
 
 export const TestCaseFilteredList = ({ submissionId }: TestCaseFilteredListProps) => {
     return (
@@ -10,6 +14,7 @@ export const TestCaseFilteredList = ({ submissionId }: TestCaseFilteredListProps
             resource="testcases"
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={{ submissionId: submissionId }}
+            filters={listFilters}
             title=" "
         >
             <Datagrid

@@ -1,89 +1,14 @@
 import { useParams } from "react-router-dom";
-import { Button, Datagrid, Identifier, Labeled, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Datagrid, ListContextProvider, Loading, NumberField, Show, useGetManyReference, useList, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
-import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
+import { CompareWithActions } from "./CompareWithActions";
+import { BeforeAfterFields } from "./BeforeAfterFields";
+import { computeStats } from "./stats";
 
-interface SetAsBestButtonProps {
-    id?: Identifier,
-}
-
-const SetAsBestButton = ({ id }: SetAsBestButtonProps) => {
-    const resource = useResourceContext();
-    return <Button label="set as best" href={`/#/${resource}/${id}/compare`} >
-        <StarIcon />
-    </Button>;
-};
-
-interface CompareActionsProps {
-    id?: Identifier,
-}
-
-const CompareActions = ({ id }: CompareActionsProps) => (
-    <TopToolbar>
-        <SetAsBestButton id={id} />
-        <ShowButton />
-    </TopToolbar>
-);
-
-interface TestCasesStats {
-    total: number,
-    avg: number,
-    max: number,
-    min: number,
-    variance: number,
-}
-
-const computeStats = (scores: number[]): TestCasesStats => {
-    if (scores.length === 0) {
-        return {
-            total: 0,
-            avg: 0,
-            max: 0,
-            min: 0,
-            variance: 0,
-        };
-    } else {
-        const total = scores.reduce((acc, score) => acc + score, 0);
-        const avg = total / scores.length;
-        const max = Math.max(...scores);
-        const min = Math.min(...scores);
-        const variance = scores.length > 1
-            ? scores.reduce((acc, score) => acc + Math.pow(score - avg, 2), 0) /
-            (scores.length - 1)
-            : 0;
-
-        return {
-            total,
-            avg,
-            max,
-            min,
-            variance,
-        };
-    }
-};
-
-interface BeforeAfterFieldProps {
-    source: string,
-    before: number,
-    after: number,
-}
-
-const BeforeAfterField = ({ source, before, after }: BeforeAfterFieldProps) => {
-    const color = after === before ? "black" : after > before ? "green" : "red";
-
-    return <Labeled source={source}>
-        <Typography variant="body2">
-            {before.toLocaleString()} → {after.toLocaleString()} {" "}
-            <span style={{ color }}>
-                ({after > before && "+"} {(after - before).toLocaleString()})
-            </span>
-        </Typography>
-    </Labeled>;
-};
 
 export const SubmissionCompareWith = () => {
     const { id, targetId } = useParams();
@@ -110,7 +35,7 @@ export const SubmissionCompareWith = () => {
         if (data && dataTarget) {
             const beforeMap = new Map(data.map((obj) => [obj.seed, obj]));
             const afterMap = new Map(dataTarget.map((obj) => [obj.seed, obj]));
-            console.log(beforeMap, afterMap);
+            // console.log(beforeMap, afterMap);
 
             const beforeSeeds = new Set(beforeMap.keys());
             const afterSeeds = new Set(afterMap.keys());
@@ -121,6 +46,7 @@ export const SubmissionCompareWith = () => {
                 const beforeScore = x?.score ?? 0;
                 const afterScore = y?.score ?? 0;
                 return {
+                    id: seed,
                     seed: seed,
                     beforeTestCaseId: x?.id ?? "",
                     afterTestCaseId: y?.id ?? "",
@@ -136,12 +62,14 @@ export const SubmissionCompareWith = () => {
             const beforeStats = computeStats(scores);
             const afterStats = computeStats(afterScores);
 
-            console.log(commonSeeds, scores, afterScores, beforeStats, afterStats);
+            // console.log(commonSeeds, scores, afterScores, beforeStats, afterStats);
             return { records, beforeStats, afterStats };
         } else {
             return { records: [], beforeStats: computeStats([]), afterStats: computeStats([]) };
         }
     }, [data, dataTarget]);
+
+    const listContext = useList({ data: combinedData.records });
 
     if (isLoading || isLoadingTarget) { return <Loading />; }
     if (error) { return <p>Error: {JSON.stringify(error)}</p>; }
@@ -151,7 +79,7 @@ export const SubmissionCompareWith = () => {
         <Grid container spacing={2}>
             <Grid item xs={6}>
                 <Show
-                    actions={<CompareActions id={id} />}
+                    actions={<CompareWithActions id={id} />}
                     resource="submissions"
                     id={id}
                     title={`Submission #${id} vs #${targetId}`}
@@ -161,7 +89,7 @@ export const SubmissionCompareWith = () => {
             </Grid>
             <Grid item xs={6}>
                 <Show
-                    actions={<CompareActions id={targetId} />}
+                    actions={<CompareWithActions id={targetId} />}
                     resource="submissions"
                     id={targetId}
                     title=" "
@@ -177,33 +105,10 @@ export const SubmissionCompareWith = () => {
                             <Typography>
                                 Statistics for common testcases
                             </Typography>
-                            <Stack>
-                                <BeforeAfterField
-                                    source="totalScore"
-                                    before={combinedData.beforeStats.total}
-                                    after={combinedData.afterStats.total}
-                                />
-                                <BeforeAfterField
-                                    source="averageScore"
-                                    before={Math.round(combinedData.beforeStats.avg)}
-                                    after={Math.round(combinedData.afterStats.avg)}
-                                />
-                                <BeforeAfterField
-                                    source="maxScore"
-                                    before={combinedData.beforeStats.max}
-                                    after={combinedData.afterStats.max}
-                                />
-                                <BeforeAfterField
-                                    source="minScore"
-                                    before={combinedData.beforeStats.min}
-                                    after={combinedData.afterStats.min}
-                                />
-                                <BeforeAfterField
-                                    source="variance"
-                                    before={Math.round(combinedData.beforeStats.variance)}
-                                    after={Math.round(combinedData.afterStats.variance)}
-                                />
-                            </Stack>
+                            <BeforeAfterFields
+                                before={combinedData.beforeStats}
+                                after={combinedData.afterStats}
+                            />
                         </Grid>
                         <Grid item xs={9}>
                             <ScatterChart
@@ -226,18 +131,19 @@ export const SubmissionCompareWith = () => {
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
-                    <Datagrid
-                        data={combinedData.records}
-                        sort={{ field: "seed", order: "ASC" }}
-                        rowClick={(id, resource, record) => {
-                            return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
-                        }}
-                    >
-                        <NumberField source="seed" />
-                        <NumberField source="beforeScore" />
-                        <NumberField source="afterScore" />
-                        <NumberField source="change" />
-                    </Datagrid>
+                    <ListContextProvider value={listContext} >
+                        <Datagrid
+                            rowClick={(id, resource, record) => {
+                                return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
+                            }}
+                            bulkActionButtons={false}
+                        >
+                            <NumberField source="seed" />
+                            <NumberField source="beforeScore" />
+                            <NumberField source="afterScore" />
+                            <NumberField source="change" />
+                        </Datagrid>
+                    </ListContextProvider>
                 </Paper>
             </Grid>
 
@@ -252,8 +158,6 @@ export const SubmissionCompareWith = () => {
                     {dataTarget?.map(x => <li>
                         {JSON.stringify(x)}
                     </li>)}
-
-                    {JSON.stringify(merged)}
                 </Paper>
             </Grid> */}
 

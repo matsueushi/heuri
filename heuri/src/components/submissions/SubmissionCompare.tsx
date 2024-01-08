@@ -1,22 +1,16 @@
-import { EditButton, Labeled, Show, ShowButton, TopToolbar, useRecordContext } from "react-admin";
+import { Labeled, Show, useRecordContext } from "react-admin";
 import { useParams } from "react-router-dom";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import { Paper } from "@mui/material";
 import { ReactNode } from "react";
 import { SubmissionFilteredList } from "./SubmissionFilteredList";
+import { CompareActions } from "./CompareActions";
 
-const SubmissionCompareActions = () => (
-    <TopToolbar>
-        <ShowButton />
-        <EditButton />
-    </TopToolbar>
-);
-
-interface ShowWrapperProps {
+interface CompareWrapperProps {
     children?: ReactNode
 }
 
-const ShowWrapper = ({ children }: ShowWrapperProps) => {
+const CompareWrapper = ({ children }: CompareWrapperProps) => {
     const record = useRecordContext();
     return <Paper sx={{ width: 1 }}>
         {children}
@@ -40,8 +34,8 @@ export const SubmissionCompare = () => {
         <Show
             resource="submissions"
             id={id}
-            actions={<SubmissionCompareActions />}
-            component={ShowWrapper}
+            actions={<CompareActions />}
+            component={CompareWrapper}
         >
             <SubmissionShowLayout />
         </Show >
