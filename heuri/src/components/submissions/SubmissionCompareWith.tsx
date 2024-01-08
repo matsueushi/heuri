@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import { Button, Datagrid, FunctionField, Identifier, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Button, Datagrid, Identifier, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
 import { Paper } from "@mui/material";
-import { Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
+import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
 
 interface SetAsBestButtonProps {
     id?: Identifier,
@@ -58,12 +58,15 @@ export const SubmissionCompareWith = () => {
             const result = [...commonSeeds].map((seed) => {
                 const x = data.find((x) => x.seed === seed);
                 const y = dataTarget.find((y) => y.seed === seed);
+                const beforeScore = x?.score ?? 0;
+                const afterScore = y?.score ?? 0;
                 return {
                     seed: seed,
                     beforeTestCaseId: x?.id ?? "",
                     afterTestCaseId: y?.id ?? "",
-                    beforeScore: x?.score ?? 0,
-                    afterScore: y?.score ?? 0,
+                    beforeScore: beforeScore,
+                    afterScore: afterScore,
+                    change: afterScore - beforeScore,
                 };
             });
             return result;
@@ -101,12 +104,20 @@ export const SubmissionCompareWith = () => {
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
+                    stats
+                </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Paper sx={{ padding: 2 }}>
                     <ScatterChart
                         width={730}
                         height={250}
+                    // onClick={(state, event) => { console.log(state, event); }}
                     >
                         <XAxis dataKey="beforeScore" name="before" type="number" />
                         <YAxis dataKey="afterScore" name="after" type="number" />
+                        <ZAxis dataKey="seed" name="seed" type="number" />
                         <Tooltip cursor={{ strokeDasharray: "3 3" }} />
                         <Scatter name="Score" data={merged} fill="#8884d8" />
                     </ScatterChart>
@@ -125,12 +136,12 @@ export const SubmissionCompareWith = () => {
                         <NumberField source="seed" />
                         <NumberField source="beforeScore" />
                         <NumberField source="afterScore" />
-                        <FunctionField label="change" render={(record: any) => record.afterScore - record.beforeScore} />
+                        <NumberField source="change" />
                     </Datagrid>
                 </Paper>
             </Grid>
 
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
                     <p>id</p>
                     {data?.map(x => <li>
@@ -144,7 +155,7 @@ export const SubmissionCompareWith = () => {
 
                     {JSON.stringify(merged)}
                 </Paper>
-            </Grid>
+            </Grid> */}
 
         </Grid >
     </>;
