@@ -3,18 +3,12 @@ import { Datagrid, ListContextProvider, Loading, NumberField, Show, useGetManyRe
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import { useMemo } from "react";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import { BeforeAfterField } from "./BeforeAfterField";
 import { CompareWithActions } from "./CompareWithActions";
+import { BeforeAfterFields } from "./BeforeAfterFields";
+import { TestCasesStats } from "./stats";
 
-interface TestCasesStats {
-    total: number,
-    avg: number,
-    max: number,
-    min: number,
-    variance: number,
-}
 
 const computeStats = (scores: number[]): TestCasesStats => {
     if (scores.length === 0) {
@@ -141,33 +135,10 @@ export const SubmissionCompareWith = () => {
                             <Typography>
                                 Statistics for common testcases
                             </Typography>
-                            <Stack>
-                                <BeforeAfterField
-                                    source="totalScore"
-                                    before={combinedData.beforeStats.total}
-                                    after={combinedData.afterStats.total}
-                                />
-                                <BeforeAfterField
-                                    source="averageScore"
-                                    before={Math.round(combinedData.beforeStats.avg)}
-                                    after={Math.round(combinedData.afterStats.avg)}
-                                />
-                                <BeforeAfterField
-                                    source="maxScore"
-                                    before={combinedData.beforeStats.max}
-                                    after={combinedData.afterStats.max}
-                                />
-                                <BeforeAfterField
-                                    source="minScore"
-                                    before={combinedData.beforeStats.min}
-                                    after={combinedData.afterStats.min}
-                                />
-                                <BeforeAfterField
-                                    source="variance"
-                                    before={Math.round(combinedData.beforeStats.variance)}
-                                    after={Math.round(combinedData.afterStats.variance)}
-                                />
-                            </Stack>
+                            <BeforeAfterFields
+                                before={combinedData.beforeStats}
+                                after={combinedData.afterStats}
+                            />
                         </Grid>
                         <Grid item xs={9}>
                             <ScatterChart
