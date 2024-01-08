@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import { Button, Datagrid, Identifier, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
+import { Button, Datagrid, Identifier, Labeled, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useResourceContext, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import StarIcon from "@mui/icons-material/Star";
 import { useMemo } from "react";
-import { Paper } from "@mui/material";
+import { Paper, Stack, Typography } from "@mui/material";
 import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
 
 interface SetAsBestButtonProps {
@@ -28,6 +28,57 @@ const CompareActions = ({ id }: CompareActionsProps) => (
         <ShowButton />
     </TopToolbar>
 );
+
+interface TestCasesStats {
+    total: number,
+    avg: number,
+    max: number,
+    min: number,
+    variance: number,
+}
+
+const computeStats = (scores: number[]): TestCasesStats => {
+    if (scores.length === 0) {
+        return {
+            total: 0,
+            avg: 0,
+            max: 0,
+            min: 0,
+            variance: 0,
+        };
+    } else {
+        const total = scores.reduce((acc, score) => acc + score, 0);
+        const avg = total / scores.length;
+        const max = Math.max(...scores);
+        const min = Math.min(...scores);
+        const variance = scores.length > 1
+            ? scores.reduce((acc, score) => acc + Math.pow(score - avg, 2), 0) /
+            (scores.length - 1)
+            : 0;
+
+        return {
+            total,
+            avg,
+            max,
+            min,
+            variance,
+        };
+    }
+};
+
+interface BeforeAfterFieldProps {
+    source: string,
+    before: number,
+    after: number,
+}
+
+const BeforeAfterField = ({ source, before, after }: BeforeAfterFieldProps) => {
+    return <Labeled source={source}>
+        <Typography variant="body2">
+            {before} → {after} ({after > before && "+"} {after - before})
+        </Typography>
+    </Labeled>;
+};
 
 export const SubmissionCompareWith = () => {
     const { id, targetId } = useParams();
@@ -54,10 +105,11 @@ export const SubmissionCompareWith = () => {
         if (data && dataTarget) {
             const beforeMap = new Map(data.map((obj) => [obj.seed, obj]));
             const afterMap = new Map(dataTarget.map((obj) => [obj.seed, obj]));
+            console.log(beforeMap, afterMap);
 
             const beforeSeeds = new Set(beforeMap.keys());
             const afterSeeds = new Set(afterMap.keys());
-            const commonSeeds = [...beforeSeeds].filter((x) => afterSeeds.has(x));
+            const commonSeeds = [...beforeSeeds].filter((seed) => afterSeeds.has(seed));
             const records = [...commonSeeds].map((seed) => {
                 const x = beforeMap.get(seed);
                 const y = afterMap.get(seed);
@@ -72,9 +124,17 @@ export const SubmissionCompareWith = () => {
                     change: afterScore - beforeScore,
                 };
             });
-            return { records };
+
+            const scores: number[] = [...commonSeeds].map((seed) => beforeMap.get(seed)?.score ?? 0);
+            const afterScores: number[] = [...commonSeeds].map((seed) => afterMap.get(seed)?.score ?? 0);
+
+            const beforeStats = computeStats(scores);
+            const afterStats = computeStats(afterScores);
+
+            console.log(commonSeeds, scores, afterScores, beforeStats, afterStats);
+            return { records, beforeStats, afterStats };
         } else {
-            return { records: [] };
+            return { records: [], beforeStats: computeStats([]), afterStats: computeStats([]) };
         }
     }, [data, dataTarget]);
 
@@ -109,7 +169,36 @@ export const SubmissionCompareWith = () => {
                 <Paper sx={{ padding: 2 }}>
                     <Grid container>
                         <Grid item xs={3}>
-                            Statistics
+                            <Typography>
+                                Statistics for common testcases
+                            </Typography>
+                            <Stack>
+                                <BeforeAfterField
+                                    source="totalScore"
+                                    before={combinedData.beforeStats.total}
+                                    after={combinedData.afterStats.total}
+                                />
+                                <BeforeAfterField
+                                    source="averageScore"
+                                    before={Math.round(combinedData.beforeStats.avg)}
+                                    after={Math.round(combinedData.afterStats.avg)}
+                                />
+                                <BeforeAfterField
+                                    source="maxScore"
+                                    before={combinedData.beforeStats.max}
+                                    after={combinedData.afterStats.max}
+                                />
+                                <BeforeAfterField
+                                    source="minScore"
+                                    before={combinedData.beforeStats.min}
+                                    after={combinedData.afterStats.min}
+                                />
+                                <BeforeAfterField
+                                    source="variance"
+                                    before={Math.round(combinedData.beforeStats.variance)}
+                                    after={Math.round(combinedData.afterStats.variance)}
+                                />
+                            </Stack>
                         </Grid>
                         <Grid item xs={9}>
                             <ScatterChart
