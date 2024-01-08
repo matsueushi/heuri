@@ -1,25 +1,10 @@
-import { Button, EditButton, Labeled, Show, TopToolbar, useRecordContext, useResourceContext } from "react-admin";
-import CompareIcon from "@mui/icons-material/Compare";
+import { Labeled, Show, useRecordContext } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import { TestCaseFilteredList } from "../testCases/TestCaseFilteredList";
 import { Paper } from "@mui/material";
 import { ReactNode } from "react";
+import { ShowActions } from "./ShowActions";
 
-const CompareButton = () => {
-    const resource = useResourceContext();
-    const record = useRecordContext();
-
-    return <Button label="compare" href={`/#/${resource}/${record.id}/compare`} >
-        <CompareIcon />
-    </Button >;
-};
-
-const SubmissionShowActions = () => (
-    <TopToolbar>
-        <CompareButton />
-        <EditButton />
-    </TopToolbar>
-);
 
 interface ShowWrapperProps {
     children?: ReactNode
@@ -41,7 +26,7 @@ const ShowWrapper = ({ children }: ShowWrapperProps) => {
 
 export const SubmissionShow = () => {
     return <Show
-        actions={<SubmissionShowActions />}
+        actions={<ShowActions />}
         component={ShowWrapper}
     >
         <SubmissionShowLayout />

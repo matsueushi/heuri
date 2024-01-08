@@ -1,4 +1,5 @@
-import { ChipField, Datagrid, DateField, ExportButton, List, NumberField, ReferenceField, SearchInput, TextField, TopToolbar } from "react-admin";
+import { ChipField, Datagrid, DateField, List, NumberField, ReferenceField, SearchInput, TextField } from "react-admin";
+import { ListActions } from "./ListActions";
 
 const filters = [
     <SearchInput source="q" alwaysOn />,
@@ -7,11 +8,7 @@ const filters = [
 export const SubmissionList = () => {
     return (
         <List
-            actions={
-                <TopToolbar>
-                    <ExportButton />
-                </TopToolbar>
-            }
+            actions={<ListActions />}
             resource="submissions"
             filters={filters}
             sort={{ field: "updatedAt", order: "DESC" }}

@@ -1,4 +1,5 @@
-import { ChipField, CreateButton, Datagrid, DateField, ExportButton, Identifier, List, NumberField, RowClickFunction, SearchInput, TextField, TopToolbar } from "react-admin";
+import { ChipField, Datagrid, DateField, Identifier, List, NumberField, RowClickFunction, SearchInput, TextField } from "react-admin";
+import { FilteredListActions } from "./FilteredListActions";
 
 interface SubmissionFilteredListProps {
     rowClick: string | RowClickFunction
@@ -10,16 +11,9 @@ const filters = [
 ];
 
 export const SubmissionFilteredList = ({ rowClick, contestId }: SubmissionFilteredListProps) => {
-    const ListActions = () => (
-        <TopToolbar>
-            <CreateButton to={`/submissions/create?contestId=${contestId}`} />
-            <ExportButton />
-        </TopToolbar>
-    );
-
     return (
         <List
-            actions={<ListActions />}
+            actions={<FilteredListActions id={contestId} />}
             resource="submissions"
             sort={{ field: "updatedAt", order: "DESC" }}
             filter={{ contestId: contestId }}
