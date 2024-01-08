@@ -1,4 +1,8 @@
-import { ChipField, Datagrid, DateField, ExportButton, List, NumberField, ReferenceField, TextField, TopToolbar } from "react-admin";
+import { ChipField, Datagrid, DateField, ExportButton, List, NumberField, ReferenceField, SearchInput, TextField, TopToolbar } from "react-admin";
+
+const filters = [
+    <SearchInput source="q" alwaysOn />,
+];
 
 export const SubmissionList = () => {
     const ListActions = () => (
@@ -11,6 +15,7 @@ export const SubmissionList = () => {
         <List
             actions={<ListActions />}
             resource="submissions"
+            filters={filters}
             sort={{ field: "updatedAt", order: "DESC" }}
         >
             <Datagrid rowClick="show">
