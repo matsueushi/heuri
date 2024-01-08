@@ -50,14 +50,17 @@ export const SubmissionCompareWith = () => {
         }
     );
 
-    const merged = useMemo(() => {
+    const combinedData = useMemo(() => {
         if (data && dataTarget) {
-            const beforeSeeds = new Set<number>(data.map((x) => x.seed));
-            const afterSeeds = new Set<number>(dataTarget.map((x) => x.seed));
+            const beforeMap = new Map(data.map((obj) => [obj.seed, obj]));
+            const afterMap = new Map(dataTarget.map((obj) => [obj.seed, obj]));
+
+            const beforeSeeds = new Set(beforeMap.keys());
+            const afterSeeds = new Set(afterMap.keys());
             const commonSeeds = [...beforeSeeds].filter((x) => afterSeeds.has(x));
-            const result = [...commonSeeds].map((seed) => {
-                const x = data.find((x) => x.seed === seed);
-                const y = dataTarget.find((y) => y.seed === seed);
+            const records = [...commonSeeds].map((seed) => {
+                const x = beforeMap.get(seed);
+                const y = afterMap.get(seed);
                 const beforeScore = x?.score ?? 0;
                 const afterScore = y?.score ?? 0;
                 return {
@@ -69,9 +72,9 @@ export const SubmissionCompareWith = () => {
                     change: afterScore - beforeScore,
                 };
             });
-            return result;
+            return { records };
         } else {
-            return [];
+            return { records: [] };
         }
     }, [data, dataTarget]);
 
@@ -104,30 +107,33 @@ export const SubmissionCompareWith = () => {
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
-                    stats
-                </Paper>
-            </Grid>
+                    <Grid container>
+                        <Grid item xs={3}>
+                            Statistics
+                        </Grid>
+                        <Grid item xs={9}>
+                            <ScatterChart
+                                width={400}
+                                height={400}
+                            // onClick={(state, event) => { console.log(state, event); }}
+                            >
+                                <XAxis dataKey="beforeScore" name="before" type="number" />
+                                <YAxis dataKey="afterScore" name="after" type="number" />
+                                <ZAxis dataKey="seed" name="seed" type="number" />
+                                <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+                                <Scatter name="Score" data={combinedData.records} fill="#8884d8" />
+                            </ScatterChart>
+                        </Grid>
 
-            <Grid item xs={12}>
-                <Paper sx={{ padding: 2 }}>
-                    <ScatterChart
-                        width={730}
-                        height={250}
-                    // onClick={(state, event) => { console.log(state, event); }}
-                    >
-                        <XAxis dataKey="beforeScore" name="before" type="number" />
-                        <YAxis dataKey="afterScore" name="after" type="number" />
-                        <ZAxis dataKey="seed" name="seed" type="number" />
-                        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-                        <Scatter name="Score" data={merged} fill="#8884d8" />
-                    </ScatterChart>
+                    </Grid>
+
                 </Paper>
             </Grid>
 
             <Grid item xs={12}>
                 <Paper sx={{ padding: 2 }}>
                     <Datagrid
-                        data={merged}
+                        data={combinedData.records}
                         sort={{ field: "seed", order: "ASC" }}
                         rowClick={(id, resource, record) => {
                             return `/testcases/${record.beforeTestCaseId}/compare/${record.afterTestCaseId}`;
