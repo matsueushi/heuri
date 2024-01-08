@@ -5,13 +5,6 @@ import { Paper } from "@mui/material";
 import { ReactNode } from "react";
 import { SubmissionFilteredList } from "./SubmissionFilteredList";
 
-const SubmissionCompareActions = () => (
-    <TopToolbar>
-        <ShowButton />
-        <EditButton />
-    </TopToolbar>
-);
-
 interface CompareWrapperProps {
     children?: ReactNode
 }
@@ -40,7 +33,12 @@ export const SubmissionCompare = () => {
         <Show
             resource="submissions"
             id={id}
-            actions={<SubmissionCompareActions />}
+            actions={
+                <TopToolbar>
+                    <ShowButton />
+                    <EditButton />
+                </TopToolbar>
+            }
             component={CompareWrapper}
         >
             <SubmissionShowLayout />

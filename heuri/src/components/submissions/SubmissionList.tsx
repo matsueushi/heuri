@@ -5,15 +5,13 @@ const filters = [
 ];
 
 export const SubmissionList = () => {
-    const ListActions = () => (
-        <TopToolbar>
-            <ExportButton />
-        </TopToolbar>
-    );
-
     return (
         <List
-            actions={<ListActions />}
+            actions={
+                <TopToolbar>
+                    <ExportButton />
+                </TopToolbar>
+            }
             resource="submissions"
             filters={filters}
             sort={{ field: "updatedAt", order: "DESC" }}

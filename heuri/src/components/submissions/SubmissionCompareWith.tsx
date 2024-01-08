@@ -1,25 +1,12 @@
 import { useParams } from "react-router-dom";
-import { Datagrid, Identifier, ListContextProvider, Loading, NumberField, Show, ShowButton, TopToolbar, useGetManyReference, useList, } from "react-admin";
+import { Datagrid, ListContextProvider, Loading, NumberField, Show, useGetManyReference, useList, } from "react-admin";
 import { SubmissionShowLayout } from "./SubmissionShowLayout";
 import Grid from "@mui/material/Grid";
 import { useMemo } from "react";
 import { Paper, Stack, Typography } from "@mui/material";
 import { Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import { SetAsBestButton } from "./SetAsBestButton";
 import { BeforeAfterField } from "./BeforeAfterField";
-
-
-
-interface CompareActionsProps {
-    id?: Identifier,
-}
-
-const CompareActions = ({ id }: CompareActionsProps) => (
-    <TopToolbar>
-        <SetAsBestButton id={id} />
-        <ShowButton />
-    </TopToolbar>
-);
+import { CompareWithActions } from "./CompareWithActions";
 
 interface TestCasesStats {
     total: number,
@@ -128,7 +115,7 @@ export const SubmissionCompareWith = () => {
         <Grid container spacing={2}>
             <Grid item xs={6}>
                 <Show
-                    actions={<CompareActions id={id} />}
+                    actions={<CompareWithActions id={id} />}
                     resource="submissions"
                     id={id}
                     title={`Submission #${id} vs #${targetId}`}
@@ -138,7 +125,7 @@ export const SubmissionCompareWith = () => {
             </Grid>
             <Grid item xs={6}>
                 <Show
-                    actions={<CompareActions id={targetId} />}
+                    actions={<CompareWithActions id={targetId} />}
                     resource="submissions"
                     id={targetId}
                     title=" "
