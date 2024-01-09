@@ -68,5 +68,30 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito-UserPool-Groups"
     }
+  },
+  "function": {
+    "heurisubmit5b7cddc2": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_heurisubmit5b7cddc2_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "heurisubmit5b7cddc2"
+        }
+      ]
+    },
+    "AMPLIFY_function_heurisubmit5b7cddc2_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "heurisubmit5b7cddc2"
+        }
+      ]
+    }
   }
 }

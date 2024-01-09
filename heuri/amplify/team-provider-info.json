@@ -18,6 +18,12 @@
       },
       "api": {
         "heuri": {}
+      },
+      "function": {
+        "heurisubmit5b7cddc2": {
+          "deploymentBucketName": "amplify-heuri-dev-131855-deployment",
+          "s3Key": "amplify-builds/heurisubmit5b7cddc2-76686e4331676f346a4b-build.zip"
+        }
       }
     }
   }
