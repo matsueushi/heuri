@@ -15,6 +15,8 @@ export const SubmissionCreate = () => {
     const search = useLocation().search;
     const query = new URLSearchParams(search);
     const contestId = query.get("contestId");
+    const workingDir = query.get("workingDir");
+    const functionName = query.get("functionName");
 
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
@@ -28,7 +30,6 @@ export const SubmissionCreate = () => {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };
-            console.log(modifiedData);
             return modifiedData;
         } else {
             return data;
@@ -39,8 +40,9 @@ export const SubmissionCreate = () => {
         <Create redirect="list" transform={transform}>
             <SimpleForm>
                 <TextInput source="contestId" defaultValue={contestId} validate={required()} />
-                <TextInput source="functionName" validate={required()} />
-                <TextInput source="seeds" multiline validate={required()} />
+                <TextInput source="workingDir" defaultValue={workingDir} validate={required()} />
+                <TextInput source="functionName" defaultValue={functionName} validate={required()} />
+                <TextInput source="seeds" multiline validate={required()} maxRows={10} />
                 <TextInput source="description" />
             </SimpleForm>
         </Create>
