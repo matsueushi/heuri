@@ -10,6 +10,7 @@ export const ContestEdit = () => (
                 <TextField source="name" />
             </Labeled>
             <TextInput source="workingDir" />
+            <TextInput source="functionName" />
             <TextInput source="description" />
         </SimpleForm>
     </Edit>

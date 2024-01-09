@@ -16,6 +16,7 @@ export const createContest = /* GraphQL */ `mutation CreateContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt
@@ -35,6 +36,7 @@ export const updateContest = /* GraphQL */ `mutation UpdateContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt
@@ -54,6 +56,7 @@ export const deleteContest = /* GraphQL */ `mutation DeleteContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt

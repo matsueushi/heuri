@@ -2,6 +2,7 @@ type Contest @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   name: String!
   workingDir: String!
+  functionName: String!
   description: String!
 }
 

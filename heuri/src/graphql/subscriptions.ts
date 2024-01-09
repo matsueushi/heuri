@@ -16,6 +16,7 @@ export const onCreateContest = /* GraphQL */ `subscription OnCreateContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt
@@ -35,6 +36,7 @@ export const onUpdateContest = /* GraphQL */ `subscription OnUpdateContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt
@@ -54,6 +56,7 @@ export const onDeleteContest = /* GraphQL */ `subscription OnDeleteContest(
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt

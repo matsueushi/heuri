@@ -36,7 +36,8 @@ const userPool = new CognitoUserPool({
 const authProvider = CognitoAuthProvider(userPool);
 
 export const App = () => {
-    const [isTest] = useState(false);
+    // const [isTest] = useState(false);
+    const [isTest] = useState(true);
 
     const dataProvider = isTest ? fakeDataProvider : buildDataProvider({ queries, mutations });
     const queryClient = new QueryClient({

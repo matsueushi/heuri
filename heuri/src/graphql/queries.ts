@@ -13,6 +13,7 @@ export const getContest = /* GraphQL */ `query GetContest($id: ID!) {
     id
     name
     workingDir
+    functionName
     description
     createdAt
     updatedAt
@@ -34,6 +35,7 @@ export const listContests = /* GraphQL */ `query ListContests(
       id
       name
       workingDir
+      functionName
       description
       createdAt
       updatedAt

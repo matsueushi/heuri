@@ -30,6 +30,7 @@ export const ContestShow = () => {
                 <TextField source="id" />
                 <TextField source="name" />
                 <UrlField source="workingDir" />
+                <TextField source="functionName" />
                 <TextField source="description" />
                 <DateField source="createdAt" showTime />
                 <DateField source="updatedAt" showTime />

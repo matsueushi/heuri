@@ -19,15 +19,17 @@ export const SubmissionCreate = () => {
     const isTest = useContext(TestContext);
     const transform = (data: any) => {
         if (isTest) {
-            return {
+            const modifiedData = {
                 ...data,
                 id: uuidv4(),
-                status: "runnnig",
+                status: "running",
                 testcases: 0,
                 score: 0,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             };
+            console.log(modifiedData);
+            return modifiedData;
         } else {
             return data;
         }
